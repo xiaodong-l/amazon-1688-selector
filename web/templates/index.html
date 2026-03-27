@@ -318,17 +318,14 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Navigation Bar -->
+    {% include 'components/navbar.html' %}
+    
+    <div class="container" style="padding-top: 20px;">
         <header>
-            <h1>🏆 亚马逊选品系统</h1>
+            <h1>🏆 亚马逊选品系统 v2.4</h1>
             <p>Amazon 数据采集 → 趋势分析 → Top20 潜力商品</p>
         </header>
-
-        <div class="nav">
-            <a href="/" class="active">🏠 首页</a>
-            <a href="/charts">📊 可视化</a>
-            <a href="/api/results">📄 API 文档</a>
-        </div>
 
         <!-- 开始选品 -->
         <div class="card">

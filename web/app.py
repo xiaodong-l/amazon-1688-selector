@@ -25,12 +25,22 @@ from src.analysis.trend_analyzer import TrendAnalyzer
 from src._1688.supplier_finder import SupplierFinder
 from src.utils.config import DATA_DIR
 
+# Import authentication blueprints
+from web.routes.auth import auth_bp
+from web.middleware.auth import init_auth
+
 # Version
-VERSION = "2.3.0"
+VERSION = "2.4.0"
 
 app = Flask(__name__, template_folder='templates')
 logger.remove()
 logger.add(sys.stdout, level="INFO")
+
+# Register authentication blueprint
+app.register_blueprint(auth_bp)
+
+# Initialize authentication middleware
+init_auth(app)
 
 
 @app.route('/')

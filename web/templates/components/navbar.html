@@ -1,0 +1,711 @@
+<!-- 
+Navigation Bar Component
+Responsive navbar with authentication status, user menu, and theme support.
+Purple gradient theme as per project style.
+-->
+<nav class="navbar" id="mainNavbar">
+    <div class="navbar-container">
+        <!-- Logo / Brand -->
+        <div class="navbar-brand">
+            <a href="/" class="brand-link">
+                <span class="brand-icon">🛒</span>
+                <span class="brand-text">亚马逊选品系统</span>
+            </a>
+        </div>
+        
+        <!-- Mobile Menu Toggle -->
+        <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle navigation">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+        
+        <!-- Navigation Links -->
+        <div class="navbar-menu" id="navbarMenu">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="/" class="nav-link" data-page="home">
+                        <span class="nav-icon">🏠</span>
+                        <span class="nav-text">首页</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/charts" class="nav-link" data-page="charts">
+                        <span class="nav-icon">📊</span>
+                        <span class="nav-text">图表</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/analysis/model_comparison.html" class="nav-link" data-page="comparison">
+                        <span class="nav-icon">⚖️</span>
+                        <span class="nav-text">模型对比</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/monitor/dashboard.html" class="nav-link" data-page="monitor">
+                        <span class="nav-icon">📈</span>
+                        <span class="nav-text">监控</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- User Authentication Section -->
+        <div class="navbar-auth" id="navbarAuth">
+            <!-- Not Logged In -->
+            <div class="auth-buttons" id="authButtonsGuest">
+                <a href="/auth/login.html" class="btn btn-outline btn-login">
+                    <span class="btn-icon">🔑</span>
+                    <span>登录</span>
+                </a>
+                <a href="/auth/register.html" class="btn btn-primary btn-register">
+                    <span>注册</span>
+                    <span class="btn-icon">→</span>
+                </a>
+            </div>
+            
+            <!-- Logged In -->
+            <div class="auth-user" id="authButtonsUser" style="display: none;">
+                <div class="user-info" id="userInfo">
+                    <span class="user-avatar" id="userAvatar">👤</span>
+                    <span class="user-name" id="userName">用户</span>
+                    <span class="user-role" id="userRole"></span>
+                </div>
+                
+                <div class="user-dropdown" id="userDropdown">
+                    <button class="dropdown-toggle" id="userDropdownToggle">
+                        <span class="dropdown-icon">⚙️</span>
+                    </button>
+                    <div class="dropdown-menu" id="userDropdownMenu">
+                        <div class="dropdown-header">
+                            <span class="dropdown-username" id="dropdownUsername">用户名</span>
+                            <span class="dropdown-email" id="dropdownEmail">email@example.com</span>
+                        </div>
+                        <a href="/auth/api_keys.html" class="dropdown-item">
+                            <span class="dropdown-icon">🔐</span>
+                            <span>API Keys</span>
+                        </a>
+                        <a href="/auth/profile.html" class="dropdown-item">
+                            <span class="dropdown-icon">👤</span>
+                            <span>个人资料</span>
+                        </a>
+                        <a href="/auth/settings.html" class="dropdown-item">
+                            <span class="dropdown-icon">⚙️</span>
+                            <span>设置</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item dropdown-logout" id="logoutBtn">
+                            <span class="dropdown-icon">🚪</span>
+                            <span>退出登录</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<style>
+/* Navbar Base Styles */
+.navbar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.navbar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+}
+
+/* Brand */
+.navbar-brand {
+    flex-shrink: 0;
+}
+
+.brand-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 1.25rem;
+    transition: opacity 0.2s;
+}
+
+.brand-link:hover {
+    opacity: 0.9;
+}
+
+.brand-icon {
+    font-size: 1.5rem;
+}
+
+/* Mobile Toggle */
+.navbar-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.hamburger-line {
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+
+/* Navigation Menu */
+.navbar-menu {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 8px;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+}
+
+.nav-icon {
+    font-size: 1.1rem;
+}
+
+/* Auth Section */
+.navbar-auth {
+    flex-shrink: 0;
+    margin-left: 20px;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    font-size: 0.9rem;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+}
+
+.btn-primary {
+    background: white;
+    color: #667eea;
+    border: 2px solid white;
+}
+
+.btn-primary:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-1px);
+}
+
+.btn-icon {
+    font-size: 1rem;
+}
+
+/* User Info */
+.auth-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.user-info:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.user-name {
+    font-weight: 600;
+}
+
+.user-role {
+    font-size: 0.75rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 8px;
+    border-radius: 12px;
+    text-transform: uppercase;
+}
+
+/* User Dropdown */
+.user-dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.dropdown-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.dropdown-icon {
+    font-size: 1.2rem;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    min-width: 240px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s;
+    overflow: hidden;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 16px;
+}
+
+.dropdown-username {
+    display: block;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.dropdown-email {
+    display: block;
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.2s;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.dropdown-item:hover {
+    background: #f5f5f5;
+}
+
+.dropdown-item.dropdown-logout {
+    color: #dc3545;
+}
+
+.dropdown-item.dropdown-logout:hover {
+    background: #fee;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: #eee;
+    margin: 8px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .navbar-menu {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 20px;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+    }
+    
+    .navbar-menu.show {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .navbar-nav {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .nav-link {
+        padding: 14px 16px;
+    }
+    
+    .navbar-toggle {
+        display: flex;
+    }
+    
+    .auth-buttons {
+        flex-direction: column;
+    }
+    
+    .navbar-auth {
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .brand-text {
+        display: none;
+    }
+    
+    .nav-text {
+        display: none;
+    }
+    
+    .user-name, .user-role {
+        display: none;
+    }
+}
+</style>
+
+<script>
+/**
+ * Navbar JavaScript Controller
+ * Handles mobile menu toggle, user dropdown, and authentication state
+ */
+(function() {
+    'use strict';
+    
+    // DOM Elements
+    const navbarToggle = document.getElementById('navbarToggle');
+    const navbarMenu = document.getElementById('navbarMenu');
+    const userDropdownToggle = document.getElementById('userDropdownToggle');
+    const userDropdownMenu = document.getElementById('userDropdownMenu');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const authButtonsGuest = document.getElementById('authButtonsGuest');
+    const authButtonsUser = document.getElementById('authButtonsUser');
+    
+    // State
+    let isLoggedIn = false;
+    let currentUser = null;
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+        checkAuthState();
+        setupEventListeners();
+        highlightActivePage();
+    });
+    
+    /**
+     * Check authentication state from localStorage
+     */
+    function checkAuthState() {
+        const token = localStorage.getItem('access_token');
+        const user = localStorage.getItem('user_info');
+        
+        if (token && user) {
+            try {
+                currentUser = JSON.parse(user);
+                isLoggedIn = true;
+                updateUIForLoggedInUser(currentUser);
+            } catch (e) {
+                console.error('Failed to parse user info:', e);
+                logout();
+            }
+        } else {
+            isLoggedIn = false;
+            currentUser = null;
+            updateUIForGuest();
+        }
+    }
+    
+    /**
+     * Update UI for logged in user
+     */
+    function updateUIForLoggedInUser(user) {
+        if (authButtonsGuest) authButtonsGuest.style.display = 'none';
+        if (authButtonsUser) authButtonsUser.style.display = 'flex';
+        
+        const userName = document.getElementById('userName');
+        const userRole = document.getElementById('userRole');
+        const dropdownUsername = document.getElementById('dropdownUsername');
+        const dropdownEmail = document.getElementById('dropdownEmail');
+        
+        if (userName) userName.textContent = user.username || '用户';
+        if (userRole) userRole.textContent = user.role || 'user';
+        if (dropdownUsername) dropdownUsername.textContent = user.username || '用户';
+        if (dropdownEmail) dropdownEmail.textContent = user.email || '';
+    }
+    
+    /**
+     * Update UI for guest user
+     */
+    function updateUIForGuest() {
+        if (authButtonsGuest) authButtonsGuest.style.display = 'flex';
+        if (authButtonsUser) authButtonsUser.style.display = 'none';
+    }
+    
+    /**
+     * Setup event listeners
+     */
+    function setupEventListeners() {
+        // Mobile menu toggle
+        if (navbarToggle) {
+            navbarToggle.addEventListener('click', toggleMobileMenu);
+        }
+        
+        // User dropdown toggle
+        if (userDropdownToggle) {
+            userDropdownToggle.addEventListener('click', toggleUserDropdown);
+        }
+        
+        // Logout button
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', handleLogout);
+        }
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (userDropdownMenu && !userDropdownMenu.contains(e.target) && 
+                !userDropdownToggle?.contains(e.target)) {
+                userDropdownMenu.classList.remove('show');
+            }
+        });
+        
+        // Handle mobile menu on route change
+        window.addEventListener('popstate', function() {
+            navbarMenu?.classList.remove('show');
+            highlightActivePage();
+        });
+    }
+    
+    /**
+     * Toggle mobile menu
+     */
+    function toggleMobileMenu() {
+        navbarMenu?.classList.toggle('show');
+    }
+    
+    /**
+     * Toggle user dropdown
+     */
+    function toggleUserDropdown(e) {
+        e.stopPropagation();
+        userDropdownMenu?.classList.toggle('show');
+    }
+    
+    /**
+     * Handle logout
+     */
+    async function handleLogout() {
+        try {
+            const token = localStorage.getItem('access_token');
+            
+            // Call logout API
+            if (token) {
+                await fetch('/api/v2/auth/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+            }
+        } catch (e) {
+            console.error('Logout API call failed:', e);
+        } finally {
+            // Always clear local state
+            logout();
+        }
+    }
+    
+    /**
+     * Clear auth state and redirect
+     */
+    function logout() {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        localStorage.removeItem('user_info');
+        
+        isLoggedIn = false;
+        currentUser = null;
+        
+        updateUIForGuest();
+        
+        // Redirect to login or home
+        if (window.location.pathname.includes('/auth/')) {
+            window.location.href = '/';
+        } else {
+            // Show toast notification
+            showToast('已成功退出登录');
+        }
+    }
+    
+    /**
+     * Highlight active page in navigation
+     */
+    function highlightActivePage() {
+        const currentPage = window.location.pathname;
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href');
+            if (href === currentPage || 
+                (currentPage === '/' && href === '/') ||
+                (currentPage.startsWith(href) && href !== '/')) {
+                link.classList.add('active');
+            }
+        });
+    }
+    
+    /**
+     * Show toast notification
+     */
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        toast.textContent = message;
+        toast.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            z-index: 9999;
+            animation: slideUp 0.3s ease;
+        `;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.style.animation = 'slideDown 0.3s ease';
+            setTimeout(() => toast.remove(), 300);
+        }, 2000);
+    }
+    
+    // Add animations
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+        @keyframes slideDown {
+            from { opacity: 1; transform: translateX(-50%) translateY(0); }
+            to { opacity: 0; transform: translateX(-50%) translateY(20px); }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Expose for external use
+    window.NavbarAuth = {
+        checkAuthState,
+        logout,
+        isLoggedIn: () => isLoggedIn,
+        getCurrentUser: () => currentUser,
+    };
+})();
+</script>

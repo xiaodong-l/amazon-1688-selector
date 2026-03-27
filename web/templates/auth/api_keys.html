@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Key 管理 - 亚马逊选品系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+        
+        /* Include navbar styles */
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        
+        .navbar-brand a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .page-header {
+            margin-bottom: 32px;
+        }
+        
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .page-subtitle {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #667eea;
+            color: #667eea;
+        }
+        
+        .btn-outline:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+        
+        /* API Keys Table */
+        .api-keys-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .api-keys-table th {
+            text-align: left;
+            padding: 12px 16px;
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #666;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .api-keys-table td {
+            padding: 16px;
+            border-bottom: 1px solid #eee;
+            color: #333;
+        }
+        
+        .api-keys-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .key-name {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .key-id {
+            font-family: monospace;
+            background: #f0f0f0;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+        
+        .key-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .key-status.active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .key-status.inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+        }
+        
+        .empty-state-text {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        
+        .modal-overlay.show {
+            display: flex;
+        }
+        
+        .modal {
+            background: white;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlideIn 0.3s ease;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            padding: 24px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .modal-close:hover {
+            color: #333;
+        }
+        
+        .modal-body {
+            padding: 24px;
+        }
+        
+        .modal-footer {
+            padding: 24px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .form-input, .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        
+        .form-input:focus, .form-select:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+        
+        .form-help {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 6px;
+        }
+        
+        /* New Key Display */
+        .new-key-display {
+            background: #f8f9fa;
+            border: 2px dashed #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .new-key-warning {
+            color: #dc3545;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .new-key-value {
+            font-family: monospace;
+            font-size: 1.1rem;
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            word-break: break-all;
+            margin-bottom: 12px;
+        }
+        
+        .btn-copy {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .btn-copy:hover {
+            background: #5a6fd6;
+        }
+        
+        /* Usage Stats */
+        .usage-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 4px;
+        }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 14px 24px;
+            border-radius: 8px;
+            z-index: 3000;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .api-keys-table {
+                font-size: 0.9rem;
+            }
+            
+            .api-keys-table th,
+            .api-keys-table td {
+                padding: 12px 8px;
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <a href="/">🛒 亚马逊选品系统</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">🔐 API Key 管理</h1>
+            <p class="page-subtitle">创建和管理您的 API 访问密钥</p>
+        </div>
+        
+        <!-- API Keys Card -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">您的 API Keys</h2>
+                <button class="btn btn-primary" id="createKeyBtn">
+                    <span>➕</span>
+                    <span>创建新 Key</span>
+                </button>
+            </div>
+            
+            <div id="apiKeysContainer">
+                <!-- Will be populated by JavaScript -->
+                <div class="empty-state">
+                    <div class="empty-state-icon">🔑</div>
+                    <div class="empty-state-text">加载中...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Create Key Modal -->
+    <div class="modal-overlay" id="createModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">创建新 API Key</h3>
+                <button class="modal-close" onclick="closeCreateModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="createKeyForm">
+                    <div class="form-group">
+                        <label class="form-label" for="keyName">名称 *</label>
+                        <input 
+                            type="text" 
+                            id="keyName" 
+                            class="form-input" 
+                            placeholder="例如：生产环境 Key"
+                            required
+                        >
+                        <div class="form-help">给这个 Key 起一个容易识别的名字</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="keyPermissions">权限</label>
+                        <select id="keyPermissions" class="form-select">
+                            <option value="read">只读 (api:read)</option>
+                            <option value="readwrite">读写 (api:read, api:write)</option>
+                            <option value="full">完全访问 (所有权限)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="keyRateLimit">速率限制</label>
+                        <input 
+                            type="number" 
+                            id="keyRateLimit" 
+                            class="form-input" 
+                            placeholder="每小时请求数 (留空表示无限制)"
+                            min="1"
+                        >
+                        <div class="form-help">限制每小时最多可发出的请求数</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="keyExpiry">过期时间</label>
+                        <select id="keyExpiry" class="form-select">
+                            <option value="">永不过期</option>
+                            <option value="30">30 天</option>
+                            <option value="90">90 天</option>
+                            <option value="180">180 天</option>
+                            <option value="365">1 年</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeCreateModal()">取消</button>
+                <button class="btn btn-primary" id="confirmCreateBtn">创建 Key</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Key Display Modal -->
+    <div class="modal-overlay" id="newKeyModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">✅ API Key 创建成功</h3>
+                <button class="modal-close" onclick="closeNewKeyModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="new-key-display">
+                    <div class="new-key-warning">⚠️ 请复制并安全保存此 Key！</div>
+                    <div class="new-key-value" id="newKeyValue">sk_xxxxx...</div>
+                    <button class="btn-copy" onclick="copyNewKey()">📋 复制 Key</button>
+                </div>
+                <p style="color: #666; font-size: 0.9rem;">
+                    这是您唯一一次看到完整的 API Key。刷新页面后，您将无法再次查看它。
+                    请将 Key 保存在安全的地方，不要分享给他人。
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeNewKeyModal()">我知道了</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Usage Stats Modal -->
+    <div class="modal-overlay" id="usageModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">📊 使用统计</h3>
+                <button class="modal-close" onclick="closeUsageModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="usageStatsContent">
+                <!-- Populated by JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeUsageModal()">关闭</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        (function() {
+            'use strict';
+            
+            // State
+            let apiKeys = [];
+            let currentNewKey = null;
+            
+            // Initialize
+            document.addEventListener('DOMContentLoaded', function() {
+                checkAuth();
+                loadApiKeys();
+                setupEventListeners();
+            });
+            
+            /**
+             * Check authentication
+             */
+            function checkAuth() {
+                const token = localStorage.getItem('access_token');
+                if (!token) {
+                    window.location.href = '/auth/login.html?redirect=' + encodeURIComponent(window.location.pathname);
+                    return;
+                }
+            }
+            
+            /**
+             * Load API keys
+             */
+            async function loadApiKeys() {
+                const token = localStorage.getItem('access_token');
+                
+                try {
+                    const response = await fetch('/api/v2/auth/api-keys', {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                        },
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        apiKeys = data.keys || [];
+                        renderApiKeys();
+                    } else {
+                        showError('加载失败：' + data.error);
+                    }
+                } catch (error) {
+                    console.error('Failed to load API keys:', error);
+                    showError('网络错误，请重试');
+                }
+            }
+            
+            /**
+             * Render API keys table
+             */
+            function renderApiKeys() {
+                const container = document.getElementById('apiKeysContainer');
+                
+                if (apiKeys.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">🔑</div>
+                            <div class="empty-state-text">暂无 API Keys</div>
+                            <button class="btn btn-primary" onclick="openCreateModal()">创建第一个 Key</button>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let html = `
+                    <table class="api-keys-table">
+                        <thead>
+                            <tr>
+                                <th>名称</th>
+                                <th>ID</th>
+                                <th>状态</th>
+                                <th>使用次数</th>
+                                <th>创建时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+                
+                apiKeys.forEach(key => {
+                    const statusClass = key.is_active ? 'active' : 'inactive';
+                    const statusText = key.is_active ? '活跃' : '已撤销';
+                    const createdDate = new Date(key.created_at).toLocaleDateString('zh-CN');
+                    
+                    html += `
+                        <tr>
+                            <td>
+                                <div class="key-name">${escapeHtml(key.name)}</div>
+                            </td>
+                            <td>
+                                <span class="key-id">${escapeHtml(key.id)}</span>
+                            </td>
+                            <td>
+                                <span class="key-status ${statusClass}">
+                                    <span class="status-dot"></span>
+                                    ${statusText}
+                                </span>
+                            </td>
+                            <td>${key.usage_count || 0}</td>
+                            <td>${createdDate}</td>
+                            <td>
+                                <div class="actions">
+                                    ${key.is_active ? `
+                                        <button class="btn btn-outline btn-sm" onclick="rotateKey('${key.id}')">🔄 轮换</button>
+                                        <button class="btn btn-outline btn-sm" onclick="showUsage('${key.id}')">📊 统计</button>
+                                    ` : ''}
+                                    <button class="btn btn-danger btn-sm" onclick="revokeKey('${key.id}')">🚫 撤销</button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                html += '</tbody></table>';
+                container.innerHTML = html;
+            }
+            
+            /**
+             * Setup event listeners
+             */
+            function setupEventListeners() {
+                document.getElementById('createKeyBtn').addEventListener('click', openCreateModal);
+                document.getElementById('confirmCreateBtn').addEventListener('click', createApiKey);
+            }
+            
+            /**
+             * Create API key
+             */
+            async function createApiKey() {
+                const name = document.getElementById('keyName').value.trim();
+                const permissionsSelect = document.getElementById('keyPermissions').value;
+                const rateLimit = document.getElementById('keyRateLimit').value;
+                const expiry = document.getElementById('keyExpiry').value;
+                
+                if (!name) {
+                    showError('请输入 Key 名称');
+                    return;
+                }
+                
+                const permissionsMap = {
+                    'read': ['api:read'],
+                    'readwrite': ['api:read', 'api:write'],
+                    'full': ['api:read', 'api:write', 'api:delete', 'admin:access'],
+                };
+                
+                const token = localStorage.getItem('access_token');
+                
+                try {
+                    const response = await fetch('/api/v2/auth/api-keys', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`,
+                        },
+                        body: JSON.stringify({
+                            name: name,
+                            permissions: permissionsMap[permissionsSelect],
+                            rate_limit: rateLimit ? parseInt(rateLimit) : null,
+                            expires_in_days: expiry ? parseInt(expiry) : null,
+                        }),
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        currentNewKey = data.key;
+                        closeCreateModal();
+                        showNewKeyModal();
+                        loadApiKeys();
+                        showToast('API Key 创建成功');
+                    } else {
+                        showError('创建失败：' + data.error);
+                    }
+                } catch (error) {
+                    console.error('Failed to create API key:', error);
+                    showError('网络错误，请重试');
+                }
+            }
+            
+            /**
+             * Revoke API key
+             */
+            async function revokeKey(keyId) {
+                if (!confirm('确定要撤销这个 API Key 吗？撤销后将无法恢复。')) {
+                    return;
+                }
+                
+                const token = localStorage.getItem('access_token');
+                
+                try {
+                    const response = await fetch(`/api/v2/auth/api-keys/${keyId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                        },
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        loadApiKeys();
+                        showToast('API Key 已撤销');
+                    } else {
+                        showError('撤销失败：' + data.error);
+                    }
+                } catch (error) {
+                    console.error('Failed to revoke API key:', error);
+                    showError('网络错误，请重试');
+                }
+            }
+            
+            /**
+             * Rotate API key
+             */
+            async function rotateKey(keyId) {
+                if (!confirm('确定要轮换这个 API Key 吗？旧 Key 将立即失效。')) {
+                    return;
+                }
+                
+                const token = localStorage.getItem('access_token');
+                
+                try {
+                    const response = await fetch(`/api/v2/auth/api-keys/${keyId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`,
+                        },
+                        body: JSON.stringify({}),
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        currentNewKey = data.key;
+                        showNewKeyModal();
+                        loadApiKeys();
+                        showToast('API Key 已轮换');
+                    } else {
+                        showError('轮换失败：' + data.error);
+                    }
+                } catch (error) {
+                    console.error('Failed to rotate API key:', error);
+                    showError('网络错误，请重试');
+                }
+            }
+            
+            /**
+             * Show usage stats
+             */
+            async function showUsage(keyId) {
+                const token = localStorage.getItem('access_token');
+                
+                try {
+                    const response = await fetch(`/api/v2/auth/api-keys/${keyId}/usage`, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                        },
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        const usage = data.usage;
+                        const content = document.getElementById('usageStatsContent');
+                        content.innerHTML = `
+                            <div class="usage-stats">
+                                <div class="stat-card">
+                                    <div class="stat-value">${usage.total_requests}</div>
+                                    <div class="stat-label">总请求数</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value">${usage.requests_last_hour}</div>
+                                    <div class="stat-label">过去 1 小时</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value">${usage.requests_last_day}</div>
+                                    <div class="stat-label">过去 24 小时</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value">${usage.requests_last_week}</div>
+                                    <div class="stat-label">过去 7 天</div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 20px; padding: 16px; background: #f8f9fa; border-radius: 8px;">
+                                <div style="font-weight: 600; margin-bottom: 8px;">成功率</div>
+                                <div style="font-size: 1.5rem; color: #28a745;">${usage.success_rate}%</div>
+                            </div>
+                        `;
+                        document.getElementById('usageModal').classList.add('show');
+                    } else {
+                        showError('获取统计失败：' + data.error);
+                    }
+                } catch (error) {
+                    console.error('Failed to get usage stats:', error);
+                    showError('网络错误，请重试');
+                }
+            }
+            
+            /**
+             * Modal functions
+             */
+            function openCreateModal() {
+                document.getElementById('createModal').classList.add('show');
+                document.getElementById('keyName').value = '';
+                document.getElementById('keyPermissions').value = 'read';
+                document.getElementById('keyRateLimit').value = '';
+                document.getElementById('keyExpiry').value = '';
+            }
+            
+            function closeCreateModal() {
+                document.getElementById('createModal').classList.remove('show');
+            }
+            
+            function showNewKeyModal() {
+                if (currentNewKey) {
+                    document.getElementById('newKeyValue').textContent = currentNewKey.key;
+                    document.getElementById('newKeyModal').classList.add('show');
+                }
+            }
+            
+            function closeNewKeyModal() {
+                document.getElementById('newKeyModal').classList.remove('show');
+                currentNewKey = null;
+            }
+            
+            function closeUsageModal() {
+                document.getElementById('usageModal').classList.remove('show');
+            }
+            
+            /**
+             * Copy new key to clipboard
+             */
+            function copyNewKey() {
+                const keyValue = document.getElementById('newKeyValue').textContent;
+                navigator.clipboard.writeText(keyValue).then(() => {
+                    showToast('已复制到剪贴板');
+                }).catch(() => {
+                    showError('复制失败，请手动复制');
+                });
+            }
+            
+            /**
+             * Show toast notification
+             */
+            function showToast(message) {
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.textContent = message;
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.style.animation = 'slideIn 0.3s ease reverse';
+                    setTimeout(() => toast.remove(), 300);
+                }, 2000);
+            }
+            
+            /**
+             * Show error
+             */
+            function showError(message) {
+                showToast('❌ ' + message);
+            }
+            
+            /**
+             * Escape HTML
+             */
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            // Expose for inline handlers
+            window.openCreateModal = openCreateModal;
+            window.closeCreateModal = closeCreateModal;
+            window.closeNewKeyModal = closeNewKeyModal;
+            window.closeUsageModal = closeUsageModal;
+            window.copyNewKey = copyNewKey;
+            window.showUsage = showUsage;
+            window.rotateKey = rotateKey;
+            window.revokeKey = revokeKey;
+        })();
+    </script>
+</body>
+</html>

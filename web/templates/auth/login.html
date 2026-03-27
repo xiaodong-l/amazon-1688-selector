@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - 亚马逊选品系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            animation: slideUp 0.5s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .login-logo {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+        
+        .login-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .login-subtitle {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.2s;
+            outline: none;
+        }
+        
+        .form-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .form-input.error {
+            border-color: #dc3545;
+        }
+        
+        .error-message {
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 6px;
+            display: none;
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #667eea;
+        }
+        
+        .checkbox-group label {
+            color: #666;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        
+        .forgot-password {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-submit .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        .btn-submit.loading .spinner {
+            display: block;
+        }
+        
+        .btn-submit.loading .btn-text {
+            display: none;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 24px 0;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            height: 1px;
+            background: #e0e0e0;
+        }
+        
+        .divider span {
+            background: white;
+            padding: 0 16px;
+            color: #999;
+            font-size: 0.9rem;
+            position: relative;
+        }
+        
+        .register-link {
+            text-align: center;
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .register-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .alert {
+            padding: 14px 16px;
+            border-radius: 10px;
+            margin-bottom: 24px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .alert-error {
+            background: #fee;
+            color: #c00;
+            border: 1px solid #fcc;
+        }
+        
+        .alert-success {
+            background: #efe;
+            color: #060;
+            border: 1px solid #cfc;
+        }
+        
+        .alert-icon {
+            font-size: 1.2rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 20px;
+            }
+            
+            .login-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="login-logo">🛒</div>
+            <h1 class="login-title">欢迎回来</h1>
+            <p class="login-subtitle">登录亚马逊选品系统</p>
+        </div>
+        
+        <div class="alert alert-error" id="errorAlert">
+            <span class="alert-icon">⚠️</span>
+            <span class="alert-message">错误信息</span>
+        </div>
+        
+        <div class="alert alert-success" id="successAlert">
+            <span class="alert-icon">✅</span>
+            <span class="alert-message">登录成功！正在跳转...</span>
+        </div>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label class="form-label" for="username">用户名</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    class="form-input" 
+                    placeholder="请输入用户名"
+                    autocomplete="username"
+                    required
+                >
+                <div class="error-message" id="usernameError">请输入用户名</div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="password">密码</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    class="form-input" 
+                    placeholder="请输入密码"
+                    autocomplete="current-password"
+                    required
+                >
+                <div class="error-message" id="passwordError">请输入密码</div>
+            </div>
+            
+            <div class="form-options">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="rememberMe" name="rememberMe">
+                    <label for="rememberMe">记住我</label>
+                </div>
+                <a href="#" class="forgot-password">忘记密码？</a>
+            </div>
+            
+            <button type="submit" class="btn-submit" id="submitBtn">
+                <span class="spinner"></span>
+                <span class="btn-text">🔑 登录</span>
+            </button>
+        </form>
+        
+        <div class="divider">
+            <span>或</span>
+        </div>
+        
+        <p class="register-link">
+            还没有账号？<a href="/auth/register.html">立即注册</a>
+        </p>
+    </div>
+    
+    <script>
+        (function() {
+            'use strict';
+            
+            // DOM Elements
+            const loginForm = document.getElementById('loginForm');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const rememberMeCheckbox = document.getElementById('rememberMe');
+            const submitBtn = document.getElementById('submitBtn');
+            const errorAlert = document.getElementById('errorAlert');
+            const successAlert = document.getElementById('successAlert');
+            const usernameError = document.getElementById('usernameError');
+            const passwordError = document.getElementById('passwordError');
+            
+            // Check if already logged in
+            if (localStorage.getItem('access_token')) {
+                window.location.href = '/';
+            }
+            
+            // Form submission
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Clear previous errors
+                hideError();
+                clearFieldErrors();
+                
+                // Validate
+                let isValid = true;
+                
+                if (!usernameInput.value.trim()) {
+                    showFieldError(usernameInput, usernameError);
+                    isValid = false;
+                }
+                
+                if (!passwordInput.value) {
+                    showFieldError(passwordInput, passwordError);
+                    isValid = false;
+                }
+                
+                if (!isValid) return;
+                
+                // Submit
+                await submitLogin();
+            });
+            
+            /**
+             * Submit login form
+             */
+            async function submitLogin() {
+                setLoading(true);
+                
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value;
+                const rememberMe = rememberMeCheckbox.checked;
+                
+                try {
+                    const response = await fetch('/api/v2/auth/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: username,
+                            password: password,
+                            remember_me: rememberMe,
+                        }),
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok && data.success) {
+                        // Store tokens
+                        localStorage.setItem('access_token', data.access_token);
+                        localStorage.setItem('refresh_token', data.refresh_token);
+                        localStorage.setItem('user_info', JSON.stringify(data.user));
+                        
+                        // Show success
+                        showSuccess();
+                        
+                        // Redirect after delay
+                        setTimeout(function() {
+                            // Redirect to original page or home
+                            const redirectUrl = getQueryParam('redirect') || '/';
+                            window.location.href = redirectUrl;
+                        }, 1000);
+                    } else {
+                        showError(data.error || '登录失败，请重试');
+                    }
+                } catch (error) {
+                    console.error('Login error:', error);
+                    showError('网络错误，请检查连接后重试');
+                } finally {
+                    setLoading(false);
+                }
+            }
+            
+            /**
+             * Set loading state
+             */
+            function setLoading(loading) {
+                if (loading) {
+                    submitBtn.classList.add('loading');
+                    submitBtn.disabled = true;
+                } else {
+                    submitBtn.classList.remove('loading');
+                    submitBtn.disabled = false;
+                }
+            }
+            
+            /**
+             * Show error alert
+             */
+            function showError(message) {
+                errorAlert.querySelector('.alert-message').textContent = message;
+                errorAlert.style.display = 'flex';
+                successAlert.style.display = 'none';
+            }
+            
+            /**
+             * Show success alert
+             */
+            function showSuccess() {
+                successAlert.style.display = 'flex';
+                errorAlert.style.display = 'none';
+            }
+            
+            /**
+             * Hide error alert
+             */
+            function hideError() {
+                errorAlert.style.display = 'none';
+            }
+            
+            /**
+             * Show field error
+             */
+            function showFieldError(input, errorElement) {
+                input.classList.add('error');
+                if (errorElement) errorElement.style.display = 'block';
+            }
+            
+            /**
+             * Clear field errors
+             */
+            function clearFieldErrors() {
+                usernameInput.classList.remove('error');
+                passwordInput.classList.remove('error');
+                usernameError.style.display = 'none';
+                passwordError.style.display = 'none';
+            }
+            
+            /**
+             * Get query parameter
+             */
+            function getQueryParam(name) {
+                const params = new URLSearchParams(window.location.search);
+                return params.get(name);
+            }
+            
+            // Clear errors on input
+            usernameInput.addEventListener('input', function() {
+                this.classList.remove('error');
+                usernameError.style.display = 'none';
+            });
+            
+            passwordInput.addEventListener('input', function() {
+                this.classList.remove('error');
+                passwordError.style.display = 'none';
+            });
+        })();
+    </script>
+</body>
+</html>

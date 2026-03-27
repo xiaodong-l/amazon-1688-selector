@@ -167,17 +167,14 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Navigation Bar -->
+    {% include 'components/navbar.html' %}
+    
+    <div class="container" style="padding-top: 20px;">
         <header>
             <h1>📊 数据可视化中心</h1>
             <p>6 种分析图表 - 全方位数据洞察 (基于真实采集数据)</p>
         </header>
-
-        <div class="nav">
-            <a href="/">🏠 首页</a>
-            <a href="/charts" class="active">📊 可视化</a>
-            <a href="/api/results">📄 API 文档</a>
-        </div>
 
         <div class="info-box">
             <h4>💡 使用说明</h4>
