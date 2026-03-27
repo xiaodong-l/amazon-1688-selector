@@ -34,6 +34,12 @@ logger.add(
 from .amazon.collector import AmazonCollector
 from .analysis.trend_analyzer import TrendAnalyzer
 from .analysis.visualizer import TrendVisualizer
+from .analysis.prophet_predictor import ProphetPredictor, quick_forecast
+from .analysis.prophet_visualizer import ProphetVisualizer, quick_plot_forecast
+from .analysis.lstm_predictor import LSTMPredictor, quick_lstm_forecast
+from .analysis.lstm_features import create_features, create_target
+from .analysis.lstm_visualizer import create_dashboard as lstm_create_dashboard
+from .analysis.holidays import create_holidays_df
 from ._1688.supplier_finder import SupplierFinder
 from .utils.config import DATA_DIR, ANALYSIS_CONFIG, ALIBABA_CONFIG
 from .db import (
@@ -45,13 +51,20 @@ from .db import (
 
 
 class AmazonSelectorWorkflow:
-    """亚马逊选品工作流 (v2.3 - 数据库集成版)"""
+    """亚马逊选品工作流 (v2.4 Phase 2 - LSTM 深度学习预测集成版)"""
     
     def __init__(
         self,
         include_suppliers: bool = True,
         generate_charts: bool = True,
         use_database: bool = True,
+        use_prophet: bool = False,
+        prophet_forecast_days: int = 30,
+        prophet_country_holidays: str = "US",
+        use_lstm: bool = False,
+        lstm_lookback: int = 60,
+        lstm_forecast_days: int = 30,
+        lstm_units: list = None,
     ):
         """
         初始化工作流
@@ -60,26 +73,58 @@ class AmazonSelectorWorkflow:
             include_suppliers: 是否包含 1688 供应商匹配
             generate_charts: 是否生成可视化图表
             use_database: 是否使用数据库存储 (默认 True)
+            use_prophet: 是否使用 Prophet 时间序列预测 (v2.4 新功能)
+            prophet_forecast_days: Prophet 预测天数 (默认 30)
+            prophet_country_holidays: Prophet 国家节假日代码 (默认 US)
+            use_lstm: 是否使用 LSTM 深度学习预测 (v2.4 Phase 2 新功能)
+            lstm_lookback: LSTM 回溯窗口 (默认 60 天)
+            lstm_forecast_days: LSTM 预测天数 (默认 30 天)
+            lstm_units: LSTM 每层单元数列表 (默认 [50, 25])
         """
         self.use_database = use_database
+        self.use_prophet = use_prophet
+        self.prophet_forecast_days = prophet_forecast_days
+        self.prophet_country_holidays = prophet_country_holidays
+        self.use_lstm = use_lstm
+        self.lstm_lookback = lstm_lookback
+        self.lstm_forecast_days = lstm_forecast_days
+        self.lstm_units = lstm_units or [50, 25]
+        
         self.collector = AmazonCollector(
             use_rainforest=True,
             use_database=use_database,
         )
         self.analyzer = TrendAnalyzer()
         self.visualizer = TrendVisualizer() if generate_charts else None
+        self.prophet_predictor = ProphetPredictor() if use_prophet else None
+        self.prophet_visualizer = ProphetVisualizer() if (use_prophet and generate_charts) else None
+        self.lstm_predictor = LSTMPredictor(
+            lookback=lstm_lookback,
+            forecast_horizon=lstm_forecast_days,
+            lstm_units=self.lstm_units,
+        ) if use_lstm else None
+        self.lstm_visualizer = lstm_create_dashboard if (use_lstm and generate_charts) else None
         self.supplier_finder = SupplierFinder() if include_suppliers else None
         self.top_n_products = ANALYSIS_CONFIG["top_n_products"]
         self.top_n_suppliers = ALIBABA_CONFIG["top_n_suppliers"]
         self.generate_charts = generate_charts
         
-        logger.info("亚马逊选品工作流 (v2.3 - 数据库集成版) 初始化完成")
+        logger.info("亚马逊选品工作流 (v2.4 Phase 2 - LSTM 深度学习预测集成版) 初始化完成")
         if include_suppliers:
             logger.info("1688 供应商匹配已启用")
         if generate_charts:
             logger.info("可视化图表生成已启用")
         if use_database:
             logger.info("📊 数据库存储已启用")
+        if use_prophet:
+            logger.info("🔮 Prophet 时间序列预测已启用")
+            logger.info(f"   预测天数：{prophet_forecast_days}")
+            logger.info(f"   节假日：{prophet_country_holidays}")
+        if use_lstm:
+            logger.info("🧠 LSTM 深度学习预测已启用")
+            logger.info(f"   回溯窗口：{lstm_lookback}天")
+            logger.info(f"   预测天数：{lstm_forecast_days}天")
+            logger.info(f"   LSTM 单元：{self.lstm_units}")
     
     async def _ensure_db_initialized(self):
         """确保数据库已初始化"""
@@ -123,6 +168,58 @@ class AmazonSelectorWorkflow:
         elif isinstance(price_data, (int, float)):
             return float(price_data)
         return 0.0
+    
+    def _prepare_prophet_data(
+        self,
+        products: List[Dict[str, Any]],
+        timestamp: datetime,
+        days_history: int = 90,
+    ) -> pd.DataFrame:
+        """
+        为 Prophet 准备历史数据
+        
+        Args:
+            products: 商品数据列表
+            timestamp: 当前时间戳
+            days_history: 历史天数
+            
+        Returns:
+            Prophet 格式 DataFrame (ds, y)
+        """
+        import pandas as pd
+        import numpy as np
+        
+        # 从产品数据生成模拟历史数据
+        # 实际使用时应该从数据库加载真实历史数据
+        dates = pd.date_range(
+            end=timestamp,
+            periods=days_history,
+            freq="D",
+        )
+        
+        # 使用当前产品的 review_count 和 rating 估算销售
+        # 这是一个简化的模拟，实际应该使用真实历史销售数据
+        base_sales = np.mean([
+            p.get("review_count", 100) * 0.1  # 假设评论数的 10% 作为日销量估算
+            for p in products
+            if isinstance(p.get("review_count"), (int, float))
+        ])
+        
+        # 添加趋势和季节性
+        trend = np.linspace(base_sales * 0.8, base_sales * 1.2, days_history)
+        weekly_seasonality = 10 * np.sin(np.arange(days_history) * 2 * np.pi / 7)
+        noise = np.random.randn(days_history) * 5
+        
+        sales = trend + weekly_seasonality + noise
+        sales = np.maximum(sales, 0)  # 确保非负
+        
+        df = pd.DataFrame({
+            "date": dates,
+            "sales": sales,
+        })
+        
+        logger.info(f"准备 Prophet 数据：{len(df)} 天，平均销量 {sales.mean():.1f}")
+        return df
     
     async def _save_to_database(
         self,
@@ -308,7 +405,143 @@ class AmazonSelectorWorkflow:
         top_products = self.analyzer.select_top_n(analyzed_products, n=self.top_n_products)
         logger.info("✅ 筛选完成")
         
-        # 步骤 3.5: 生成可视化图表
+        # 步骤 3.5: Prophet 时间序列预测 (v2.4 新功能)
+        prophet_results = None
+        if self.use_prophet and self.prophet_predictor:
+            logger.info("🔮 开始 Prophet 时间序列预测...")
+            try:
+                # 准备历史数据 (从 analyzed_products 提取)
+                historical_df = self._prepare_prophet_data(analyzed_products, timestamp)
+                
+                if len(historical_df) > 10:
+                    # 配置节假日
+                    self.prophet_predictor.add_holidays(
+                        country=self.prophet_country_holidays,
+                        add_shopping_holidays=True,
+                    )
+                    
+                    # 训练模型
+                    self.prophet_predictor.train(historical_df)
+                    
+                    # 生成预测
+                    forecast = self.prophet_predictor.predict(periods=self.prophet_forecast_days)
+                    
+                    # 获取评估指标
+                    metrics = self.prophet_predictor.get_metrics()
+                    
+                    # 生成预测图
+                    if self.prophet_visualizer:
+                        forecast_plot = f"prophet_forecast_{timestamp_str}.png"
+                        self.prophet_visualizer.plot_forecast(
+                            self.prophet_predictor,
+                            title="销售预测 (Prophet)",
+                            save_path=forecast_plot,
+                            show_plot=False,
+                        )
+                        charts["prophet_forecast"] = forecast_plot
+                    
+                    # 生成组件图
+                    components_plot = f"prophet_components_{timestamp_str}.png"
+                    self.prophet_visualizer.plot_components(
+                        self.prophet_predictor,
+                        title="预测组件分析",
+                        save_path=components_plot,
+                        show_plot=False,
+                    )
+                    charts["prophet_components"] = components_plot
+                    
+                    prophet_results = {
+                        "forecast": forecast,
+                        "metrics": metrics,
+                        "forecast_days": self.prophet_forecast_days,
+                        "mape": metrics.get("mape", 0),
+                    }
+                    
+                    logger.info(f"✅ Prophet 预测完成 (MAPE: {metrics.get('mape', 0):.2f}%)")
+                else:
+                    logger.warning("⚠️ 历史数据不足，跳过 Prophet 预测")
+            except Exception as e:
+                logger.warning(f"⚠️ Prophet 预测失败：{e}")
+                prophet_results = None
+        
+        # 步骤 3.5b: LSTM 深度学习预测 (v2.4 Phase 2 新功能)
+        lstm_results = None
+        if self.use_lstm and self.lstm_predictor:
+            logger.info("🧠 开始 LSTM 深度学习预测...")
+            try:
+                # 准备历史数据
+                historical_df = self._prepare_prophet_data(analyzed_products, timestamp)
+                
+                if len(historical_df) > self.lstm_lookback:
+                    # 创建特征
+                    features_df = create_features(
+                        historical_df,
+                        target_col="sales",
+                        date_col="date",
+                    )
+                    
+                    # 准备 LSTM 数据
+                    sales_data = features_df["sales"].values
+                    
+                    # 快速 LSTM 预测
+                    predictions, metrics = quick_lstm_forecast(
+                        sales_data,
+                        forecast_days=self.lstm_forecast_days,
+                        lookback=self.lstm_lookback,
+                        verbose=True,
+                    )
+                    
+                    # 生成预测日期
+                    forecast_dates = pd.date_range(
+                        start=timestamp + pd.Timedelta(days=1),
+                        periods=self.lstm_forecast_days,
+                        freq="D",
+                    )
+                    
+                    # 生成预测 DataFrame
+                    lstm_forecast = pd.DataFrame({
+                        "date": forecast_dates,
+                        "predicted_sales": predictions,
+                    })
+                    
+                    # 生成可视化
+                    if self.lstm_visualizer:
+                        # 创建仪表板
+                        dashboard_path = f"lstm_dashboard_{timestamp_str}.png"
+                        history_dict = self.lstm_predictor.history.history if self.lstm_predictor.history else {}
+                        
+                        fig = self.lstm_visualizer(
+                            y_true=sales_data[-len(predictions):],
+                            y_pred=predictions,
+                            history=history_dict,
+                            metrics=metrics,
+                            dates=forecast_dates,
+                            save_path=dashboard_path,
+                            show=False,
+                        )
+                        import matplotlib.pyplot as plt
+                        plt.close(fig)
+                        charts["lstm_dashboard"] = dashboard_path
+                    
+                    lstm_results = {
+                        "forecast": lstm_forecast,
+                        "metrics": metrics,
+                        "forecast_days": self.lstm_forecast_days,
+                        "mape": metrics.get("MAPE", 0),
+                    }
+                    
+                    logger.info(f"✅ LSTM 预测完成 (MAPE: {metrics.get('MAPE', 0):.2f}%)")
+                else:
+                    logger.warning(
+                        f"⚠️ 历史数据不足 (需要>{self.lstm_lookback}天，实际{len(historical_df)}天)，跳过 LSTM 预测"
+                    )
+            except Exception as e:
+                logger.warning(f"⚠️ LSTM 预测失败：{e}")
+                import traceback
+                logger.debug(traceback.format_exc())
+                lstm_results = None
+        
+        # 步骤 3.6: 生成可视化图表
         charts = {}
         if self.visualizer and self.generate_charts:
             logger.info("📊 生成可视化图表...")
@@ -383,6 +616,10 @@ class AmazonSelectorWorkflow:
             "charts": charts,
             "visualizer_enabled": self.visualizer is not None,
             "database_enabled": self.use_database,
+            "prophet_enabled": self.use_prophet,
+            "prophet_results": prophet_results,
+            "lstm_enabled": self.use_lstm,
+            "lstm_results": lstm_results,
             "timestamp": timestamp.isoformat(),
         }
 
@@ -390,7 +627,7 @@ class AmazonSelectorWorkflow:
 async def main():
     """主函数 - 支持命令行参数"""
     # 解析命令行参数
-    parser = argparse.ArgumentParser(description="亚马逊选品工作流 (v2.3)")
+    parser = argparse.ArgumentParser(description="亚马逊选品工作流 (v2.4 - Prophet 预测)")
     parser.add_argument(
         "--keywords",
         type=str,
@@ -420,6 +657,42 @@ async def main():
         default=None,
         help="加载已有 CSV 文件 (不重新采集)"
     )
+    parser.add_argument(
+        "--use-prophet",
+        action="store_true",
+        default=False,
+        help="启用 Prophet 时间序列预测 (v2.4 新功能)"
+    )
+    parser.add_argument(
+        "--prophet-days",
+        type=int,
+        default=30,
+        help="Prophet 预测天数 (默认：30)"
+    )
+    parser.add_argument(
+        "--prophet-country",
+        type=str,
+        default="US",
+        help="Prophet 国家节假日代码 (默认：US)"
+    )
+    parser.add_argument(
+        "--use-lstm",
+        action="store_true",
+        default=False,
+        help="启用 LSTM 深度学习预测 (v2.4 Phase 2 新功能)"
+    )
+    parser.add_argument(
+        "--lstm-lookback",
+        type=int,
+        default=60,
+        help="LSTM 回溯窗口天数 (默认：60)"
+    )
+    parser.add_argument(
+        "--lstm-days",
+        type=int,
+        default=30,
+        help="LSTM 预测天数 (默认：30)"
+    )
     
     args = parser.parse_args()
     
@@ -436,6 +709,12 @@ async def main():
         use_database=use_database,
         include_suppliers=True,
         generate_charts=True,
+        use_prophet=args.use_prophet,
+        prophet_forecast_days=args.prophet_days,
+        prophet_country_holidays=args.prophet_country,
+        use_lstm=args.use_lstm,
+        lstm_lookback=args.lstm_lookback,
+        lstm_forecast_days=args.lstm_days,
     )
     
     # 运行工作流
