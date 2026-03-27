@@ -1,0 +1,56 @@
+# Docker 忽略文件
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# 测试
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# 数据文件
+*.db
+*.sqlite
+data/*.csv
+data/*.json
+results/
+logs/
+models/
+
+# 环境配置
+.env
+.env.local
+
+# 文档
+*.md
+!README.md
+docs/
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose*.yml
+.docker/
+
+# 其他
+*.log
+.DS_Store
+Thumbs.db
