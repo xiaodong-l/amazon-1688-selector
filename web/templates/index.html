@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏆 亚马逊选品系统</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        header p { font-size: 1.1em; opacity: 0.9; }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .card h2 { color: #667eea; margin-bottom: 20px; font-size: 1.5em; }
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .controls input[type="text"] {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+        .controls input[type="text"]:focus { outline: none; border-color: #667eea; }
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .status.loading { background: #fff3cd; color: #856404; display: block; }
+        .status.success { background: #d4edda; color: #155724; display: block; }
+        .status.error { background: #f8d7da; color: #721c24; display: block; }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.2s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .product-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+        .product-card h3 {
+            color: #333;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            max-height: 3.2em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        .product-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .product-info div {
+            padding: 5px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .product-info strong { color: #333; }
+        .product-link {
+            color: #667eea;
+            text-decoration: none;
+            word-break: break-all;
+            font-size: 0.85em;
+        }
+        .product-link:hover { text-decoration: underline; }
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .badge-hot { background: linear-gradient(135deg, #ff6b6b, #ee5a6f); color: white; }
+        .badge-grow { background: linear-gradient(135deg, #51cf66, #40c057); color: white; }
+        .badge-stable { background: linear-gradient(135deg, #74c0fc, #5c9ce6); color: white; }
+        .badge-slow { background: linear-gradient(135deg, #ffd43b, #fab005); color: #333; }
+        .score-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        .score-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+        .score-title {
+            font-size: 0.95em;
+            opacity: 0.95;
+        }
+        .score-number {
+            font-size: 2.2em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .score-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        .score-item {
+            background: rgba(255,255,255,0.15);
+            padding: 12px 8px;
+            border-radius: 8px;
+            text-align: center;
+            transition: background 0.2s;
+        }
+        .score-item:hover {
+            background: rgba(255,255,255,0.25);
+        }
+        .score-item .label {
+            opacity: 0.9;
+            font-size: 0.75em;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+        .score-item .weight {
+            opacity: 0.7;
+            font-size: 0.7em;
+            margin-top: 3px;
+        }
+        .score-item .value {
+            font-weight: bold;
+            font-size: 1.3em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        .score-item .bar {
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        .score-item .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,1));
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-card .number { font-size: 2em; font-weight: bold; }
+        .stat-card .label { font-size: 0.9em; opacity: 0.9; }
+        .search-box {
+            margin-bottom: 20px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+        .search-box input:focus { outline: none; border-color: #667eea; }
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .no-data {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+        .no-data h3 { font-size: 1.5em; margin-bottom: 10px; color: #999; }
+        .no-data p { color: #aaa; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏆 亚马逊选品系统</h1>
+            <p>Amazon 数据采集 → 趋势分析 → Top20 潜力商品</p>
+        </header>
+
+        <div class="card">
+            <h2>🎯 开始选品</h2>
+            <div class="controls">
+                <input type="text" id="keywords" placeholder="输入关键词，用逗号分隔" 
+                       value="wireless earbuds, phone case, laptop stand">
+                <button class="btn" onclick="runWorkflow()" id="runBtn">
+                    🚀 开始选品
+                </button>
+            </div>
+            <div id="status" class="status"></div>
+        </div>
+
+        <div class="stats" id="stats" style="display: none;">
+            <div class="stat-card">
+                <div class="number" id="statTotal">0</div>
+                <div class="label">采集商品</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="statTop">0</div>
+                <div class="label">Top 潜力商品</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="statKeywords">0</div>
+                <div class="label">关键词</div>
+            </div>
+        </div>
+
+        <div class="card" id="productsCard" style="display: none;">
+            <h2>📊 Top 潜力商品</h2>
+            <div class="search-box">
+                <input type="text" id="searchBox" placeholder="🔍 搜索商品 (标题/ASIN)..." onkeyup="filterProducts()">
+            </div>
+            <div class="product-grid" id="productGrid"></div>
+        </div>
+
+        <div class="card" id="noDataCard">
+            <div class="no-data">
+                <h3>📦 暂无数据</h3>
+                <p>点击上方"开始选品"按钮采集商品数据</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentProducts = [];
+        let filteredProducts = [];
+
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.className = `status ${type}`;
+            status.innerHTML = type === 'loading' 
+                ? `<span class="loading-spinner"></span>${message}`
+                : message;
+        }
+
+        async function runWorkflow() {
+            const keywordsInput = document.getElementById('keywords').value;
+            const keywords = keywordsInput.split(',').map(k => k.trim()).filter(k => k);
+            
+            if (keywords.length === 0) {
+                showStatus('请输入至少一个关键词', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('runBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading-spinner"></span>采集中...';
+            showStatus('正在采集商品并分析趋势，请稍候...', 'loading');
+
+            try {
+                const response = await fetch('/api/run', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        keywords: keywords,
+                        include_suppliers: false 
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showStatus(`✅ 完成！采集 ${data.result.total_products} 个商品，筛选出 ${data.result.top_products_count} 个潜力商品`, 'success');
+                    await loadProducts();
+                } else {
+                    showStatus(`❌ 失败：${data.error}`, 'error');
+                }
+            } catch (error) {
+                showStatus(`❌ 错误：${error.message}`, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '🚀 开始选品';
+            }
+        }
+
+        async function loadProducts() {
+            try {
+                const response = await fetch('/api/products');
+                const data = await response.json();
+
+                if (data.success && data.products && data.products.length > 0) {
+                    currentProducts = data.products;
+                    filteredProducts = [...currentProducts];
+                    renderProducts(data.products);
+                    
+                    document.getElementById('stats').style.display = 'grid';
+                    document.getElementById('statTotal').textContent = data.count || data.products.length;
+                    document.getElementById('statTop').textContent = data.products.length;
+                    
+                    const kwInput = document.getElementById('keywords').value;
+                    const kwCount = kwInput.split(',').filter(k => k.trim()).length;
+                    document.getElementById('statKeywords').textContent = kwCount;
+                    
+                    document.getElementById('productsCard').style.display = 'block';
+                    document.getElementById('noDataCard').style.display = 'none';
+                } else {
+                    document.getElementById('productsCard').style.display = 'none';
+                    document.getElementById('noDataCard').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('加载商品失败:', error);
+                showStatus('加载数据失败，请刷新页面', 'error');
+            }
+        }
+
+        function filterProducts() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+            
+            if (!searchTerm) {
+                filteredProducts = [...currentProducts];
+            } else {
+                filteredProducts = currentProducts.filter(p => {
+                    const title = (p.title || '').toLowerCase();
+                    const asin = (p.asin || '').toLowerCase();
+                    return title.includes(searchTerm) || asin.includes(searchTerm);
+                });
+            }
+            
+            renderProducts(filteredProducts);
+        }
+
+        function renderProducts(products) {
+            const grid = document.getElementById('productGrid');
+            
+            if (!products || products.length === 0) {
+                grid.innerHTML = '<div class="no-data"><h3>😕 没有找到匹配的商品</h3><p>尝试其他搜索关键词</p></div>';
+                return;
+            }
+            
+            grid.innerHTML = '';
+
+            products.forEach((product, index) => {
+                const price = product.price ? (product.price.value || product.price.raw || product.price) : 'N/A';
+                const score = product.trend_score || 0;
+                const rating = product.rating || 0;
+                const ratingsTotal = product.ratings_total || 0;
+                
+                let badgeClass = 'badge-stable';
+                let badgeText = '稳定发展';
+                if (score >= 80) { badgeClass = 'badge-hot'; badgeText = '🔥 爆品潜力'; }
+                else if (score >= 60) { badgeClass = 'badge-grow'; badgeText = '📈 快速增长'; }
+                else if (score < 40) { badgeClass = 'badge-slow'; badgeText = '⚠️ 增长放缓'; }
+
+                // 评分标准说明 (支持扁平结构和嵌套结构)
+                const scoreExplain = {
+                    sales: (product.sales_growth !== undefined ? product.sales_growth : product.metrics?.sales_growth || 0).toFixed(1),
+                    review: (product.review_growth !== undefined ? product.review_growth : product.metrics?.review_growth || 0).toFixed(1),
+                    bsr: (product.bsr_improvement !== undefined ? product.bsr_improvement : product.metrics?.bsr_improvement || 0).toFixed(1)
+                };
+
+                // 商品链接
+                const productUrl = product.link || `https://www.amazon.com/dp/${product.asin}`;
+
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    ${product.main_image ? `<img src="${product.main_image}" alt="商品图片" class="product-image" onerror="this.style.display='none'">` : ''}
+                    <h3 title="${product.title}">${index + 1}. ${product.title}</h3>
+                    
+                    <div class="product-info">
+                        <div><strong>ASIN:</strong> ${product.asin || 'N/A'}</div>
+                        <div><strong>价格:</strong> ${typeof price === 'object' ? `$${price.value || 'N/A'}` : `$${price}`}</div>
+                        <div><strong>评分:</strong> ${rating}⭐ (${ratingsTotal.toLocaleString()} 条)</div>
+                        <div><strong>标签:</strong> ${product.is_prime ? '✓ Prime' : ''} ${product.is_amazon_choice ? '✓ Amazon Choice' : ''} ${product.is_best_seller ? '✓ Best Seller' : ''}</div>
+                        <div style="grid-column: 1/-1;"><strong>链接:</strong> <a href="${productUrl}" target="_blank" class="product-link">${productUrl}</a></div>
+                    </div>
+                    
+                    <div class="score-box">
+                        <div class="score-header">
+                            <div>
+                                <span class="score-title">📊 趋势评分</span>
+                                <span class="badge ${badgeClass}" style="margin-left: 10px;">${badgeText}</span>
+                            </div>
+                            <span class="score-number">${score}<span style="font-size:0.5em; opacity:0.8">/100</span></span>
+                        </div>
+                        <div class="score-details">
+                            <div class="score-item">
+                                <div class="label">📈 销量增长</div>
+                                <div class="value">${scoreExplain.sales}</div>
+                                <div class="weight">权重 40%</div>
+                                <div class="bar"><div class="bar-fill" style="width: ${Math.min(100, scoreExplain.sales)}%"></div></div>
+                            </div>
+                            <div class="score-item">
+                                <div class="label">💬 评论增速</div>
+                                <div class="value">${scoreExplain.review}</div>
+                                <div class="weight">权重 30%</div>
+                                <div class="bar"><div class="bar-fill" style="width: ${Math.min(100, scoreExplain.review)}%"></div></div>
+                            </div>
+                            <div class="score-item">
+                                <div class="label">🏆 BSR 排名</div>
+                                <div class="value">${scoreExplain.bsr}</div>
+                                <div class="weight">权重 30%</div>
+                                <div class="bar"><div class="bar-fill" style="width: ${Math.min(100, scoreExplain.bsr)}%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // 页面加载时检查是否有历史数据
+        window.onload = async function() {
+            await loadProducts();
+        };
+    </script>
+</body>
+</html>

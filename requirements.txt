@@ -1,0 +1,41 @@
+# 亚马逊选品系统依赖
+
+# 亚马逊 SP-API (官方)
+sp-api-python>=0.1.0
+
+# 浏览器自动化 (备选方案)
+playwright>=1.40.0
+selenium>=4.15.0
+
+# 数据处理
+pandas>=2.0.0
+numpy>=1.24.0
+scipy>=1.11.0  # 统计分析
+
+# 数据可视化
+matplotlib>=3.8.0
+plotly>=5.18.0
+kaleido>=0.2.0  # Plotly 静态图片导出
+
+# 数据库
+psycopg2-binary>=2.9.0
+sqlalchemy>=2.0.0
+
+# HTTP 请求
+requests>=2.31.0
+aiohttp>=3.9.0
+
+# 代理支持
+fake-useragent>=1.4.0
+rotating-proxies>=0.1.0
+
+# 工具
+python-dotenv>=1.0.0
+loguru>=0.7.0
+
+# 测试
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+
+# Web 前端
+flask>=3.0.0
