@@ -9,10 +9,12 @@
 """
 import asyncio
 import json
+import os
+import glob
 from pathlib import Path
 from datetime import datetime
 
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, send_from_directory
 from loguru import logger
 
 import sys
@@ -32,6 +34,12 @@ logger.add(sys.stdout, level="INFO")
 def index():
     """首页"""
     return render_template('index.html')
+
+
+@app.route('/charts')
+def charts_page():
+    """可视化图表页面"""
+    return render_template('charts.html')
 
 
 @app.route('/api/products', methods=['GET'])
@@ -187,6 +195,110 @@ def run_full_workflow():
             "success": False,
             "error": str(e),
         }), 500
+
+
+@app.route('/api/charts', methods=['GET'])
+def get_charts():
+    """获取可视化图表列表"""
+    try:
+        import glob
+        
+        # 查找图表文件
+        chart_files = []
+        chart_types = {
+            'trend_bar': '趋势评分柱状图',
+            'price_dist': '价格分布图',
+            'scatter': '评分 - 销量散点图',
+            'radar': '雷达图',
+            'heatmap': '相关性热力图',
+            'dashboard': '综合仪表板'
+        }
+        
+        for chart_type, chart_name in chart_types.items():
+            pattern = str(DATA_DIR / "charts" / f"{chart_type}_*.png")
+            files = glob.glob(pattern)
+            if files:
+                latest = max(files, key=lambda f: os.path.getmtime(f))
+                chart_files.append({
+                    "type": chart_type,
+                    "name": chart_name,
+                    "url": f"/static/charts/{os.path.basename(latest)}",
+                    "path": latest,
+                    "created_at": datetime.fromtimestamp(os.path.getmtime(latest)).isoformat()
+                })
+            
+            # 也查找 HTML 交互式图表
+            pattern_html = str(DATA_DIR / "charts" / f"{chart_type}_*.html")
+            files_html = glob.glob(pattern_html)
+            if files_html:
+                latest_html = max(files_html, key=lambda f: os.path.getmtime(f))
+                chart_files.append({
+                    "type": chart_type,
+                    "name": chart_name + " (交互式)",
+                    "url": f"/static/charts/{os.path.basename(latest_html)}",
+                    "path": latest_html,
+                    "created_at": datetime.fromtimestamp(os.path.getmtime(latest_html)).isoformat()
+                })
+        
+        # 按时间排序
+        chart_files.sort(key=lambda x: x['created_at'], reverse=True)
+        
+        # 获取商品数量
+        product_count = 20  # 默认 Top20
+        
+        return jsonify({
+            "success": True,
+            "charts": chart_files,
+            "product_count": product_count,
+            "last_update": chart_files[0]['created_at'] if chart_files else None,
+        })
+    except Exception as e:
+        logger.error(f"获取图表失败：{e}")
+        return jsonify({
+            "success": False,
+            "error": str(e),
+        }), 500
+
+
+@app.route('/api/config', methods=['GET'])
+def get_config():
+    """获取分析配置信息 (v2.1 新增)"""
+    try:
+        from src.utils.config import (
+            ANALYSIS_WEIGHTS,
+            ANALYSIS_THRESHOLDS,
+            CATEGORY_MARGINS,
+            SEASONAL_FACTORS,
+        )
+        
+        return jsonify({
+            "success": True,
+            "config": {
+                "weights": ANALYSIS_WEIGHTS,
+                "thresholds": {
+                    "ratings_high": ANALYSIS_THRESHOLDS["ratings_high"],
+                    "ratings_medium": ANALYSIS_THRESHOLDS["ratings_medium"],
+                    "rating_excellent": ANALYSIS_THRESHOLDS["rating_excellent"],
+                    "price_low": ANALYSIS_THRESHOLDS["price_low"],
+                    "price_medium": ANALYSIS_THRESHOLDS["price_medium"],
+                },
+                "category_margins": CATEGORY_MARGINS,
+                "seasonal_factors": SEASONAL_FACTORS,
+            }
+        })
+    except Exception as e:
+        logger.error(f"获取配置失败：{e}")
+        return jsonify({
+            "success": False,
+            "error": str(e),
+        }), 500
+
+
+@app.route('/static/charts/<filename>')
+def serve_chart(filename):
+    """提供静态图表文件"""
+    chart_dir = DATA_DIR / "charts"
+    return send_from_directory(str(chart_dir), filename)
 
 
 if __name__ == "__main__":

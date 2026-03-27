@@ -132,6 +132,48 @@
         .badge-grow { background: linear-gradient(135deg, #51cf66, #40c057); color: white; }
         .badge-stable { background: linear-gradient(135deg, #74c0fc, #5c9ce6); color: white; }
         .badge-slow { background: linear-gradient(135deg, #ffd43b, #fab005); color: #333; }
+        .enhanced-metrics {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            display: none;
+        }
+        .enhanced-metrics.show { display: block; }
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.85em;
+        }
+        .metric-row:last-child { border-bottom: none; }
+        .metric-label { opacity: 0.9; }
+        .metric-value { font-weight: bold; }
+        .forecast-box {
+            background: rgba(255,255,255,0.15);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+        }
+        .forecast-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.85em;
+        }
+        .toggle-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+        .toggle-btn:hover { background: rgba(255,255,255,0.3); }
         .score-box {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
@@ -457,26 +499,77 @@
                             <div class="score-item">
                                 <div class="label">📈 销量增长</div>
                                 <div class="value">${scoreExplain.sales}</div>
-                                <div class="weight">权重 40%</div>
+                                <div class="weight">权重 30%</div>
                                 <div class="bar"><div class="bar-fill" style="width: ${Math.min(100, scoreExplain.sales)}%"></div></div>
                             </div>
                             <div class="score-item">
                                 <div class="label">💬 评论增速</div>
                                 <div class="value">${scoreExplain.review}</div>
-                                <div class="weight">权重 30%</div>
+                                <div class="weight">权重 20%</div>
                                 <div class="bar"><div class="bar-fill" style="width: ${Math.min(100, scoreExplain.review)}%"></div></div>
                             </div>
                             <div class="score-item">
                                 <div class="label">🏆 BSR 排名</div>
                                 <div class="value">${scoreExplain.bsr}</div>
-                                <div class="weight">权重 30%</div>
+                                <div class="weight">权重 20%</div>
                                 <div class="bar"><div class="bar-fill" style="width: ${Math.min(100, scoreExplain.bsr)}%"></div></div>
                             </div>
+                        </div>
+                        
+                        <button class="toggle-btn" onclick="toggleMetrics(this)">🔍 查看增强指标 (v2.1)</button>
+                        
+                        <div class="enhanced-metrics">
+                            <div class="metric-row">
+                                <span class="metric-label">💰 利润率估算</span>
+                                <span class="metric-value">${(product.metrics?.profit_margin || 0).toFixed(1)}/100</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">📊 市场饱和度</span>
+                                <span class="metric-value">${(product.metrics?.market_saturation || 0).toFixed(1)}/100</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">📈 增长持续性</span>
+                                <span class="metric-value">${(product.metrics?.growth_sustainability || 0).toFixed(1)}/100</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">⚠️ 风险评分</span>
+                                <span class="metric-value">${(product.metrics?.risk_score || 0).toFixed(1)}/100</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">✅ 置信度</span>
+                                <span class="metric-value">${(product.confidence || 0).toFixed(2)}</span>
+                            </div>
+                            
+                            ${product.forecast_30d ? `
+                            <div class="forecast-box">
+                                <div style="margin-bottom: 8px; font-weight: bold; opacity: 0.9;">🔮 30 天预测</div>
+                                <div class="forecast-row">
+                                    <span>预测评分:</span>
+                                    <span>${product.forecast_30d.score || 'N/A'}</span>
+                                </div>
+                                <div class="forecast-row">
+                                    <span>趋势:</span>
+                                    <span>${product.forecast_30d.trend || 'N/A'}</span>
+                                </div>
+                                <div class="forecast-row">
+                                    <span>置信区间:</span>
+                                    <span>[${(product.forecast_30d.confidence_interval?.low || 0).toFixed(1)}, ${(product.forecast_30d.confidence_interval?.high || 0).toFixed(1)}]</span>
+                                </div>
+                            </div>
+                            ` : ''}
                         </div>
                     </div>
                 `;
                 grid.appendChild(card);
             });
+        }
+
+        function toggleMetrics(btn) {
+            const metricsDiv = btn.nextElementSibling;
+            metricsDiv.classList.toggle('show');
+            btn.textContent = metricsDiv.classList.contains('show') 
+                ? '🔼 收起增强指标' 
+                : '🔍 查看增强指标 (v2.1)';
         }
 
         // 页面加载时检查是否有历史数据
