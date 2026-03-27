@@ -1,0 +1,63 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+categories:
+  - title: '🚀 新功能'
+    labels:
+      - 'feature'
+      - 'enhancement'
+  - title: '🐛 Bug 修复'
+    labels:
+      - 'fix'
+      - 'bugfix'
+      - 'bug'
+  - title: '📚 文档'
+    labels:
+      - 'docs'
+      - 'documentation'
+  - title: '⚙️ 代码优化'
+    labels:
+      - 'refactor'
+      - 'optimization'
+  - title: '🧪 测试'
+    labels:
+      - 'test'
+      - 'tests'
+  - title: '📦 依赖'
+    labels:
+      - 'dependencies'
+      - 'dependency'
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+change-title-escapes: '\<*_&'
+version-resolver:
+  major:
+    labels:
+      - 'major'
+      - 'breaking'
+  minor:
+    labels:
+      - 'minor'
+      - 'feature'
+  patch:
+    labels:
+      - 'patch'
+      - 'fix'
+      - 'bug'
+  default: patch
+
+template: |
+  ## 🎉 更新内容
+
+  $CHANGES
+
+  ## 📊 统计
+
+  - **贡献者:** $CONTRIBUTORS
+  - **提交:** $COMMIT_COUNT
+  - **文件变更:** $FILES_CHANGED
+
+  ## 🙏 致谢
+
+  感谢所有贡献者！
+
+  ---
+  **完整更新日志:** [CHANGELOG.md](https://github.com/$OWNER/$REPOSITORY/blob/master/CHANGELOG.md)
