@@ -27,6 +27,9 @@ from src.utils.config import DATA_DIR
 
 # Import authentication blueprints
 from web.routes.auth import auth_bp
+from web.routes.analysis import analysis_bp
+from web.routes.monitor import monitor_bp
+from web.routes.users import users_bp
 from web.middleware.auth import init_auth
 
 # Version
@@ -36,8 +39,11 @@ app = Flask(__name__, template_folder='templates')
 logger.remove()
 logger.add(sys.stdout, level="INFO")
 
-# Register authentication blueprint
+# Register blueprints
 app.register_blueprint(auth_bp)
+app.register_blueprint(analysis_bp)
+app.register_blueprint(monitor_bp)
+app.register_blueprint(users_bp)
 
 # Initialize authentication middleware
 init_auth(app)

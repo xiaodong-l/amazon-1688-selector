@@ -643,10 +643,10 @@ def get_current_user():
             "success": True,
             "user": {
                 "id": user['id'],
-                "username': user['username'],
+                "username": user['username'],
                 "email": user.get('email'),
                 "role": user.get('role', 'user'),
-                "permissions': permissions,
+                "permissions": permissions,
                 "created_at": user.get('created_at').isoformat() if user.get('created_at') else None,
             }
         }), 200
