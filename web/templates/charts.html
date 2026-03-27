@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📊 数据可视化 - 亚马逊选品系统</title>
+    <title>📊 数据可视化 - 亚马逊选品系统 v2.1</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
         .container { max-width: 1600px; margin: 0 auto; }
+        
         header {
             text-align: center;
             color: white;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
-        header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
         header p { font-size: 1.1em; opacity: 0.9; }
+        
         .nav {
             text-align: center;
             margin-bottom: 20px;
@@ -28,12 +30,16 @@
             color: white;
             text-decoration: none;
             padding: 10px 20px;
-            margin: 0 10px;
+            margin: 0 8px;
             border: 2px solid white;
             border-radius: 8px;
-            transition: background 0.2s;
+            transition: all 0.2s;
+            font-weight: bold;
+            display: inline-block;
         }
-        .nav a:hover { background: rgba(255,255,255,0.2); }
+        .nav a:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+        .nav a.active { background: rgba(255,255,255,0.3); }
+        
         .card {
             background: white;
             border-radius: 12px;
@@ -42,44 +48,7 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
         .card h2 { color: #667eea; margin-bottom: 20px; }
-        .chart-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 20px;
-        }
-        .chart-card {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-        .chart-card img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .chart-card h3 {
-            color: #333;
-            margin: 15px 0 10px;
-            font-size: 1.1em;
-        }
-        .chart-card p {
-            color: #666;
-            font-size: 0.9em;
-            margin-bottom: 15px;
-        }
-        .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            display: inline-block;
-            transition: transform 0.2s;
-        }
-        .btn:hover { transform: translateY(-2px); }
+        
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -95,47 +64,164 @@
         }
         .stat-card .number { font-size: 2em; font-weight: bold; }
         .stat-card .label { font-size: 0.9em; opacity: 0.9; }
-        .loading { text-align: center; padding: 40px; color: #666; }
-        .no-data { text-align: center; padding: 60px; color: #999; }
+        
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+        }
+        
+        .chart-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        .chart-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+        .chart-icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+        }
+        .chart-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        .chart-card p {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(102,126,234,0.4); }
+        .btn-iframe { background: linear-gradient(135deg, #11998e, #38ef7d); }
+        
+        .loading { text-align: center; padding: 60px; color: #666; }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .no-data {
+            text-align: center;
+            padding: 80px 20px;
+            color: #999;
+        }
+        .no-data h3 { font-size: 1.5em; margin-bottom: 15px; color: #666; }
+        .no-data p { margin-bottom: 20px; }
+        .no-data code {
+            background: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .info-box h4 { color: #1976D2; margin-bottom: 10px; }
+        .info-box ul { margin-left: 20px; color: #555; }
+        .info-box li { margin-bottom: 5px; }
+        
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.8em; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .nav a { display: block; margin: 5px 0; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>📊 数据可视化中心</h1>
-            <p>6 种分析图表 - 全方位数据洞察</p>
+            <p>6 种分析图表 - 全方位数据洞察 (基于真实采集数据)</p>
         </header>
 
         <div class="nav">
             <a href="/">🏠 首页</a>
-            <a href="/charts">📊 可视化</a>
+            <a href="/charts" class="active">📊 可视化</a>
             <a href="/api/results">📄 API 文档</a>
+        </div>
+
+        <div class="info-box">
+            <h4>💡 使用说明</h4>
+            <ul>
+                <li>所有图表基于真实采集的亚马逊商品数据生成</li>
+                <li>点击"查看图表"按钮在新窗口打开高清版本</li>
+                <li>交互式图表 (HTML) 可直接在下方预览</li>
+                <li>运行选品工作流后会自动生成最新图表</li>
+            </ul>
         </div>
 
         <div class="stats" id="stats">
             <div class="stat-card">
                 <div class="number" id="chartCount">0</div>
-                <div class="label">图表数量</div>
+                <div class="label">📊 图表数量</div>
             </div>
             <div class="stat-card">
                 <div class="number" id="productCount">0</div>
-                <div class="label">分析商品</div>
+                <div class="label">📦 分析商品</div>
             </div>
             <div class="stat-card">
                 <div class="number" id="updateTime">-</div>
-                <div class="label">最后更新</div>
+                <div class="label">🕐 最后更新</div>
             </div>
         </div>
 
         <div class="card">
             <h2>📈 分析图表</h2>
+            
             <div id="loading" class="loading">
+                <div class="loading-spinner"></div>
                 <p>🔄 正在加载图表...</p>
             </div>
+            
             <div id="noData" class="no-data" style="display: none;">
                 <h3>😕 暂无图表数据</h3>
                 <p>请先运行选品工作流生成图表</p>
+                <p style="margin-top: 15px; font-size: 0.9em; color: #aaa;">
+                    提示：运行完整工作流后，图表会自动保存在<br>
+                    <code style="background: #f0f0f0; padding: 5px 10px; border-radius: 4px;">data/charts/</code> 目录
+                </p>
+                <a href="/" class="btn" style="margin-top: 20px;">🏠 返回首页选品</a>
             </div>
+            
             <div class="chart-grid" id="chartGrid" style="display: none;"></div>
         </div>
     </div>
@@ -143,44 +229,32 @@
     <script>
         async function loadCharts() {
             try {
-                // 获取图表文件列表
                 const response = await fetch('/api/charts');
                 const data = await response.json();
                 console.log('图表数据:', data);
 
                 if (data.success) {
-                    // 即使没有图表也显示提示
                     if (data.charts && data.charts.length > 0) {
                         renderCharts(data.charts);
                         document.getElementById('chartCount').textContent = data.charts.length;
-                    } else {
-                        document.getElementById('chartCount').textContent = '0';
-                        document.getElementById('noData').innerHTML = `
-                            <h3>😕 暂无图表数据</h3>
-                            <p>请先运行选品工作流生成图表</p>
-                            <p style="margin-top: 15px; font-size: 0.9em; color: #aaa;">
-                                提示：运行完整工作流后，图表会自动保存在<br>
-                                <code style="background: #f0f0f0; padding: 5px 10px; border-radius: 4px;">data/charts/</code> 目录
-                            </p>
-                        `;
-                        document.getElementById('noData').style.display = 'block';
+                        document.getElementById('productCount').textContent = data.product_count || 20;
+                        document.getElementById('updateTime').textContent = data.last_update ? 
+                            new Date(data.last_update).toLocaleString('zh-CN') : '-';
+                        
+                        document.getElementById('stats').style.display = 'grid';
                         document.getElementById('loading').style.display = 'none';
-                        return;
+                        document.getElementById('chartGrid').style.display = 'grid';
+                    } else {
+                        document.getElementById('loading').style.display = 'none';
+                        document.getElementById('noData').style.display = 'block';
                     }
-                    
-                    document.getElementById('productCount').textContent = data.product_count || 20;
-                    document.getElementById('updateTime').textContent = data.last_update ? 
-                        new Date(data.last_update).toLocaleDateString() : '-';
-                    
-                    document.getElementById('loading').style.display = 'none';
-                    document.getElementById('chartGrid').style.display = 'grid';
                 } else {
                     document.getElementById('loading').style.display = 'none';
                     document.getElementById('noData').style.display = 'block';
                 }
             } catch (error) {
                 console.error('加载图表失败:', error);
-                document.getElementById('loading').innerHTML = `<p>❌ 加载失败：${error.message}</p>`;
+                document.getElementById('loading').innerHTML = `<p style="color: #dc3545;">❌ 加载失败：${error.message}</p>`;
             }
         }
 
@@ -194,12 +268,16 @@
                 
                 const icon = getChartIcon(chart.type);
                 const desc = getChartDesc(chart.type);
+                const isHtml = chart.url.endsWith('.html');
                 
                 card.innerHTML = `
-                    ${icon}
+                    <div class="chart-icon">${icon}</div>
                     <h3>${chart.name}</h3>
                     <p>${desc}</p>
-                    <a href="${chart.url}" class="btn" target="_blank">🔍 查看大图</a>
+                    <a href="${chart.url}" class="btn ${isHtml ? 'btn-iframe' : ''}" 
+                       target="_blank" onclick="${isHtml ? 'showIframe(event, \'' + chart.url + '\')' : ''}">
+                        ${isHtml ? '🖼️ 预览图表' : '🔍 查看大图'}
+                    </a>
                 `;
                 grid.appendChild(card);
             });
@@ -214,19 +292,39 @@
                 'heatmap': '🔗',
                 'dashboard': '📱'
             };
-            return `<div style="font-size: 3em; margin-bottom: 10px;">${icons[type] || '📈'}</div>`;
+            return icons[type] || '📈';
         }
 
         function getChartDesc(type) {
             const descs = {
-                'trend_bar': 'Top20 商品趋势评分对比，按潜力标签着色',
-                'price_dist': '商品价格区间分布，含平均价/中位价统计',
-                'scatter': '评分与评论数关系，颜色=趋势评分',
-                'radar': '单商品三维度量对比 (销量/评论/BSR)',
-                'heatmap': '各指标间皮尔逊相关系数分析',
-                'dashboard': '四合一交互式综合分析面板'
+                'trend_bar': 'Top20 商品趋势评分对比，按潜力标签着色，直观展示各商品竞争力',
+                'price_dist': '商品价格区间分布直方图，含平均价/中位价统计，帮助市场定位',
+                'scatter': '评分与评论数关系散点图，颜色代表趋势评分，发现高潜力商品',
+                'radar': '单商品三维度量对比雷达图 (销量增长/评论增速/BSR 排名)',
+                'heatmap': '各指标间皮尔逊相关系数热力图，发现数据关联性',
+                'dashboard': '四合一交互式综合分析面板，一站式查看所有关键指标'
             };
             return descs[type] || '数据可视化图表';
+        }
+
+        function showIframe(event, url) {
+            event.preventDefault();
+            
+            // 移除现有 iframe
+            const existing = document.querySelector('iframe');
+            if (existing) existing.remove();
+            
+            // 创建 iframe
+            const iframe = document.createElement('iframe');
+            iframe.src = url;
+            iframe.style.width = '100%';
+            iframe.style.height = '600px';
+            iframe.style.border = 'none';
+            iframe.style.borderRadius = '8px';
+            iframe.style.marginTop = '15px';
+            
+            // 添加到卡片下方
+            event.target.closest('.chart-card').appendChild(iframe);
         }
 
         window.onload = loadCharts;
