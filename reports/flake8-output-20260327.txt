@@ -1,0 +1,1288 @@
+src/_1688/supplier_finder.py:25:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:29:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:39:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:44:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:53:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:58:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:65:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:68:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:70:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:77:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:80:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:84:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:87:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:90:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:99:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:102:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:108:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:115:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:119:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:121:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:126:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:128:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:131:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:135:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:143:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:149:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:151:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:155:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:176:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:181:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:183:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:189:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:195:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:203:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:205:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:207:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:209:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:213:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:223:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:231:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:239:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:242:101: E501 line too long (116 > 100 characters)
+src/_1688/supplier_finder.py:248:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:258:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:262:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:272:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:274:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:282:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:286:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:291:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:304:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:306:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:310:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:312:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:336:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:340:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:342:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:343:101: E501 line too long (105 > 100 characters)
+src/_1688/supplier_finder.py:346:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:350:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:359:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:363:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:366:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:372:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:375:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:383:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:388:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:390:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:392:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:399:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:407:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:411:1: W293 blank line contains whitespace
+src/_1688/supplier_finder.py:420:1: W293 blank line contains whitespace
+src/amazon/collector.py:28:1: W293 blank line contains whitespace
+src/amazon/collector.py:37:1: W293 blank line contains whitespace
+src/amazon/collector.py:49:1: W293 blank line contains whitespace
+src/amazon/collector.py:63:1: W293 blank line contains whitespace
+src/amazon/collector.py:66:1: W293 blank line contains whitespace
+src/amazon/collector.py:71:1: W293 blank line contains whitespace
+src/amazon/collector.py:74:1: W293 blank line contains whitespace
+src/amazon/collector.py:85:1: W293 blank line contains whitespace
+src/amazon/collector.py:93:1: W293 blank line contains whitespace
+src/amazon/collector.py:97:1: W293 blank line contains whitespace
+src/amazon/collector.py:103:1: W293 blank line contains whitespace
+src/amazon/collector.py:105:1: W293 blank line contains whitespace
+src/amazon/collector.py:108:1: W293 blank line contains whitespace
+src/amazon/collector.py:113:1: W293 blank line contains whitespace
+src/amazon/collector.py:120:1: W293 blank line contains whitespace
+src/amazon/collector.py:124:1: W293 blank line contains whitespace
+src/amazon/collector.py:136:33: E722 do not use bare 'except'
+src/amazon/collector.py:141:101: E501 line too long (103 > 100 characters)
+src/amazon/collector.py:142:33: E722 do not use bare 'except'
+src/amazon/collector.py:148:1: W293 blank line contains whitespace
+src/amazon/collector.py:151:1: W293 blank line contains whitespace
+src/amazon/collector.py:163:1: W293 blank line contains whitespace
+src/amazon/collector.py:193:1: W293 blank line contains whitespace
+src/amazon/collector.py:210:1: W293 blank line contains whitespace
+src/amazon/collector.py:212:1: W293 blank line contains whitespace
+src/amazon/collector.py:216:1: W293 blank line contains whitespace
+src/amazon/collector.py:218:1: W293 blank line contains whitespace
+src/amazon/collector.py:222:1: W293 blank line contains whitespace
+src/amazon/collector.py:224:1: W293 blank line contains whitespace
+src/amazon/collector.py:235:1: W293 blank line contains whitespace
+src/amazon/collector.py:248:1: W293 blank line contains whitespace
+src/amazon/collector.py:258:1: W293 blank line contains whitespace
+src/amazon/collector.py:264:1: W293 blank line contains whitespace
+src/amazon/collector.py:271:1: W293 blank line contains whitespace
+src/amazon/collector.py:273:1: W293 blank line contains whitespace
+src/amazon/collector.py:276:1: W293 blank line contains whitespace
+src/amazon/collector.py:284:1: W293 blank line contains whitespace
+src/amazon/collector.py:286:1: W293 blank line contains whitespace
+src/amazon/collector.py:289:1: W293 blank line contains whitespace
+src/amazon/collector.py:293:1: W293 blank line contains whitespace
+src/amazon/collector.py:295:1: W293 blank line contains whitespace
+src/amazon/collector.py:300:1: W293 blank line contains whitespace
+src/amazon/collector.py:302:1: W293 blank line contains whitespace
+src/amazon/collector.py:313:1: W293 blank line contains whitespace
+src/amazon/collector.py:319:1: W293 blank line contains whitespace
+src/amazon/collector.py:322:1: W293 blank line contains whitespace
+src/amazon/collector.py:331:1: W293 blank line contains whitespace
+src/amazon/collector.py:339:1: W293 blank line contains whitespace
+src/amazon/collector.py:351:1: W293 blank line contains whitespace
+src/amazon/collector.py:354:1: W293 blank line contains whitespace
+src/amazon/collector.py:356:1: W293 blank line contains whitespace
+src/amazon/collector.py:365:1: W293 blank line contains whitespace
+src/amazon/collector.py:367:1: W293 blank line contains whitespace
+src/amazon/collector.py:370:101: E501 line too long (126 > 100 characters)
+src/amazon/collector.py:371:101: E501 line too long (132 > 100 characters)
+src/amazon/collector.py:376:1: W293 blank line contains whitespace
+src/amazon/collector.py:385:1: W293 blank line contains whitespace
+src/amazon/collector.py:391:1: W293 blank line contains whitespace
+src/amazon/collector.py:396:1: W293 blank line contains whitespace
+src/amazon/collector.py:402:1: W293 blank line contains whitespace
+src/amazon/collector.py:405:1: W293 blank line contains whitespace
+src/amazon/collector.py:412:1: W293 blank line contains whitespace
+src/amazon/collector.py:420:21: E722 do not use bare 'except'
+src/amazon/collector.py:422:1: W293 blank line contains whitespace
+src/amazon/collector.py:430:1: W293 blank line contains whitespace
+src/amazon/collector.py:435:1: W293 blank line contains whitespace
+src/amazon/collector.py:441:1: W293 blank line contains whitespace
+src/amazon/collector.py:442:101: E501 line too long (107 > 100 characters)
+src/amazon/collector.py:444:1: W293 blank line contains whitespace
+src/amazon/collector.py:445:101: E501 line too long (102 > 100 characters)
+src/amazon/collector.py:447:1: W293 blank line contains whitespace
+src/amazon/collector.py:456:1: W293 blank line contains whitespace
+src/amazon/collector.py:460:1: W293 blank line contains whitespace
+src/amazon/collector.py:463:1: W293 blank line contains whitespace
+src/amazon/collector.py:466:1: W293 blank line contains whitespace
+src/amazon/collector.py:468:1: W293 blank line contains whitespace
+src/amazon/collector.py:472:1: W293 blank line contains whitespace
+src/amazon/collector.py:475:1: W293 blank line contains whitespace
+src/amazon/collector.py:480:1: W293 blank line contains whitespace
+src/amazon/collector.py:487:1: W293 blank line contains whitespace
+src/amazon/collector.py:490:1: W293 blank line contains whitespace
+src/amazon/collector.py:493:1: W293 blank line contains whitespace
+src/amazon/collector.py:495:1: W293 blank line contains whitespace
+src/amazon/collector.py:504:1: W293 blank line contains whitespace
+src/amazon/collector.py:515:1: W293 blank line contains whitespace
+src/amazon/collector.py:519:1: W293 blank line contains whitespace
+src/amazon/collector.py:523:1: W293 blank line contains whitespace
+src/amazon/collector.py:526:1: W293 blank line contains whitespace
+src/amazon/collector.py:530:1: W293 blank line contains whitespace
+src/amazon/collector.py:534:1: W293 blank line contains whitespace
+src/amazon/collector.py:541:1: W293 blank line contains whitespace
+src/amazon/collector.py:544:1: W293 blank line contains whitespace
+src/amazon/collector.py:548:1: W293 blank line contains whitespace
+src/amazon/collector.py:560:1: W293 blank line contains whitespace
+src/amazon/collector.py:563:1: W293 blank line contains whitespace
+src/amazon/collector.py:565:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:21:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:25:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:32:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:35:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:37:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:46:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:51:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:62:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:64:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:78:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:82:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:84:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:109:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:112:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:113:101: E501 line too long (102 > 100 characters)
+src/amazon/rainforest_client.py:116:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:120:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:130:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:132:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:146:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:150:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:172:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:181:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:186:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:197:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:199:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:213:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:217:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:219:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:236:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:238:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:247:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:252:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:263:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:265:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:279:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:283:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:301:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:304:1: W293 blank line contains whitespace
+src/amazon/rainforest_client.py:312:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:21:1: F401 'asyncio' imported but unused
+src/analysis/trend_analyzer.py:22:1: F401 'typing.Tuple' imported but unused
+src/analysis/trend_analyzer.py:23:1: F401 'datetime.timedelta' imported but unused
+src/analysis/trend_analyzer.py:27:1: F401 'scipy.stats' imported but unused
+src/analysis/trend_analyzer.py:28:1: F401 'json' imported but unused
+src/analysis/trend_analyzer.py:31:21: W291 trailing whitespace
+src/analysis/trend_analyzer.py:38:1: F401 '..utils.helpers.safe_get' imported but unused
+src/analysis/trend_analyzer.py:49:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:53:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:60:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:62:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:68:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:71:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:73:25: E128 continuation line under-indented for visual indent
+src/analysis/trend_analyzer.py:76:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:81:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:84:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:92:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:96:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:102:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:107:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:109:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:112:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:116:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:118:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:121:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:133:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:136:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:140:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:143:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:147:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:151:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:153:20: E128 continuation line under-indented for visual indent
+src/analysis/trend_analyzer.py:155:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:156:101: E501 line too long (116 > 100 characters)
+src/analysis/trend_analyzer.py:159:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:169:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:182:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:185:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:188:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:191:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:194:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:197:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:200:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:203:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:206:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:209:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:211:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:212:101: E501 line too long (107 > 100 characters)
+src/analysis/trend_analyzer.py:215:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:228:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:231:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:234:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:237:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:240:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:242:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:249:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:253:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:258:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:261:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:279:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:282:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:292:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:302:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:310:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:312:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:316:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:324:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:327:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:330:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:332:101: E501 line too long (104 > 100 characters)
+src/analysis/trend_analyzer.py:333:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:336:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:338:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:342:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:347:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:352:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:355:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:359:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:371:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:375:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:380:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:383:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:386:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:390:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:395:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:401:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:413:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:417:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:421:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:423:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:427:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:432:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:437:9: F841 local variable 'ratings_total' is assigned to but never used
+src/analysis/trend_analyzer.py:440:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:450:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:459:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:462:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:464:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:468:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:474:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:479:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:483:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:489:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:495:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:501:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:510:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:512:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:522:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:526:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:535:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:539:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:544:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:553:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:560:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:563:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:566:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:570:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:574:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:576:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:578:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:582:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:587:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:592:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:602:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:608:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:620:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:622:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:626:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:631:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:638:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:641:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:649:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:656:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:659:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:663:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:665:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:675:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:678:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:688:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:692:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:697:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:706:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:719:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:723:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:727:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:732:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:739:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:741:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:743:20: E128 continuation line under-indented for visual indent
+src/analysis/trend_analyzer.py:744:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:746:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:748:24: E128 continuation line under-indented for visual indent
+src/analysis/trend_analyzer.py:751:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:756:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:764:23: F541 f-string is missing placeholders
+src/analysis/trend_analyzer.py:765:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:771:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:775:101: E501 line too long (115 > 100 characters)
+src/analysis/trend_analyzer.py:776:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:786:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:791:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:800:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:803:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:810:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:813:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:817:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:819:101: E501 line too long (118 > 100 characters)
+src/analysis/trend_analyzer.py:820:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:826:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:831:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:837:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:840:101: E501 line too long (102 > 100 characters)
+src/analysis/trend_analyzer.py:841:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:845:101: E501 line too long (105 > 100 characters)
+src/analysis/trend_analyzer.py:848:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:850:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:853:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:860:27: F541 f-string is missing placeholders
+src/analysis/trend_analyzer.py:861:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:864:101: E501 line too long (118 > 100 characters)
+src/analysis/trend_analyzer.py:867:101: E501 line too long (122 > 100 characters)
+src/analysis/trend_analyzer.py:870:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:873:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:875:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:883:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:885:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:889:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:898:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:907:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:929:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:933:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:971:1: W293 blank line contains whitespace
+src/analysis/trend_analyzer.py:975:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:18:1: F401 'matplotlib' imported but unused
+src/analysis/visualizer.py:27:1: F401 'plotly.express as px' imported but unused
+src/analysis/visualizer.py:29:1: F401 'functools.lru_cache' imported but unused
+src/analysis/visualizer.py:30:1: F401 'hashlib' imported but unused
+src/analysis/visualizer.py:31:1: F401 'json' imported but unused
+src/analysis/visualizer.py:34:14: W291 trailing whitespace
+src/analysis/visualizer.py:38:1: F401 '..utils.helpers.parse_price' imported but unused
+src/analysis/visualizer.py:38:1: F401 '..utils.helpers.truncate_text' imported but unused
+src/analysis/visualizer.py:50:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:58:9: E722 do not use bare 'except'
+src/analysis/visualizer.py:60:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:70:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:74:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:82:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:86:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:91:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:92:21: F541 f-string is missing placeholders
+src/analysis/visualizer.py:95:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:96:76: W291 trailing whitespace
+src/analysis/visualizer.py:97:33: E127 continuation line over-indented for visual indent
+src/analysis/visualizer.py:100:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:105:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:110:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:114:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:117:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:130:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:133:9: F841 local variable 'bars' is assigned to but never used
+src/analysis/visualizer.py:134:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:137:76: W291 trailing whitespace
+src/analysis/visualizer.py:138:20: E128 continuation line under-indented for visual indent
+src/analysis/visualizer.py:139:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:142:77: W291 trailing whitespace
+src/analysis/visualizer.py:145:95: W291 trailing whitespace
+src/analysis/visualizer.py:146:21: E128 continuation line under-indented for visual indent
+src/analysis/visualizer.py:147:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:157:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:161:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:164:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:171:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:174:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:175:62: W291 trailing whitespace
+src/analysis/visualizer.py:176:36: E127 continuation line over-indented for visual indent
+src/analysis/visualizer.py:179:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:183:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:188:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:197:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:199:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:203:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:206:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:209:80: W291 trailing whitespace
+src/analysis/visualizer.py:211:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:216:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:217:73: W291 trailing whitespace
+src/analysis/visualizer.py:218:19: E128 continuation line under-indented for visual indent
+src/analysis/visualizer.py:219:77: W291 trailing whitespace
+src/analysis/visualizer.py:220:19: E128 continuation line under-indented for visual indent
+src/analysis/visualizer.py:221:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:223:101: E501 line too long (111 > 100 characters)
+src/analysis/visualizer.py:226:16: E128 continuation line under-indented for visual indent
+src/analysis/visualizer.py:227:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:231:81: W291 trailing whitespace
+src/analysis/visualizer.py:232:21: E128 continuation line under-indented for visual indent
+src/analysis/visualizer.py:236:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:238:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:244:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:247:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:248:64: W291 trailing whitespace
+src/analysis/visualizer.py:249:38: E127 continuation line over-indented for visual indent
+src/analysis/visualizer.py:252:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:256:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:261:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:267:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:272:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:278:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:282:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:285:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:298:71: W291 trailing whitespace
+src/analysis/visualizer.py:303:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:309:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:318:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:321:101: E501 line too long (102 > 100 characters)
+src/analysis/visualizer.py:328:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:330:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:337:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:344:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:346:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:350:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:354:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:359:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:364:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:372:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:377:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:380:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:384:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:391:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:394:86: W291 trailing whitespace
+src/analysis/visualizer.py:395:21: E128 continuation line under-indented for visual indent
+src/analysis/visualizer.py:396:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:398:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:405:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:408:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:409:63: W291 trailing whitespace
+src/analysis/visualizer.py:410:37: E127 continuation line over-indented for visual indent
+src/analysis/visualizer.py:413:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:417:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:422:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:433:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:440:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:446:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:449:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:451:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:454:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:457:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:460:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:464:17: F841 local variable 'text' is assigned to but never used
+src/analysis/visualizer.py:465:31: E128 continuation line under-indented for visual indent
+src/analysis/visualizer.py:466:31: E128 continuation line under-indented for visual indent
+src/analysis/visualizer.py:467:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:473:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:477:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:479:82: W291 trailing whitespace
+src/analysis/visualizer.py:480:21: E128 continuation line under-indented for visual indent
+src/analysis/visualizer.py:481:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:483:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:489:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:492:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:497:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:502:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:507:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:515:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:517:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:531:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:542:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:560:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:571:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:575:101: E501 line too long (104 > 100 characters)
+src/analysis/visualizer.py:578:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:586:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:590:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:597:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:599:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:604:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:611:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:617:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:619:28: E128 continuation line under-indented for visual indent
+src/analysis/visualizer.py:622:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:627:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:633:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:640:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:642:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:644:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:647:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:650:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:653:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:657:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:660:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:663:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:666:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:669:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:711:1: W293 blank line contains whitespace
+src/analysis/visualizer.py:714:1: W293 blank line contains whitespace
+src/api/v2/history.py:9:1: F401 'datetime.timedelta' imported but unused
+src/api/v2/history.py:15:1: E402 module level import not at top of file
+src/api/v2/history.py:16:1: E402 module level import not at top of file
+src/api/v2/history.py:17:1: F401 'src.db.models.History' imported but unused
+src/api/v2/history.py:17:1: E402 module level import not at top of file
+src/api/v2/history.py:44:1: W293 blank line contains whitespace
+src/api/v2/history.py:80:1: W293 blank line contains whitespace
+src/api/v2/history.py:85:1: W293 blank line contains whitespace
+src/api/v2/history.py:94:1: W293 blank line contains whitespace
+src/api/v2/history.py:108:1: W293 blank line contains whitespace
+src/api/v2/history.py:113:1: W293 blank line contains whitespace
+src/api/v2/history.py:119:1: W293 blank line contains whitespace
+src/api/v2/history.py:126:1: W293 blank line contains whitespace
+src/api/v2/history.py:139:1: W293 blank line contains whitespace
+src/api/v2/history.py:144:1: W293 blank line contains whitespace
+src/api/v2/history.py:150:1: W293 blank line contains whitespace
+src/api/v2/history.py:152:1: W293 blank line contains whitespace
+src/api/v2/history.py:158:1: W293 blank line contains whitespace
+src/api/v2/history.py:169:1: W293 blank line contains whitespace
+src/api/v2/history.py:174:1: W293 blank line contains whitespace
+src/api/v2/history.py:180:1: W293 blank line contains whitespace
+src/api/v2/history.py:191:1: W293 blank line contains whitespace
+src/api/v2/history.py:196:1: W293 blank line contains whitespace
+src/api/v2/history.py:202:1: W293 blank line contains whitespace
+src/api/v2/history.py:204:1: W293 blank line contains whitespace
+src/api/v2/history.py:208:1: W293 blank line contains whitespace
+src/api/v2/history.py:213:1: W293 blank line contains whitespace
+src/api/v2/history.py:219:1: W293 blank line contains whitespace
+src/api/v2/history.py:222:1: W293 blank line contains whitespace
+src/api/v2/history.py:224:1: W293 blank line contains whitespace
+src/api/v2/history.py:240:1: W293 blank line contains whitespace
+src/api/v2/history.py:245:1: W293 blank line contains whitespace
+src/api/v2/history.py:251:1: W293 blank line contains whitespace
+src/api/v2/history.py:262:1: W293 blank line contains whitespace
+src/api/v2/history.py:267:1: W293 blank line contains whitespace
+src/api/v2/history.py:269:1: W293 blank line contains whitespace
+src/api/v2/history.py:280:1: W293 blank line contains whitespace
+src/api/v2/history.py:285:1: W293 blank line contains whitespace
+src/api/v2/history.py:291:1: W293 blank line contains whitespace
+src/api/v2/history.py:293:1: W293 blank line contains whitespace
+src/api/v2/products.py:6:1: F401 'fastapi.Depends' imported but unused
+src/api/v2/products.py:9:1: F401 'datetime.datetime' imported but unused
+src/api/v2/products.py:15:1: F401 'src.db.connection.init_db' imported but unused
+src/api/v2/products.py:15:1: E402 module level import not at top of file
+src/api/v2/products.py:16:1: E402 module level import not at top of file
+src/api/v2/products.py:59:1: W293 blank line contains whitespace
+src/api/v2/products.py:95:1: W293 blank line contains whitespace
+src/api/v2/products.py:100:1: W293 blank line contains whitespace
+src/api/v2/products.py:101:101: E501 line too long (123 > 100 characters)
+src/api/v2/products.py:113:1: W293 blank line contains whitespace
+src/api/v2/products.py:115:1: W293 blank line contains whitespace
+src/api/v2/products.py:132:1: W293 blank line contains whitespace
+src/api/v2/products.py:141:1: W293 blank line contains whitespace
+src/api/v2/products.py:152:1: W293 blank line contains whitespace
+src/api/v2/products.py:158:1: W293 blank line contains whitespace
+src/api/v2/products.py:161:1: W293 blank line contains whitespace
+src/api/v2/products.py:169:1: W293 blank line contains whitespace
+src/api/v2/products.py:174:1: W293 blank line contains whitespace
+src/api/v2/products.py:182:1: W293 blank line contains whitespace
+src/api/v2/products.py:191:1: W293 blank line contains whitespace
+src/api/v2/products.py:196:1: W293 blank line contains whitespace
+src/api/v2/products.py:198:1: W293 blank line contains whitespace
+src/api/v2/products.py:201:1: W293 blank line contains whitespace
+src/api/v2/products.py:209:1: W293 blank line contains whitespace
+src/api/v2/products.py:214:1: W293 blank line contains whitespace
+src/api/v2/products.py:217:1: W293 blank line contains whitespace
+src/api/v2/products.py:225:1: W293 blank line contains whitespace
+src/api/v2/products.py:237:1: W293 blank line contains whitespace
+src/api/v2/products.py:242:1: W293 blank line contains whitespace
+src/api/v2/products.py:245:1: W293 blank line contains whitespace
+src/api/v2/products.py:247:9: F401 'sqlalchemy.avg' imported but unused
+src/api/v2/products.py:248:9: F841 local variable 'avg_rating' is assigned to but never used
+src/api/v2/products.py:248:101: E501 line too long (106 > 100 characters)
+src/api/v2/products.py:249:1: W293 blank line contains whitespace
+src/db/__init__.py:16:1: F401 '.connection.init_db_async' imported but unused
+src/db/__init__.py:16:1: F401 '.connection.drop_db' imported but unused
+src/db/__init__.py:16:1: F401 '.connection.drop_db_async' imported but unused
+src/db/__init__.py:16:1: F401 '.connection.reset_db' imported but unused
+src/db/__init__.py:16:1: F401 '.connection.reset_db_async' imported but unused
+src/db/__init__.py:16:1: F401 '.connection.close_all' imported but unused
+src/db/__init__.py:16:1: F401 '.connection.close_all_async' imported but unused
+src/db/cli.py:15:1: F401 'os' imported but unused
+src/db/cli.py:23:1: F401 'sqlalchemy.text' imported but unused
+src/db/cli.py:23:1: E402 module level import not at top of file
+src/db/cli.py:24:1: E402 module level import not at top of file
+src/db/cli.py:38:1: W293 blank line contains whitespace
+src/db/cli.py:44:1: W293 blank line contains whitespace
+src/db/cli.py:46:1: W293 blank line contains whitespace
+src/db/cli.py:50:1: W293 blank line contains whitespace
+src/db/cli.py:54:1: W293 blank line contains whitespace
+src/db/cli.py:58:1: W293 blank line contains whitespace
+src/db/cli.py:67:1: W293 blank line contains whitespace
+src/db/cli.py:73:1: W293 blank line contains whitespace
+src/db/cli.py:75:1: W293 blank line contains whitespace
+src/db/cli.py:79:1: W293 blank line contains whitespace
+src/db/cli.py:83:1: W293 blank line contains whitespace
+src/db/cli.py:87:1: W293 blank line contains whitespace
+src/db/cli.py:98:1: W293 blank line contains whitespace
+src/db/cli.py:100:1: W293 blank line contains whitespace
+src/db/cli.py:104:1: W293 blank line contains whitespace
+src/db/cli.py:108:1: W293 blank line contains whitespace
+src/db/cli.py:116:1: W293 blank line contains whitespace
+src/db/cli.py:124:1: W293 blank line contains whitespace
+src/db/cli.py:136:1: W293 blank line contains whitespace
+src/db/cli.py:141:1: W293 blank line contains whitespace
+src/db/cli.py:143:1: W293 blank line contains whitespace
+src/db/cli.py:149:1: W293 blank line contains whitespace
+src/db/cli.py:152:9: F841 local variable 'engine' is assigned to but never used
+src/db/cli.py:153:1: W293 blank line contains whitespace
+src/db/cli.py:159:1: W293 blank line contains whitespace
+src/db/cli.py:163:1: W293 blank line contains whitespace
+src/db/cli.py:167:1: W293 blank line contains whitespace
+src/db/cli.py:169:1: W293 blank line contains whitespace
+src/db/cli.py:173:1: W293 blank line contains whitespace
+src/db/cli.py:181:1: W293 blank line contains whitespace
+src/db/cli.py:190:1: W293 blank line contains whitespace
+src/db/cli.py:199:1: W293 blank line contains whitespace
+src/db/cli.py:204:1: W293 blank line contains whitespace
+src/db/cli.py:206:1: W293 blank line contains whitespace
+src/db/cli.py:209:1: W293 blank line contains whitespace
+src/db/cli.py:213:1: W293 blank line contains whitespace
+src/db/cli.py:216:9: F841 local variable 'engine' is assigned to but never used
+src/db/cli.py:217:1: W293 blank line contains whitespace
+src/db/cli.py:223:1: W293 blank line contains whitespace
+src/db/cli.py:230:1: W293 blank line contains whitespace
+src/db/cli.py:234:1: W293 blank line contains whitespace
+src/db/cli.py:238:1: W293 blank line contains whitespace
+src/db/cli.py:244:1: W293 blank line contains whitespace
+src/db/cli.py:253:1: W293 blank line contains whitespace
+src/db/cli.py:264:5: F401 'sqlalchemy.func' imported but unused
+src/db/cli.py:264:5: F811 redefinition of unused 'text' from line 23
+src/db/cli.py:266:1: W293 blank line contains whitespace
+src/db/cli.py:269:1: W293 blank line contains whitespace
+src/db/cli.py:272:9: F841 local variable 'db_url' is assigned to but never used
+src/db/cli.py:273:1: W293 blank line contains whitespace
+src/db/cli.py:276:1: W293 blank line contains whitespace
+src/db/cli.py:288:1: W293 blank line contains whitespace
+src/db/cli.py:291:1: W293 blank line contains whitespace
+src/db/cli.py:300:1: W293 blank line contains whitespace
+src/db/cli.py:305:1: W293 blank line contains whitespace
+src/db/cli.py:310:1: W293 blank line contains whitespace
+src/db/cli.py:312:1: W293 blank line contains whitespace
+src/db/cli.py:317:1: W293 blank line contains whitespace
+src/db/cli.py:327:5: F401 '.connection.get_database_url' imported but unused
+src/db/cli.py:328:5: F811 redefinition of unused 'text' from line 23
+src/db/cli.py:330:1: W293 blank line contains whitespace
+src/db/cli.py:333:1: W293 blank line contains whitespace
+src/db/cli.py:336:1: W293 blank line contains whitespace
+src/db/cli.py:339:1: W293 blank line contains whitespace
+src/db/cli.py:350:1: W293 blank line contains whitespace
+src/db/cli.py:353:1: W293 blank line contains whitespace
+src/db/cli.py:365:1: W293 blank line contains whitespace
+src/db/cli.py:367:1: W293 blank line contains whitespace
+src/db/cli.py:371:29: E128 continuation line under-indented for visual indent
+src/db/cli.py:373:29: E128 continuation line under-indented for visual indent
+src/db/cli.py:374:1: W293 blank line contains whitespace
+src/db/cli.py:376:5: F841 local variable 'migrate_parser' is assigned to but never used
+src/db/cli.py:377:1: W293 blank line contains whitespace
+src/db/cli.py:381:31: E128 continuation line under-indented for visual indent
+src/db/cli.py:382:1: W293 blank line contains whitespace
+src/db/cli.py:386:32: E128 continuation line under-indented for visual indent
+src/db/cli.py:387:1: W293 blank line contains whitespace
+src/db/cli.py:391:31: E128 continuation line under-indented for visual indent
+src/db/cli.py:392:1: W293 blank line contains whitespace
+src/db/cli.py:396:29: E128 continuation line under-indented for visual indent
+src/db/cli.py:397:1: W293 blank line contains whitespace
+src/db/cli.py:399:1: W293 blank line contains whitespace
+src/db/cli.py:405:1: W293 blank line contains whitespace
+src/db/cli.py:408:1: W293 blank line contains whitespace
+src/db/cli.py:411:1: W293 blank line contains whitespace
+src/db/cli.py:414:1: W293 blank line contains whitespace
+src/db/cli.py:420:1: W293 blank line contains whitespace
+src/db/cli.py:423:1: W293 blank line contains whitespace
+src/db/connection.py:12:1: F401 'typing.Optional' imported but unused
+src/db/connection.py:35:1: W293 blank line contains whitespace
+src/db/connection.py:39:1: W293 blank line contains whitespace
+src/db/connection.py:47:1: W293 blank line contains whitespace
+src/db/connection.py:58:1: W293 blank line contains whitespace
+src/db/connection.py:71:1: W293 blank line contains whitespace
+src/db/connection.py:76:1: W293 blank line contains whitespace
+src/db/connection.py:81:1: W293 blank line contains whitespace
+src/db/connection.py:84:1: W293 blank line contains whitespace
+src/db/connection.py:102:1: W293 blank line contains whitespace
+src/db/connection.py:109:1: W293 blank line contains whitespace
+src/db/connection.py:113:1: W293 blank line contains whitespace
+src/db/connection.py:120:1: W293 blank line contains whitespace
+src/db/connection.py:125:1: W293 blank line contains whitespace
+src/db/connection.py:129:1: W293 blank line contains whitespace
+src/db/connection.py:137:1: W293 blank line contains whitespace
+src/db/connection.py:140:1: W293 blank line contains whitespace
+src/db/connection.py:160:1: W293 blank line contains whitespace
+src/db/connection.py:163:1: W293 blank line contains whitespace
+src/db/connection.py:184:1: W293 blank line contains whitespace
+src/db/connection.py:189:1: W293 blank line contains whitespace
+src/db/connection.py:194:1: W293 blank line contains whitespace
+src/db/connection.py:197:1: W293 blank line contains whitespace
+src/db/connection.py:213:1: W293 blank line contains whitespace
+src/db/connection.py:220:1: W293 blank line contains whitespace
+src/db/connection.py:228:1: W293 blank line contains whitespace
+src/db/connection.py:240:1: W293 blank line contains whitespace
+src/db/connection.py:243:1: W293 blank line contains whitespace
+src/db/connection.py:265:1: W293 blank line contains whitespace
+src/db/connection.py:276:1: W293 blank line contains whitespace
+src/db/connection.py:288:1: W293 blank line contains whitespace
+src/db/connection.py:299:1: W293 blank line contains whitespace
+src/db/connection.py:311:1: W293 blank line contains whitespace
+src/db/connection.py:314:1: W293 blank line contains whitespace
+src/db/connection.py:317:1: W293 blank line contains whitespace
+src/db/connection.py:322:5: F824 `global _SessionFactory` is unused: name is never assigned in scope
+src/db/connection.py:322:5: F824 `global _Session` is unused: name is never assigned in scope
+src/db/connection.py:323:1: W293 blank line contains whitespace
+src/db/connection.py:326:1: W293 blank line contains whitespace
+src/db/connection.py:331:1: W293 blank line contains whitespace
+src/db/connection.py:336:1: W293 blank line contains whitespace
+src/db/connection.py:341:1: W293 blank line contains whitespace
+src/db/connection.py:343:1: W293 blank line contains whitespace
+src/db/connection.py:367:1: W293 blank line contains whitespace
+src/db/connection.py:370:1: W293 blank line contains whitespace
+src/db/connection.py:373:1: W293 blank line contains whitespace
+src/db/connection.py:378:5: F824 `global _AsyncSessionFactory` is unused: name is never assigned in scope
+src/db/connection.py:379:1: W293 blank line contains whitespace
+src/db/connection.py:382:1: W293 blank line contains whitespace
+src/db/connection.py:387:1: W293 blank line contains whitespace
+src/db/connection.py:392:1: W293 blank line contains whitespace
+src/db/connection.py:397:1: W293 blank line contains whitespace
+src/db/connection.py:399:1: W293 blank line contains whitespace
+src/db/connection.py:423:1: W293 blank line contains whitespace
+src/db/connection.py:426:1: W293 blank line contains whitespace
+src/db/connection.py:429:1: W293 blank line contains whitespace
+src/db/connection.py:438:1: W293 blank line contains whitespace
+src/db/connection.py:441:1: W293 blank line contains whitespace
+src/db/migrate.py:38:1: E402 module level import not at top of file
+src/db/migrate.py:39:1: E402 module level import not at top of file
+src/db/migrate.py:40:1: E402 module level import not at top of file
+src/db/migrate.py:46:26: W291 trailing whitespace
+src/db/migrate.py:55:1: W293 blank line contains whitespace
+src/db/migrate.py:68:1: W293 blank line contains whitespace
+src/db/migrate.py:104:1: W293 blank line contains whitespace
+src/db/migrate.py:118:1: W293 blank line contains whitespace
+src/db/migrate.py:121:1: W293 blank line contains whitespace
+src/db/migrate.py:124:1: W293 blank line contains whitespace
+src/db/migrate.py:126:1: W293 blank line contains whitespace
+src/db/migrate.py:130:1: W293 blank line contains whitespace
+src/db/migrate.py:134:1: W293 blank line contains whitespace
+src/db/migrate.py:137:1: W293 blank line contains whitespace
+src/db/migrate.py:140:101: E501 line too long (108 > 100 characters)
+src/db/migrate.py:142:19: F541 f-string is missing placeholders
+src/db/migrate.py:143:1: W293 blank line contains whitespace
+src/db/migrate.py:158:1: W293 blank line contains whitespace
+src/db/migrate.py:160:1: W293 blank line contains whitespace
+src/db/migrate.py:164:20: W291 trailing whitespace
+src/db/migrate.py:165:19: W291 trailing whitespace
+src/db/migrate.py:169:1: W293 blank line contains whitespace
+src/db/migrate.py:173:20: W291 trailing whitespace
+src/db/migrate.py:174:19: W291 trailing whitespace
+src/db/migrate.py:178:1: W293 blank line contains whitespace
+src/db/migrate.py:181:1: W293 blank line contains whitespace
+src/db/migrate.py:184:1: W293 blank line contains whitespace
+src/db/migrate.py:187:1: W293 blank line contains whitespace
+src/db/migrate.py:191:1: W293 blank line contains whitespace
+src/db/migrate.py:194:1: W293 blank line contains whitespace
+src/db/migrate.py:196:1: W293 blank line contains whitespace
+src/db/migrations/env.py:15:1: E402 module level import not at top of file
+src/db/migrations/versions/001_initial.py:4:9: W291 trailing whitespace
+src/db/migrations/versions/001_initial.py:23:1: W293 blank line contains whitespace
+src/db/migrations/versions/001_initial.py:47:1: W293 blank line contains whitespace
+src/db/migrations/versions/001_initial.py:55:1: W293 blank line contains whitespace
+src/db/migrations/versions/001_initial.py:68:1: W293 blank line contains whitespace
+src/db/migrations/versions/001_initial.py:71:101: E501 line too long (110 > 100 characters)
+src/db/migrations/versions/001_initial.py:72:1: W293 blank line contains whitespace
+src/db/migrations/versions/001_initial.py:84:1: W293 blank line contains whitespace
+src/db/migrations/versions/001_initial.py:86:101: E501 line too long (104 > 100 characters)
+src/db/migrations/versions/001_initial.py:87:101: E501 line too long (114 > 100 characters)
+src/db/migrations/versions/001_initial.py:92:1: W293 blank line contains whitespace
+src/db/migrations/versions/001_initial.py:97:1: W293 blank line contains whitespace
+src/db/migrations/versions/001_initial.py:102:1: W293 blank line contains whitespace
+src/db/migrations/versions/001_initial.py:109:1: W293 blank line contains whitespace
+src/db/migrations/versions/002_history.py:32:1: W293 blank line contains whitespace
+src/db/migrations/versions/002_history.py:50:1: W293 blank line contains whitespace
+src/db/migrations/versions/002_history.py:52:101: E501 line too long (102 > 100 characters)
+src/db/migrations/versions/002_history.py:54:101: E501 line too long (101 > 100 characters)
+src/db/migrations/versions/002_history.py:55:101: E501 line too long (114 > 100 characters)
+src/db/migrations/versions/002_history.py:56:101: E501 line too long (123 > 100 characters)
+src/db/migrations/versions/002_history.py:57:1: W293 blank line contains whitespace
+src/db/migrations/versions/002_history.py:71:1: W293 blank line contains whitespace
+src/db/migrations/versions/002_history.py:76:101: E501 line too long (110 > 100 characters)
+src/db/migrations/versions/002_history.py:77:1: W293 blank line contains whitespace
+src/db/migrations/versions/002_history.py:91:1: W293 blank line contains whitespace
+src/db/migrations/versions/002_history.py:96:101: E501 line too long (106 > 100 characters)
+src/db/migrations/versions/002_history.py:101:1: W293 blank line contains whitespace
+src/db/migrations/versions/002_history.py:108:1: W293 blank line contains whitespace
+src/db/migrations/versions/002_history.py:115:1: W293 blank line contains whitespace
+src/db/models/base.py:6:1: F401 'sqlalchemy.Integer' imported but unused
+src/db/models/base.py:9:1: F401 'typing.Optional' imported but unused
+src/db/models/base.py:18:1: W293 blank line contains whitespace
+src/db/models/base.py:30:1: W293 blank line contains whitespace
+src/db/models/base.py:34:1: W293 blank line contains whitespace
+src/db/models/base.py:42:1: W293 blank line contains whitespace
+src/db/models/base.py:47:1: W293 blank line contains whitespace
+src/db/models/history.py:16:1: W293 blank line contains whitespace
+src/db/models/history.py:18:1: W293 blank line contains whitespace
+src/db/models/history.py:32:1: W293 blank line contains whitespace
+src/db/models/history.py:34:101: E501 line too long (107 > 100 characters)
+src/db/models/history.py:43:1: W293 blank line contains whitespace
+src/db/models/history.py:46:1: W293 blank line contains whitespace
+src/db/models/history.py:53:1: W293 blank line contains whitespace
+src/db/models/history.py:68:1: W293 blank line contains whitespace
+src/db/models/history.py:76:1: W293 blank line contains whitespace
+src/db/models/history.py:78:1: W293 blank line contains whitespace
+src/db/models/history.py:89:1: W293 blank line contains whitespace
+src/db/models/history.py:91:101: E501 line too long (107 > 100 characters)
+src/db/models/history.py:97:1: W293 blank line contains whitespace
+src/db/models/history.py:103:1: W293 blank line contains whitespace
+src/db/models/history.py:115:1: W293 blank line contains whitespace
+src/db/models/history.py:117:101: E501 line too long (106 > 100 characters)
+src/db/models/history.py:123:1: W293 blank line contains whitespace
+src/db/models/history.py:125:1: W293 blank line contains whitespace
+src/db/models/history.py:136:1: W293 blank line contains whitespace
+src/db/models/history.py:138:101: E501 line too long (107 > 100 characters)
+src/db/models/history.py:144:1: W293 blank line contains whitespace
+src/db/models/history.py:150:1: W293 blank line contains whitespace
+src/db/models/history.py:162:1: W293 blank line contains whitespace
+src/db/models/product.py:8:1: F401 'datetime.datetime' imported but unused
+src/db/models/product.py:16:1: W293 blank line contains whitespace
+src/db/models/product.py:18:1: W293 blank line contains whitespace
+src/db/models/product.py:37:1: W293 blank line contains whitespace
+src/db/models/product.py:53:1: W293 blank line contains whitespace
+src/db/models/product.py:56:101: E501 line too long (101 > 100 characters)
+src/db/models/product.py:58:1: W293 blank line contains whitespace
+src/db/models/product.py:65:1: W293 blank line contains whitespace
+src/db/models/product.py:87:1: W293 blank line contains whitespace
+src/db/models/product.py:95:1: W293 blank line contains whitespace
+src/db/models/product.py:97:1: W293 blank line contains whitespace
+src/db/models/product.py:106:1: W293 blank line contains whitespace
+src/db/models/product.py:108:101: E501 line too long (107 > 100 characters)
+src/db/models/product.py:112:1: W293 blank line contains whitespace
+src/db/models/product.py:115:1: W293 blank line contains whitespace
+src/db/models/product.py:120:1: W293 blank line contains whitespace
+src/db/models/product.py:131:1: W293 blank line contains whitespace
+src/db/models/product.py:139:1: W293 blank line contains whitespace
+src/db/models/product.py:141:1: W293 blank line contains whitespace
+src/db/models/product.py:149:1: W293 blank line contains whitespace
+src/db/models/product.py:151:101: E501 line too long (107 > 100 characters)
+src/db/models/product.py:154:1: W293 blank line contains whitespace
+src/db/models/product.py:157:1: W293 blank line contains whitespace
+src/db/models/product.py:162:1: W293 blank line contains whitespace
+src/db/models/product.py:172:1: W293 blank line contains whitespace
+src/db/repositories.py:7:1: F401 'sqlalchemy.asc' imported but unused
+src/db/repositories.py:7:1: F401 'sqlalchemy.and_' imported but unused
+src/db/repositories.py:17:1: W293 blank line contains whitespace
+src/db/repositories.py:21:1: W293 blank line contains whitespace
+src/db/repositories.py:25:1: W293 blank line contains whitespace
+src/db/repositories.py:30:1: W293 blank line contains whitespace
+src/db/repositories.py:34:1: W293 blank line contains whitespace
+src/db/repositories.py:37:1: W293 blank line contains whitespace
+src/db/repositories.py:45:1: W293 blank line contains whitespace
+src/db/repositories.py:49:1: W293 blank line contains whitespace
+src/db/repositories.py:52:1: W293 blank line contains whitespace
+src/db/repositories.py:57:1: W293 blank line contains whitespace
+src/db/repositories.py:61:1: W293 blank line contains whitespace
+src/db/repositories.py:64:1: W293 blank line contains whitespace
+src/db/repositories.py:69:1: W293 blank line contains whitespace
+src/db/repositories.py:73:1: W293 blank line contains whitespace
+src/db/repositories.py:77:1: W293 blank line contains whitespace
+src/db/repositories.py:88:1: W293 blank line contains whitespace
+src/db/repositories.py:92:1: W293 blank line contains whitespace
+src/db/repositories.py:96:1: W293 blank line contains whitespace
+src/db/repositories.py:107:1: W293 blank line contains whitespace
+src/db/repositories.py:111:1: W293 blank line contains whitespace
+src/db/repositories.py:114:1: W293 blank line contains whitespace
+src/db/repositories.py:121:1: W293 blank line contains whitespace
+src/db/repositories.py:127:1: W293 blank line contains whitespace
+src/db/repositories.py:131:1: W293 blank line contains whitespace
+src/db/repositories.py:134:1: W293 blank line contains whitespace
+src/db/repositories.py:144:1: W293 blank line contains whitespace
+src/db/repositories.py:148:1: W293 blank line contains whitespace
+src/db/repositories.py:151:1: W293 blank line contains whitespace
+src/db/repositories.py:161:1: W293 blank line contains whitespace
+src/db/repositories.py:174:1: W293 blank line contains whitespace
+src/db/repositories.py:183:1: W293 blank line contains whitespace
+src/db/repositories.py:188:1: W293 blank line contains whitespace
+src/db/repositories.py:199:1: W293 blank line contains whitespace
+src/db/repositories.py:201:1: W293 blank line contains whitespace
+src/db/repositories.py:210:1: W293 blank line contains whitespace
+src/db/repositories.py:215:1: W293 blank line contains whitespace
+src/db/repositories.py:220:1: W293 blank line contains whitespace
+src/db/repositories.py:223:1: W293 blank line contains whitespace
+src/db/repositories.py:230:1: W293 blank line contains whitespace
+src/db/repositories.py:232:1: W293 blank line contains whitespace
+src/db/repositories.py:236:1: W293 blank line contains whitespace
+src/db/repositories.py:241:1: W293 blank line contains whitespace
+src/db/repositories.py:245:1: W293 blank line contains whitespace
+src/db/repositories.py:256:1: W293 blank line contains whitespace
+src/db/repositories.py:259:1: W293 blank line contains whitespace
+src/db/repositories.py:263:1: W293 blank line contains whitespace
+src/db/repositories.py:268:1: W293 blank line contains whitespace
+src/db/repositories.py:272:1: W293 blank line contains whitespace
+src/db/repositories.py:275:1: W293 blank line contains whitespace
+src/db/repositories.py:282:1: W293 blank line contains whitespace
+src/db/repositories.py:287:1: W293 blank line contains whitespace
+src/db/repositories.py:291:1: W293 blank line contains whitespace
+src/db/repositories.py:294:1: W293 blank line contains whitespace
+src/db/repositories.py:299:1: W293 blank line contains whitespace
+src/db/repositories.py:309:1: W293 blank line contains whitespace
+src/db/repositories.py:315:1: W293 blank line contains whitespace
+src/db/repositories.py:320:1: W293 blank line contains whitespace
+src/db/repositories.py:325:1: W293 blank line contains whitespace
+src/db/repositories.py:327:1: W293 blank line contains whitespace
+src/db/repositories.py:331:1: W293 blank line contains whitespace
+src/db/repositories.py:334:1: W293 blank line contains whitespace
+src/db/repositories.py:344:1: W293 blank line contains whitespace
+src/db/repositories.py:352:1: W293 blank line contains whitespace
+src/db/repositories.py:356:1: W293 blank line contains whitespace
+src/db/repositories.py:362:1: W293 blank line contains whitespace
+src/db/repositories.py:371:1: W293 blank line contains whitespace
+src/db/repositories.py:375:1: W293 blank line contains whitespace
+src/db/repositories.py:378:1: W293 blank line contains whitespace
+src/db/repositories.py:389:1: W293 blank line contains whitespace
+src/db/repositories.py:393:1: W293 blank line contains whitespace
+src/db/repositories.py:396:1: W293 blank line contains whitespace
+src/db/repositories.py:408:1: W293 blank line contains whitespace
+src/db/repositories.py:412:1: W293 blank line contains whitespace
+src/db/repositories.py:415:1: W293 blank line contains whitespace
+src/db/repositories.py:424:1: W293 blank line contains whitespace
+src/db/repositories.py:432:1: W293 blank line contains whitespace
+src/db/repositories.py:436:1: W293 blank line contains whitespace
+src/db/repositories.py:444:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:12:1: F401 '..models.product.Product' imported but unused
+src/db/repositories/history_repo.py:18:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:22:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:26:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:31:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:35:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:38:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:49:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:63:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:67:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:71:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:76:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:80:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:82:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:96:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:106:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:120:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:124:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:126:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:137:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:144:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:155:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:159:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:161:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:172:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:179:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:190:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:194:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:196:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:207:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:214:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:219:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:228:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:230:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:233:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:235:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:238:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:249:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:256:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:261:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:270:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:272:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:275:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:277:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:280:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:291:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:298:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:303:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:312:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:314:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:317:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:319:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:322:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:331:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:336:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:347:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:362:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:370:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:373:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:384:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:398:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:401:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:409:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:426:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:431:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:440:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:450:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:458:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:462:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:471:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:482:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:485:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:493:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:498:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:501:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:508:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:516:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:520:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:529:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:540:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:543:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:551:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:556:1: W293 blank line contains whitespace
+src/db/repositories/history_repo.py:559:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:6:1: F401 'sqlalchemy.or_' imported but unused
+src/db/repositories/product_repo.py:18:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:22:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:27:44: E712 comparison to False should be 'if cond is False:' or 'if not cond:'
+src/db/repositories/product_repo.py:34:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:38:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:42:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:47:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:69:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:87:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:107:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:110:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:121:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:131:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:134:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:136:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:137:101: E501 line too long (125 > 100 characters)
+src/db/repositories/product_repo.py:140:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:145:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:156:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:159:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:162:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:163:101: E501 line too long (129 > 100 characters)
+src/db/repositories/product_repo.py:166:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:171:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:182:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:185:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:188:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:198:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:204:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:209:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:217:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:220:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:223:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:227:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:230:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:236:50: E712 comparison to False should be 'if cond is False:' or 'if not cond:'
+src/db/repositories/product_repo.py:239:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:247:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:251:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:256:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:259:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:266:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:270:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:272:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:275:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:277:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:281:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:284:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:290:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:293:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:297:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:300:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:304:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:307:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:313:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:316:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:319:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:323:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:326:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:330:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:333:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:338:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:341:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:345:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:363:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:377:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:382:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:386:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:390:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:394:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:400:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:404:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:410:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:414:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:417:50: E712 comparison to False should be 'if cond is False:' or 'if not cond:'
+src/db/repositories/product_repo.py:419:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:422:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:425:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:429:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:432:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:433:101: E501 line too long (103 > 100 characters)
+src/db/repositories/product_repo.py:436:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:440:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:446:50: E712 comparison to False should be 'if cond is False:' or 'if not cond:'
+src/db/repositories/product_repo.py:448:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:450:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:453:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:454:101: E501 line too long (109 > 100 characters)
+src/db/repositories/product_repo.py:457:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:461:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:467:50: E712 comparison to False should be 'if cond is False:' or 'if not cond:'
+src/db/repositories/product_repo.py:469:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:470:101: E501 line too long (106 > 100 characters)
+src/db/repositories/product_repo.py:471:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:474:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:478:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:482:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:488:50: E712 comparison to False should be 'if cond is False:' or 'if not cond:'
+src/db/repositories/product_repo.py:490:1: W293 blank line contains whitespace
+src/db/repositories/product_repo.py:492:1: W293 blank line contains whitespace
+src/utils/config.py:9:1: F401 'typing.Dict' imported but unused
+src/utils/config.py:9:1: F401 'typing.Any' imported but unused
+src/utils/config.py:10:1: F401 'dataclasses.dataclass' imported but unused
+src/utils/config.py:10:1: F401 'dataclasses.field' imported but unused
+src/utils/config.py:39:1: W293 blank line contains whitespace
+src/utils/config.py:43:1: W293 blank line contains whitespace
+src/utils/config.py:47:101: E501 line too long (106 > 100 characters)
+src/utils/config.py:55:101: E501 line too long (108 > 100 characters)
+src/utils/config.py:67:1: W293 blank line contains whitespace
+src/utils/config.py:72:1: W293 blank line contains whitespace
+src/utils/config.py:78:1: W293 blank line contains whitespace
+src/utils/config.py:83:1: W293 blank line contains whitespace
+src/utils/config.py:88:1: W293 blank line contains whitespace
+src/utils/config.py:102:1: W293 blank line contains whitespace
+src/utils/config.py:153:1: W293 blank line contains whitespace
+src/utils/config.py:158:1: W293 blank line contains whitespace
+src/utils/config.py:211:1: W293 blank line contains whitespace
+src/utils/config.py:215:1: W293 blank line contains whitespace
+src/utils/config.py:220:1: W293 blank line contains whitespace
+src/utils/helpers.py:15:1: W293 blank line contains whitespace
+src/utils/helpers.py:19:1: W293 blank line contains whitespace
+src/utils/helpers.py:22:1: W293 blank line contains whitespace
+src/utils/helpers.py:62:1: W293 blank line contains whitespace
+src/utils/helpers.py:67:1: W293 blank line contains whitespace
+src/utils/helpers.py:70:1: W293 blank line contains whitespace
+src/utils/helpers.py:91:1: W293 blank line contains whitespace
+src/utils/helpers.py:95:1: W293 blank line contains whitespace
+src/utils/helpers.py:110:1: W293 blank line contains whitespace
+src/utils/helpers.py:115:1: W293 blank line contains whitespace
+src/utils/helpers.py:125:1: W293 blank line contains whitespace
+src/utils/helpers.py:129:1: W293 blank line contains whitespace
+src/utils/helpers.py:139:1: W293 blank line contains whitespace
+src/utils/helpers.py:144:1: W293 blank line contains whitespace
+src/utils/helpers.py:156:1: W293 blank line contains whitespace
+src/utils/helpers.py:160:1: W293 blank line contains whitespace
+src/utils/helpers.py:163:1: W293 blank line contains whitespace
+src/utils/helpers.py:178:1: W293 blank line contains whitespace
+src/utils/helpers.py:182:1: W293 blank line contains whitespace
+src/utils/helpers.py:199:1: W293 blank line contains whitespace
+src/utils/helpers.py:204:1: W293 blank line contains whitespace
+src/utils/helpers.py:220:1: W293 blank line contains whitespace
+src/utils/helpers.py:224:1: W293 blank line contains whitespace
+src/utils/helpers.py:229:1: W293 blank line contains whitespace
+src/utils/helpers.py:233:1: W293 blank line contains whitespace
+src/workflow.py:19:1: F401 'pathlib.Path' imported but unused
+src/workflow.py:34:1: E402 module level import not at top of file
+src/workflow.py:35:1: E402 module level import not at top of file
+src/workflow.py:36:1: E402 module level import not at top of file
+src/workflow.py:37:1: E402 module level import not at top of file
+src/workflow.py:38:1: E402 module level import not at top of file
+src/workflow.py:39:1: E402 module level import not at top of file
+src/workflow.py:49:1: W293 blank line contains whitespace
+src/workflow.py:58:1: W293 blank line contains whitespace
+src/workflow.py:75:1: W293 blank line contains whitespace
+src/workflow.py:83:1: W293 blank line contains whitespace
+src/workflow.py:94:1: W293 blank line contains whitespace
+src/workflow.py:99:1: W293 blank line contains whitespace
+src/workflow.py:102:1: W293 blank line contains whitespace
+src/workflow.py:114:17: E722 do not use bare 'except'
+src/workflow.py:119:17: E722 do not use bare 'except'
+src/workflow.py:124:1: W293 blank line contains whitespace
+src/workflow.py:132:1: W293 blank line contains whitespace
+src/workflow.py:136:1: W293 blank line contains whitespace
+src/workflow.py:142:1: W293 blank line contains whitespace
+src/workflow.py:148:1: W293 blank line contains whitespace
+src/workflow.py:153:1: W293 blank line contains whitespace
+src/workflow.py:157:1: W293 blank line contains whitespace
+src/workflow.py:167:1: W293 blank line contains whitespace
+src/workflow.py:183:1: W293 blank line contains whitespace
+src/workflow.py:197:1: W293 blank line contains whitespace
+src/workflow.py:199:1: W293 blank line contains whitespace
+src/workflow.py:203:1: W293 blank line contains whitespace
+src/workflow.py:205:1: W293 blank line contains whitespace
+src/workflow.py:209:1: W293 blank line contains whitespace
+src/workflow.py:211:1: W293 blank line contains whitespace
+src/workflow.py:221:1: W293 blank line contains whitespace
+src/workflow.py:227:1: W293 blank line contains whitespace
+src/workflow.py:234:1: W293 blank line contains whitespace
+src/workflow.py:238:1: W293 blank line contains whitespace
+src/workflow.py:246:1: W293 blank line contains whitespace
+src/workflow.py:248:1: W293 blank line contains whitespace
+src/workflow.py:258:1: W293 blank line contains whitespace
+src/workflow.py:279:1: W293 blank line contains whitespace
+src/workflow.py:288:1: W293 blank line contains whitespace
+src/workflow.py:294:1: W293 blank line contains whitespace
+src/workflow.py:298:1: W293 blank line contains whitespace
+src/workflow.py:302:21: F541 f-string is missing placeholders
+src/workflow.py:303:1: W293 blank line contains whitespace
+src/workflow.py:307:21: F541 f-string is missing placeholders
+src/workflow.py:308:1: W293 blank line contains whitespace
+src/workflow.py:313:101: E501 line too long (102 > 100 characters)
+src/workflow.py:315:1: W293 blank line contains whitespace
+src/workflow.py:321:1: W293 blank line contains whitespace
+src/workflow.py:330:1: W293 blank line contains whitespace
+src/workflow.py:335:1: W293 blank line contains whitespace
+src/workflow.py:339:1: W293 blank line contains whitespace
+src/workflow.py:344:1: W293 blank line contains whitespace
+src/workflow.py:347:1: W293 blank line contains whitespace
+src/workflow.py:352:1: W293 blank line contains whitespace
+src/workflow.py:355:9: F841 local variable 'report' is assigned to but never used
+src/workflow.py:357:1: W293 blank line contains whitespace
+src/workflow.py:362:1: W293 blank line contains whitespace
+src/workflow.py:370:1: W293 blank line contains whitespace
+src/workflow.py:374:1: W293 blank line contains whitespace
+src/workflow.py:421:1: W293 blank line contains whitespace
+src/workflow.py:423:1: W293 blank line contains whitespace
+src/workflow.py:426:1: W293 blank line contains whitespace
+src/workflow.py:431:1: W293 blank line contains whitespace
+src/workflow.py:438:1: W293 blank line contains whitespace
+src/workflow.py:454:1: W293 blank line contains whitespace
+src/workflow.py:456:15: F541 f-string is missing placeholders
+src/workflow.py:462:19: F541 f-string is missing placeholders

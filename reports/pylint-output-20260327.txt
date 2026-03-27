@@ -1,0 +1,51 @@
+************* Module workflow
+src/workflow.py:96:4: R0911: Too many return statements (7/6) (too-many-return-statements)
+src/workflow.py:212:4: R0914: Too many local variables (31/15) (too-many-locals)
+src/workflow.py:212:4: R0912: Too many branches (16/12) (too-many-branches)
+src/workflow.py:212:4: R0915: Too many statements (80/50) (too-many-statements)
+************* Module _1688.supplier_finder
+src/_1688/supplier_finder.py:343:4: R0914: Too many local variables (16/15) (too-many-locals)
+************* Module db.repositories
+src/db/repositories.py:162:4: R0913: Too many arguments (8/5) (too-many-arguments)
+************* Module db.repositories.product_repo
+src/db/repositories/product_repo.py:48:4: R0913: Too many arguments (17/5) (too-many-arguments)
+src/db/repositories/product_repo.py:48:4: R0914: Too many local variables (23/15) (too-many-locals)
+src/db/repositories/product_repo.py:346:4: R0913: Too many arguments (13/5) (too-many-arguments)
+src/db/repositories/product_repo.py:346:4: R0914: Too many local variables (17/15) (too-many-locals)
+************* Module db.repositories.history_repo
+src/db/repositories/history_repo.py:83:4: R0913: Too many arguments (9/5) (too-many-arguments)
+src/db/repositories/history_repo.py:127:4: R0913: Too many arguments (6/5) (too-many-arguments)
+src/db/repositories/history_repo.py:162:4: R0913: Too many arguments (6/5) (too-many-arguments)
+src/db/repositories/history_repo.py:197:4: R0913: Too many arguments (6/5) (too-many-arguments)
+src/db/repositories/history_repo.py:239:4: R0913: Too many arguments (6/5) (too-many-arguments)
+src/db/repositories/history_repo.py:281:4: R0913: Too many arguments (6/5) (too-many-arguments)
+src/db/repositories/history_repo.py:323:4: R0914: Too many local variables (19/15) (too-many-locals)
+src/db/repositories/history_repo.py:323:4: R0912: Too many branches (17/12) (too-many-branches)
+src/db/repositories/history_repo.py:323:4: R0915: Too many statements (51/50) (too-many-statements)
+************* Module amazon.collector
+src/amazon/collector.py:86:4: R0914: Too many local variables (17/15) (too-many-locals)
+src/amazon/collector.py:86:4: R0912: Too many branches (16/12) (too-many-branches)
+src/amazon/collector.py:86:4: R0915: Too many statements (58/50) (too-many-statements)
+src/amazon/collector.py:357:4: R0914: Too many local variables (27/15) (too-many-locals)
+************* Module analysis.visualizer
+src/analysis/visualizer.py:96:4: R0914: Too many local variables (17/15) (too-many-locals)
+src/analysis/visualizer.py:175:4: R0914: Too many local variables (18/15) (too-many-locals)
+src/analysis/visualizer.py:248:4: R0914: Too many local variables (17/15) (too-many-locals)
+src/analysis/visualizer.py:409:4: R0914: Too many local variables (17/15) (too-many-locals)
+src/analysis/visualizer.py:493:4: R0914: Too many local variables (17/15) (too-many-locals)
+************* Module analysis.trend_analyzer
+src/analysis/trend_analyzer.py:72:4: R0914: Too many local variables (16/15) (too-many-locals)
+src/analysis/trend_analyzer.py:72:4: R0912: Too many branches (13/12) (too-many-branches)
+src/analysis/trend_analyzer.py:250:4: R0912: Too many branches (18/12) (too-many-branches)
+src/analysis/trend_analyzer.py:623:4: R0914: Too many local variables (19/15) (too-many-locals)
+src/analysis/trend_analyzer.py:747:4: R0914: Too many local variables (22/15) (too-many-locals)
+src/analysis/trend_analyzer.py:747:4: R0912: Too many branches (15/12) (too-many-branches)
+src/analysis/trend_analyzer.py:747:4: R0915: Too many statements (85/50) (too-many-statements)
+************* Module api.v2.products
+src/api/v2/products.py:84:0: R0913: Too many arguments (7/5) (too-many-arguments)
+************* Module utils.helpers
+src/utils/helpers.py:12:0: R0911: Too many return statements (8/6) (too-many-return-statements)
+
+-----------------------------------
+Your code has been rated at 9.88/10
+

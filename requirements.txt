@@ -18,8 +18,10 @@ plotly>=5.18.0
 kaleido>=0.2.0  # Plotly 静态图片导出
 
 # 数据库
-psycopg2-binary>=2.9.0
-sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.0  # PostgreSQL 同步驱动
+sqlalchemy[asyncio]>=2.0.0  # ORM with async support
+alembic>=1.13.0  # 数据库迁移工具
+asyncpg>=0.29.0  # PostgreSQL 异步驱动
 
 # HTTP 请求
 requests>=2.31.0
@@ -32,6 +34,9 @@ rotating-proxies>=0.1.0
 # 工具
 python-dotenv>=1.0.0
 loguru>=0.7.0
+
+# 定时任务
+apscheduler>=3.10.0  # v2.2 新增
 
 # 测试
 pytest>=7.4.0

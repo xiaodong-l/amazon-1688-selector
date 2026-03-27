@@ -1,0 +1,8 @@
+{
+  "timestamp": "2026-03-27T10:26:52.376165",
+  "results": {
+    "batch_insert_20": 134.70993423834443,
+    "simple_query_avg": 0.6733053829520941,
+    "complex_query_avg": 1.176332775503397
+  }
+}

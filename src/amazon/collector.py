@@ -1,32 +1,51 @@
 """
-亚马逊数据采集模块
+亚马逊数据采集模块 (v2.3 - 数据库集成版)
 
 支持两种采集方式：
 1. SP-API (官方推荐，合规)
 2. Playwright 浏览器自动化 (备选)
+
+v2.3 更新:
+- 添加数据库存储支持
+- 自动记录历史数据
+- 保留 CSV 导出 (向后兼容)
 """
 import asyncio
 from typing import List, Dict, Optional
 from datetime import datetime
 from loguru import logger
 from ..utils.config import AMAZON_CONFIG, DATA_DIR
+from ..db import (
+    get_async_session,
+    ProductRepository,
+    HistoryRepository,
+    init_db_async,
+)
 
 
 class AmazonCollector:
-    """亚马逊数据采集器"""
+    """亚马逊数据采集器 (v2.3 - 数据库集成版)"""
     
-    def __init__(self, use_sp_api: bool = True, use_rainforest: bool = True):
+    def __init__(
+        self,
+        use_sp_api: bool = True,
+        use_rainforest: bool = True,
+        use_database: bool = True,
+    ):
         """
         初始化采集器
         
         Args:
             use_sp_api: 是否使用官方 SP-API (默认 True)
             use_rainforest: 是否使用 Rainforest API (默认 True，推荐)
+            use_database: 是否使用数据库存储 (默认 True)
         """
         self.use_sp_api = use_sp_api
         self.use_rainforest = use_rainforest
+        self.use_database = use_database
         self.request_delay = AMAZON_CONFIG["request_delay"]
         self.max_retries = AMAZON_CONFIG["max_retries"]
+        self._db_initialized = False
         
         if use_rainforest and AMAZON_CONFIG.get("rainforest_api_key"):
             logger.info("使用 Rainforest API 进行数据采集 (推荐)")
@@ -41,6 +60,169 @@ class AmazonCollector:
             self.sp_api = None
             self.rainforest_client = None
             self.browser = None
+        
+        if use_database:
+            logger.info("数据库存储已启用")
+    
+    async def _ensure_db_initialized(self):
+        """确保数据库已初始化 (仅初始化一次)"""
+        if not self.use_database:
+            return False
+        
+        if self._db_initialized:
+            return True
+        
+        try:
+            await init_db_async()
+            self._db_initialized = True
+            logger.info("✅ 数据库已就绪")
+            return True
+        except Exception as e:
+            logger.warning(f"⚠️ 数据库初始化失败：{e}")
+            logger.warning("将使用 CSV 模式运行")
+            self.use_database = False
+            return False
+    
+    async def _save_products_to_db(
+        self,
+        products: List[Dict],
+        timestamp: Optional[datetime] = None,
+    ) -> int:
+        """
+        保存商品数据到数据库并记录历史
+        
+        Args:
+            products: 商品数据列表
+            timestamp: 时间戳 (默认使用当前时间)
+            
+        Returns:
+            保存的商品数量
+        """
+        if not self.use_database:
+            return 0
+        
+        await self._ensure_db_initialized()
+        
+        saved_count = 0
+        history_count = 0
+        
+        try:
+            async with get_async_session() as session:
+                product_repo = ProductRepository(session)
+                history_repo = HistoryRepository(session)
+                
+                for product in products:
+                    try:
+                        asin = product.get('asin', '')
+                        if not asin:
+                            logger.warning("⚠️ 商品缺少 ASIN，跳过")
+                            continue
+                        
+                        # 提取价格 (处理多种格式：字典、字符串、浮点数)
+                        price_data = product.get('price', {})
+                        price = 0.0
+                        
+                        if isinstance(price_data, dict):
+                            # 格式：{'symbol': '$', 'value': 29.94, 'raw': '$29.94'}
+                            price = float(price_data.get('value', 0.0))
+                        elif isinstance(price_data, str):
+                            # 可能是字符串格式的字典或价格
+                            if price_data.startswith('{'):
+                                # 字符串格式的字典，尝试解析
+                                import json
+                                try:
+                                    price_dict = json.loads(price_data.replace("'", '"'))
+                                    price = float(price_dict.get('value', 0.0))
+                                except Exception as e:
+                                    logger.warning(f"解析价格字典失败：{e}")
+                                    price = 0.0
+                            else:
+                                # 直接是价格字符串，如 "$29.94"
+                                try:
+                                    price = float(price_data.replace('$', '').replace(',', '').strip())
+                                except Exception as e:
+                                    logger.warning(f"解析价格字符串失败：{e}")
+                                    price = 0.0
+                        elif isinstance(price_data, (int, float)):
+                            price = float(price_data)
+                        else:
+                            price = 0.0
+                        
+                        # 检查是否已存在
+                        existing = await product_repo.get_by_asin(asin)
+                        
+                        if existing:
+                            # 更新现有商品
+                            await product_repo.update(
+                                asin,
+                                price=price,
+                                rating=product.get('rating'),
+                                review_count=product.get('review_count'),
+                                bsr=product.get('bsr'),
+                                category=product.get('category'),
+                            )
+                            logger.debug(f"🔄 更新商品：{asin}")
+                            
+                            # 记录历史数据
+                            await history_repo.record_history(
+                                product_id=existing.id,
+                                asin=asin,
+                                price=price,
+                                rating=product.get('rating'),
+                                review_count=product.get('review_count'),
+                                bsr=product.get('bsr'),
+                                title=product.get('title'),
+                                recorded_at=timestamp or datetime.utcnow(),
+                            )
+                            history_count += 1
+                            logger.debug(f"📝 记录历史：{asin}")
+                        else:
+                            # 创建新商品
+                            await product_repo.create(
+                                asin=asin,
+                                title=product.get('title', ''),
+                                price=price or 0.0,
+                                product_url=product.get('product_url', '#'),
+                                brand=product.get('brand'),
+                                category=product.get('category'),
+                                currency=product.get('currency', 'USD'),
+                                rating=product.get('rating'),
+                                review_count=product.get('review_count'),
+                                bsr=product.get('bsr'),
+                                image_url=product.get('image_url') or product.get('main_image', ''),
+                            )
+                            logger.debug(f"➕ 创建商品：{asin}")
+                            
+                            # 新商品也记录初始历史
+                            # 需要获取刚创建的 product id
+                            new_product = await product_repo.get_by_asin(asin)
+                            if new_product:
+                                await history_repo.record_history(
+                                    product_id=new_product.id,
+                                    asin=asin,
+                                    price=price,
+                                    rating=product.get('rating'),
+                                    review_count=product.get('review_count'),
+                                    bsr=product.get('bsr'),
+                                    title=product.get('title'),
+                                    recorded_at=timestamp or datetime.utcnow(),
+                                )
+                                history_count += 1
+                                logger.debug(f"📝 记录初始历史：{asin}")
+                        
+                        saved_count += 1
+                        
+                    except Exception as e:
+                        logger.warning(f"⚠️ 保存商品 {product.get('asin', 'unknown')} 失败：{e}")
+                        continue
+                
+                logger.info(f"✅ 数据库保存完成：{saved_count} 个商品，{history_count} 条历史记录")
+                
+        except Exception as e:
+            logger.error(f"❌ 数据库保存失败：{e}")
+            logger.warning("将继续使用 CSV 模式")
+        
+        return saved_count
     
     def _init_rainforest(self):
         """初始化 Rainforest API 客户端"""
@@ -70,19 +252,25 @@ class AmazonCollector:
         self,
         keywords: List[str],
         categories: Optional[List[str]] = None,
-        limit: int = 100
+        limit: int = 100,
+        save_to_db: Optional[bool] = None,
     ) -> List[Dict]:
         """
-        采集商品数据
+        采集商品数据 (v2.3 - 支持数据库存储)
         
         Args:
             keywords: 搜索关键词列表
             categories: 商品分类 (可选)
             limit: 每个关键词采集的商品数量
+            save_to_db: 是否保存到数据库 (可选，覆盖默认设置)
             
         Returns:
             商品数据列表
         """
+        # 允许覆盖数据库设置
+        if save_to_db is not None:
+            self.use_database = save_to_db
+        
         all_products = []
         
         for keyword in keywords:
@@ -106,6 +294,12 @@ class AmazonCollector:
                 continue
         
         logger.info(f"采集完成，共 {len(all_products)} 个商品")
+        
+        # 保存到数据库 (如果启用)
+        if self.use_database and all_products:
+            timestamp = datetime.utcnow()
+            await self._save_products_to_db(all_products, timestamp)
+        
         return all_products
     
     async def _collect_via_rainforest(
@@ -225,7 +419,8 @@ class AmazonCollector:
                         if product_cards:
                             logger.info(f"使用选择器找到 {len(product_cards)} 个商品：{selector}")
                             break
-                    except:
+                    except Exception as e:
+                        logger.warning(f"尝试选择器 {selector} 失败：{e}")
                         continue
                 
                 if not product_cards:

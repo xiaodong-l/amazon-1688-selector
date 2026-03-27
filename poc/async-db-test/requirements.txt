@@ -1,0 +1,11 @@
+# SQLAlchemy 2.0 Async POC 依赖
+
+# 核心依赖
+sqlalchemy>=2.0.0
+aiosqlite>=0.19.0
+
+# 可选：PostgreSQL 异步驱动 (生产环境推荐)
+# asyncpg>=0.29.0
+
+# 可选：MySQL 异步驱动
+# aiomysql>=0.2.0

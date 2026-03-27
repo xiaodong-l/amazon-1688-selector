@@ -1,0 +1,205 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.0.2, pluggy-1.6.0 -- /home/admina/.openclaw-imperial/workspace-taizi/projects/amazon-1688-selector/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/admina/.openclaw-imperial/workspace-taizi/projects/amazon-1688-selector
+configfile: pytest.ini
+plugins: asyncio-1.3.0, cov-7.1.0, anyio-4.13.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collecting ... collected 15 items
+
+tests/performance/test_v2_benchmark.py::TestBatchInsertPerformance::test_batch_insert_100 FAILED
+tests/performance/test_v2_benchmark.py::TestBatchInsertPerformance::test_batch_insert_100 ERROR
+tests/performance/test_v2_benchmark.py::TestBatchInsertPerformance::test_batch_insert_1000 
+批量插入 1000 条 (推算): 5992.76ms
+FAILED
+tests/performance/test_v2_benchmark.py::TestBatchInsertPerformance::test_batch_insert_1000 ERROR
+tests/performance/test_v2_benchmark.py::TestBatchInsertPerformance::test_batch_insert_with_history FAILED
+tests/performance/test_v2_benchmark.py::TestBatchInsertPerformance::test_batch_insert_with_history ERROR
+tests/performance/test_v2_benchmark.py::TestQueryPerformance::test_simple_query_by_asin 
+简单查询 (ASIN): 平均=0.27ms, P95=0.37ms
+PASSED
+tests/performance/test_v2_benchmark.py::TestQueryPerformance::test_simple_query_by_asin ERROR
+tests/performance/test_v2_benchmark.py::TestQueryPerformance::test_complex_query_search 
+复杂查询 (搜索): 平均=0.53ms, P95=1.16ms
+PASSED
+tests/performance/test_v2_benchmark.py::TestQueryPerformance::test_complex_query_search ERROR
+tests/performance/test_v2_benchmark.py::TestQueryPerformance::test_join_query FAILED
+tests/performance/test_v2_benchmark.py::TestQueryPerformance::test_join_query ERROR
+tests/performance/test_v2_benchmark.py::TestConcurrentPerformance::test_concurrent_reads_10 
+10 并发读取: 8.77ms
+PASSED
+tests/performance/test_v2_benchmark.py::TestConcurrentPerformance::test_concurrent_reads_10 ERROR
+tests/performance/test_v2_benchmark.py::TestConcurrentPerformance::test_concurrent_reads_50 
+50 并发读取: 31.51ms
+PASSED
+tests/performance/test_v2_benchmark.py::TestConcurrentPerformance::test_concurrent_reads_50 ERROR
+tests/performance/test_v2_benchmark.py::TestConcurrentPerformance::test_concurrent_writes FAILED
+tests/performance/test_v2_benchmark.py::TestConcurrentPerformance::test_concurrent_writes ERROR
+tests/performance/test_v2_benchmark.py::TestAuthPerformance::test_jwt_generation_performance 
+JWT 生成: 平均=0.006ms, P95=0.009ms
+PASSED
+tests/performance/test_v2_benchmark.py::TestAuthPerformance::test_jwt_verification_performance 
+JWT 验证: 平均=0.003ms, P95=0.004ms
+PASSED
+tests/performance/test_v2_benchmark.py::TestRateLimitPerformance::test_in_memory_rate_limit_check 
+限流检查: 平均=0.002ms, P99=0.004ms
+PASSED
+tests/performance/test_v2_benchmark.py::TestMonitoringOverhead::test_logging_overhead 
+日志记录开销: 平均=0.010ms
+PASSED
+tests/performance/test_v2_benchmark.py::TestMonitoringOverhead::test_metrics_collection_overhead 
+指标收集开销: 平均=0.000ms
+PASSED
+tests/performance/test_v2_benchmark.py::TestPerformanceBenchmark::test_full_benchmark_summary 
+============================================================
+性能基准测试摘要
+============================================================
+batch_insert_20: 115.42ms
+simple_query_avg: 0.29ms
+complex_query_avg: 0.73ms
+============================================================
+
+结果已保存到: /home/admina/.openclaw-imperial/workspace-taizi/projects/amazon-1688-selector/reports/performance-results.json
+PASSED
+tests/performance/test_v2_benchmark.py::TestPerformanceBenchmark::test_full_benchmark_summary ERROR
+
+==================================== ERRORS ====================================
+____ ERROR at teardown of TestBatchInsertPerformance.test_batch_insert_100 _____
+venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py:1967: in _exec_single_context
+    self.dialect.do_execute(
+venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+venv/lib/python3.12/site-packages/sqlalchemy/dialects/sqlite/aiosqlite.py:182: in execute
+    self._adapt_connection._handle_exception(error)
+venv/lib/python3.12/site-packages/sqlalchemy/dialects/sqlite/aiosqlite.py:342: in _handle_exception
+    raise error
+venv/lib/python3.12/site-packages/sqlalchemy/dialects/sqlite/aiosqlite.py:164: in execute
+    self.await_(_cursor.execute(operation, parameters))
+venv/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py:132: in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py:196: in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+venv/lib/python3.12/site-packages/aiosqlite/cursor.py:40: in execute
+    await self._execute(self._cursor.execute, sql, parameters)
+venv/lib/python3.12/site-packages/aiosqlite/cursor.py:32: in _execute
+    return await self._conn._execute(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv/lib/python3.12/site-packages/aiosqlite/core.py:160: in _execute
+    return await future
+           ^^^^^^^^^^^^
+venv/lib/python3.12/site-packages/aiosqlite/core.py:63: in _connection_worker_thread
+    result = function()
+             ^^^^^^^^^^
+E   sqlite3.OperationalError: no such table: product_history
+
+The above exception was the direct cause of the following exception:
+venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:330: in finalizer
+    runner.run(async_finalizer(), context=context)
+/usr/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:322: in async_finalizer
+    await gen_obj.__anext__()
+tests/conftest.py:427: in async_clean_database
+    await async_db_session.execute(ProductHistory.__table__.delete())
+venv/lib/python3.12/site-packages/sqlalchemy/ext/asyncio/session.py:449: in execute
+    result = await greenlet_spawn(
+venv/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py:201: in greenlet_spawn
+    result = context.throw(*sys.exc_info())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py:2351: in execute
+    return self._execute_internal(
+venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py:2258: in _execute_internal
+    result = conn.execute(
+venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py:1419: in execute
+    return meth(
+venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py:527: in _execute_on_connection
+    return connection._execute_clauseelement(
+venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py:1641: in _execute_clauseelement
+    ret = self._execute_context(
+venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py:1846: in _execute_context
+    return self._exec_single_context(
+venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py:1986: in _exec_single_context
+    self._handle_dbapi_exception(
+venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py:2363: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py:1967: in _exec_single_context
+    self.dialect.do_execute(
+venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+venv/lib/python3.12/site-packages/sqlalchemy/dialects/sqlite/aiosqlite.py:182: in execute
+    self._adapt_connection._handle_exception(error)
+venv/lib/python3.12/site-packages/sqlalchemy/dialects/sqlite/aiosqlite.py:342: in _handle_exception
+    raise error
+venv/lib/python3.12/site-packages/sqlalchemy/dialects/sqlite/aiosqlite.py:164: in execute
+    self.await_(_cursor.execute(operation, parameters))
+venv/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py:132: in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py:196: in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+venv/lib/python3.12/site-packages/aiosqlite/cursor.py:40: in execute
+    await self._execute(self._cursor.execute, sql, parameters)
+venv/lib/python3.12/site-packages/aiosqlite/cursor.py:32: in _execute
+    return await self._conn._execute(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv/lib/python3.12/site-packages/aiosqlite/core.py:160: in _execute
+    return await future
+           ^^^^^^^^^^^^
+venv/lib/python3.12/site-packages/aiosqlite/core.py:63: in _connection_worker_thread
+    result = function()
+             ^^^^^^^^^^
+E   sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: product_history
+E   [SQL: DELETE FROM product_history]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+____ ERROR at teardown of TestBatchInsertPerformance.test_batch_insert_1000 ____
+venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py:1967: in _exec_single_context
+    self.dialect.do_execute(
+venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+venv/lib/python3.12/site-packages/sqlalchemy/dialects/sqlite/aiosqlite.py:182: in execute
+    self._adapt_connection._handle_exception(error)
+venv/lib/python3.12/site-packages/sqlalchemy/dialects/sqlite/aiosqlite.py:342: in _handle_exception
+    raise error
+venv/lib/python3.12/site-packages/sqlalchemy/dialects/sqlite/aiosqlite.py:164: in execute
+    self.await_(_cursor.execute(operation, parameters))
+venv/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py:132: in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py:196: in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+venv/lib/python3.12/site-packages/aiosqlite/cursor.py:40: in execute
+    await self._execute(self._cursor.execute, sql, parameters)
+venv/lib/python3.12/site-packages/aiosqlite/cursor.py:32: in _execute
+    return await self._conn._execute(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv/lib/python3.12/site-packages/aiosqlite/core.py:160: in _execute
+    return await future
+           ^^^^^^^^^^^^
+venv/lib/python3.12/site-packages/aiosqlite/core.py:63: in _connection_worker_thread
+    result = function()
+             ^^^^^^^^^^
+E   sqlite3.OperationalError: no such table: product_history
+
+The above exception was the direct cause of the following exception:
+venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:330: in finalizer
+    runner.run(async_finalizer(), context=context)
+/usr/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/asyncio/base_events.py:687: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:322: in async_finalizer
+    await gen_obj.__anext__()
+tests/conftest.py:427: in async_clean_database
+    await async_db_session.execute(ProductHistory.__table__.delete())
+venv/lib/python3.12/site-packages/sqlalchemy/ext/asyncio/session.py:449: in execute
+    result = await greenlet_spawn(

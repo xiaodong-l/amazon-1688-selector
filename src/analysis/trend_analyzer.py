@@ -761,7 +761,7 @@ class TrendAnalyzer:
         report.append("# 🏆 Top 潜力商品分析报告 (增强版)")
         report.append(f"\n**生成时间:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         report.append(f"**分析数量:** {len(top_products)} 个商品")
-        report.append(f"**评估维度:** 销量增长 + 评论增速 + BSR 排名 + 利润率 + 市场饱和度 + 风险评分\n")
+        report.append("**评估维度:** 销量增长 + 评论增速 + BSR 排名 + 利润率 + 市场饱和度 + 风险评分\n")
         
         # 执行摘要
         report.append("## 📋 执行摘要\n")
@@ -857,7 +857,7 @@ class TrendAnalyzer:
             forecast = product.get("forecast_30d", {})
             report.append(f"**{i}. {product['title'][:40]}...**")
             report.append(f"- 当前评分：{product['trend_score']} | 预测评分：{forecast.get('score', 0):.2f}")
-            report.append(f"- 优势：高增长潜力、低市场饱和、良好利润率\n")
+            report.append("- 优势：高增长潜力、低市场饱和、良好利润率\n")
         
         # 风险提示
         report.append("### ⚠️ 风险提示\n")

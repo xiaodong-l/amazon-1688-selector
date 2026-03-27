@@ -55,7 +55,8 @@ def setup_chinese_font():
             plt.rcParams['axes.unicode_minus'] = False
             logger.info(f"使用中文字体：{font}")
             return font_prop
-        except:
+        except Exception as e:
+            logger.debug(f"加载字体 {font} 失败：{e}")
             continue
     
     # 如果都没有，使用默认字体 (英文)
@@ -89,7 +90,7 @@ class TrendVisualizer:
         self.chart_dpi = VISUALIZATION_CONFIG.get("chart_dpi", 150)
         self.default_figsize = VISUALIZATION_CONFIG.get("default_figsize", (14, 8))
         
-        logger.info(f"可视化器 (增强版) 初始化成功")
+        logger.info("可视化器 (增强版) 初始化成功")
         logger.info(f"输出目录：{self.output_dir}")
         logger.info(f"缓存：{'启用' if self.cache_enabled else '禁用'}")
     
