@@ -44,44 +44,51 @@ def charts_page():
 
 @app.route('/api/products', methods=['GET'])
 def get_products():
-    """获取已采集的商品数据"""
+    """获取已采集的商品数据 (支持增强数据)"""
     try:
-        # 查找最新的 Top20 结果文件
-        import glob
-        result_files = sorted(DATA_DIR.glob("top*_report_*.md"), key=lambda f: f.stat().st_mtime, reverse=True)
+        # 优先查找增强数据 (JSON)
+        enhanced_files = list(DATA_DIR.glob("top20_enhanced_*.json"))
         
-        if not result_files:
-            return jsonify({
-                "success": True,
-                "products": [],
-                "count": 0,
-            })
-        
-        # 查找对应的 CSV 文件
-        csv_pattern = str(result_files[0]).replace('_report_', '_').replace('.md', '.csv')
-        csv_files = glob.glob(csv_pattern)
-        
-        if csv_files:
-            import pandas as pd
-            df = pd.read_csv(csv_files[0])
-            products = df.to_dict('records')
+        if enhanced_files:
+            latest_enhanced = max(enhanced_files, key=lambda f: f.stat().st_mtime)
             
-            # 添加商品链接
-            for p in products:
-                if 'asin' in p and p['asin']:
-                    p['link'] = f"https://www.amazon.com/dp/{p['asin']}"
+            with open(latest_enhanced, 'r', encoding='utf-8') as f:
+                products = json.load(f)
             
-            return jsonify({
-                "success": True,
-                "products": products,
-                "count": len(products),
-            })
+            logger.info(f"使用增强数据：{latest_enhanced.name}")
         else:
-            return jsonify({
-                "success": True,
-                "products": [],
-                "count": 0,
-            })
+            # 使用 CSV 基础数据
+            import glob
+            result_files = sorted(DATA_DIR.glob("top*_report_*.md"), key=lambda f: f.stat().st_mtime, reverse=True)
+            
+            if not result_files:
+                return jsonify({
+                    "success": True,
+                    "products": [],
+                    "count": 0,
+                })
+            
+            csv_pattern = str(result_files[0]).replace('_report_', '_').replace('.md', '.csv')
+            csv_files = glob.glob(csv_pattern)
+            
+            if csv_files:
+                import pandas as pd
+                df = pd.read_csv(csv_files[0])
+                products = df.to_dict('records')
+            else:
+                products = []
+        
+        # 确保所有商品都有 link
+        for p in products:
+            if 'link' not in p and 'asin' in p:
+                p['link'] = f"https://www.amazon.com/dp/{p['asin']}"
+        
+        return jsonify({
+            "success": True,
+            "products": products,
+            "count": len(products),
+            "data_source": "enhanced" if enhanced_files else "csv",
+        })
             
     except Exception as e:
         logger.error(f"获取商品失败：{e}")
