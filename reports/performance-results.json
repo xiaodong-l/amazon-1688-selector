@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-03-27T11:07:12.031249",
+  "timestamp": "2026-03-27T11:43:59.640401",
   "results": {
-    "batch_insert_20": 206.04365831241012,
-    "simple_query_avg": 0.3948274068534374,
-    "complex_query_avg": 0.6595980376005173
+    "batch_insert_20": 114.56492077559233,
+    "simple_query_avg": 0.3934127278625965,
+    "complex_query_avg": 0.4623275250196457
   }
 }

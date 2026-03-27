@@ -25,6 +25,9 @@ from src.analysis.trend_analyzer import TrendAnalyzer
 from src._1688.supplier_finder import SupplierFinder
 from src.utils.config import DATA_DIR
 
+# Version
+VERSION = "2.3.0"
+
 app = Flask(__name__, template_folder='templates')
 logger.remove()
 logger.add(sys.stdout, level="INFO")

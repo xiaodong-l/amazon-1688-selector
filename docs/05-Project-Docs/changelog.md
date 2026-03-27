@@ -1,5 +1,23 @@
 # 亚马逊选品系统 - 更新日志
 
+## [2.3.0] - 2026-03-27
+
+### Added
+- JWT authentication with token blacklist
+- Role-based permissions (admin/user/readonly)
+- Audit logging
+- Redis rate limiting with 4 strategies
+- Prometheus monitoring integration
+- Request tracing and error tracking
+- Slow query logging
+
+### Stats
+- 150+ tests (>95% pass rate)
+- 30+ new files
+- 20+ new API endpoints
+
+---
+
 ## v2.0.0 (2026-03-27) - 数据可视化与算法优化
 
 ### 🎉 重大更新
