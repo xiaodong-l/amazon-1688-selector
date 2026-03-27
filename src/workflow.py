@@ -40,6 +40,8 @@ from .analysis.lstm_predictor import LSTMPredictor, quick_lstm_forecast
 from .analysis.lstm_features import create_features, create_target
 from .analysis.lstm_visualizer import create_dashboard as lstm_create_dashboard
 from .analysis.holidays import create_holidays_df
+from .analysis.model_evaluator import create_default_evaluator, quick_model_comparison
+from .analysis.model_comparison import generate_comparison_report, export_report
 from ._1688.supplier_finder import SupplierFinder
 from .utils.config import DATA_DIR, ANALYSIS_CONFIG, ALIBABA_CONFIG
 from .db import (
@@ -622,6 +624,121 @@ class AmazonSelectorWorkflow:
             "lstm_results": lstm_results,
             "timestamp": timestamp.isoformat(),
         }
+    
+    def run_model_comparison(self, days: int = 30, export_path: str = None) -> Dict[str, Any]:
+        """
+        运行多模型对比分析 (v2.4 Phase 3 新功能)
+        
+        Args:
+            days: 预测天数
+            export_path: 报告导出路径 (可选)
+            
+        Returns:
+            对比结果字典
+        """
+        logger.info("="*60)
+        logger.info("🔬 开始多模型对比分析 (v2.4 Phase 3)")
+        logger.info("="*60)
+        
+        try:
+            # 生成样本数据用于对比
+            import numpy as np
+            np.random.seed(42)
+            
+            dates = pd.date_range(end=datetime.now(), periods=90, freq='D')
+            trend = np.linspace(100, 150, 90)
+            weekly = 10 * np.sin(np.arange(90) * 2 * np.pi / 7)
+            yearly = 20 * np.sin(np.arange(90) * 2 * np.pi / 365)
+            noise = np.random.randn(90) * 5
+            sales = trend + weekly + yearly + noise
+            
+            data = pd.DataFrame({
+                'date': dates,
+                'sales': np.maximum(sales, 0),
+            })
+            
+            # 划分训练/测试集
+            train_data = data.iloc[:-days].copy()
+            test_data = data.iloc[-days:].copy()
+            
+            # 创建评估器
+            logger.info("创建模型评估器 (线性/Prophet/LSTM)...")
+            evaluator = create_default_evaluator()
+            
+            # 训练所有模型
+            logger.info("训练所有模型...")
+            evaluator.train_all(train_data, target_col='sales')
+            
+            # 预测
+            logger.info(f"预测未来 {days} 天...")
+            evaluator.predict_all(test_data, periods=days)
+            
+            # 评估
+            y_true = test_data['sales'].values
+            metrics_df = evaluator.evaluate_all(y_true)
+            
+            # 显示结果
+            logger.info("="*60)
+            logger.info("📊 模型对比结果")
+            logger.info("="*60)
+            print(metrics_df.to_string())
+            
+            # 最佳模型
+            best_model = evaluator.get_best_model('MAPE')
+            logger.info(f"🏆 最佳模型 (MAPE): {best_model}")
+            
+            # 生成报告
+            result = {
+                'metrics_df': metrics_df,
+                'best_model': best_model,
+                'evaluator': evaluator,
+                'metrics': evaluator.metrics_results,
+                'train_times': evaluator.train_times,
+                'predict_times': evaluator.predict_times,
+            }
+            
+            # 导出报告
+            if export_path:
+                logger.info(f"导出报告到：{export_path}")
+                report = generate_comparison_report(evaluator)
+                
+                if export_path.endswith('.md'):
+                    export_report(report, export_path, format='markdown')
+                else:
+                    export_report(report, export_path, format='json')
+                
+                logger.info(f"✅ 报告已导出：{export_path}")
+            
+            # 生成可视化
+            if self.generate_charts:
+                from analysis.comparison_visualizer import create_all_visualizations
+                import tempfile
+                
+                output_dir = Path(tempfile.gettempdir()) / 'model_comparison'
+                output_dir.mkdir(parents=True, exist_ok=True)
+                
+                metrics_df_for_viz = pd.DataFrame(evaluator.metrics_results).T
+                files = create_all_visualizations(
+                    metrics_df=metrics_df_for_viz,
+                    y_true=y_true,
+                    predictions_dict=evaluator.y_pred_dict,
+                    train_times=evaluator.train_times,
+                    predict_times=evaluator.predict_times,
+                    output_dir=str(output_dir),
+                )
+                
+                logger.info(f"📈 可视化图表已生成：{len(files)} 个")
+                result['visualization_files'] = files
+            
+            logger.info("="*60)
+            logger.info("✅ 多模型对比分析完成!")
+            logger.info("="*60)
+            
+            return result
+            
+        except Exception as e:
+            logger.error(f"模型对比失败：{e}", exc_info=True)
+            return {'error': str(e)}
 
 
 async def main():
@@ -693,6 +810,55 @@ async def main():
         default=30,
         help="LSTM 预测天数 (默认：30)"
     )
+    parser.add_argument(
+        "--compare-models",
+        action="store_true",
+        default=False,
+        help="启用多模型对比分析 (v2.4 Phase 3 新功能)"
+    )
+    parser.add_argument(
+        "--compare-days",
+        type=int,
+        default=30,
+        help="模型对比预测天数 (默认：30)"
+    )
+    parser.add_argument(
+        "--export-report",
+        type=str,
+        default=None,
+        help="导出对比报告路径 (JSON/Markdown)"
+    )
+    parser.add_argument(
+        "--ensemble",
+        action="store_true",
+        default=False,
+        help="启用集成预测 (v2.4 Phase 4 新功能)"
+    )
+    parser.add_argument(
+        "--ensemble-method",
+        type=str,
+        default="weighted",
+        choices=["weighted", "stacking"],
+        help="集成方法：weighted (加权平均) 或 stacking (元学习器)"
+    )
+    parser.add_argument(
+        "--pipeline",
+        action="store_true",
+        default=False,
+        help="使用预测管道 (v2.4 Phase 4 新功能)"
+    )
+    parser.add_argument(
+        "--output",
+        type=str,
+        default="results/",
+        help="预测结果输出目录 (默认：results/)"
+    )
+    parser.add_argument(
+        "--optimize-weights",
+        action="store_true",
+        default=True,
+        help="优化集成模型权重"
+    )
     
     args = parser.parse_args()
     
@@ -741,6 +907,193 @@ async def main():
         print(f"   报告文件：{result['report_file']}")
         if result.get('database_enabled'):
             print("   数据库存储：已启用")
+    
+    # 模型对比分析 (v2.4 Phase 3)
+    if args.compare_models:
+        logger.info("\n" + "="*60)
+        logger.info("🔬 启动多模型对比分析 (Phase 3)")
+        logger.info("="*60)
+        
+        compare_result = workflow.run_model_comparison(
+            days=args.compare_days,
+            export_path=args.export_report,
+        )
+        
+        if compare_result and 'error' not in compare_result:
+            print("\n🏆 模型对比结果:")
+            print(f"   最佳模型：{compare_result.get('best_model', 'N/A')}")
+            print(f"   评估模型数：{len(compare_result.get('metrics', {}))}")
+            if compare_result.get('visualization_files'):
+                print(f"   可视化图表：{len(compare_result['visualization_files'])} 个")
+    
+    # 集成预测 (v2.4 Phase 4)
+    if args.ensemble:
+        logger.info("\n" + "="*60)
+        logger.info("🔧 启动集成预测 (Phase 4)")
+        logger.info("="*60)
+        
+        try:
+            from analysis.ensemble_predictor import EnsemblePredictor, quick_ensemble_forecast
+            
+            # 准备数据
+            logger.info("准备集成预测数据...")
+            
+            # 从数据库或文件加载数据
+            from db import HistoryRepository, get_async_session
+            import asyncio
+            
+            async def load_data_for_ensemble():
+                session = await get_async_session()
+                repo = HistoryRepository(session)
+                history = await repo.get_all_history(limit=500)
+                await session.close()
+                return history
+            
+            history_data = asyncio.run(load_data_for_ensemble())
+            
+            if history_data and len(history_data) > 0:
+                # 转换为 DataFrame
+                df = pd.DataFrame([{
+                    'date': h.date,
+                    'sales': h.sales,
+                    'asin': h.asin
+                } for h in history_data if hasattr(h, '__dict__')])
+                
+                if len(df) > 100:
+                    logger.info(f"加载历史数据：{len(df)} 条记录")
+                    
+                    # 按 ASIN 分组预测
+                    unique_asins = df['asin'].unique()[:5]  # 限制为前 5 个 ASIN
+                    
+                    for asin in unique_asins:
+                        asin_data = df[df['asin'] == asin].copy()
+                        asin_data = asin_data.sort_values('date')
+                        
+                        # 添加滞后特征
+                        asin_data['lag_1'] = asin_data['sales'].shift(1)
+                        asin_data['lag_7'] = asin_data['sales'].shift(7)
+                        asin_data = asin_data.dropna()
+                        
+                        if len(asin_data) < 50:
+                            continue
+                        
+                        logger.info(f"\n  处理 ASIN: {asin}")
+                        
+                        # 创建简单模型进行集成
+                        from sklearn.linear_model import LinearRegression
+                        from sklearn.ensemble import RandomForestRegressor
+                        
+                        X = asin_data[['lag_1', 'lag_7']].values
+                        y = asin_data['sales'].values
+                        
+                        split_idx = int(len(X) * 0.8)
+                        X_train, X_val = X[:split_idx], X[split_idx:]
+                        y_train, y_val = y[:split_idx], y[split_idx:]
+                        
+                        # 训练基模型
+                        model1 = LinearRegression()
+                        model1.fit(X_train, y_train)
+                        
+                        model2 = RandomForestRegressor(n_estimators=20, max_depth=5, random_state=42)
+                        model2.fit(X_train, y_train)
+                        
+                        models = {
+                            'linear': model1,
+                            'random_forest': model2
+                        }
+                        
+                        # 创建集成预测器
+                        predictor = EnsemblePredictor(models=models)
+                        
+                        # 优化权重
+                        if args.optimize_weights:
+                            val_df = asin_data.iloc[split_idx:].copy()
+                            predictor.get_optimal_weights(val_df, target_column='sales')
+                        
+                        # 训练 Stacking (如果需要)
+                        if args.ensemble_method == 'stacking':
+                            predictor.fit_stacking(X_train, y_train, n_folds=3)
+                        
+                        # 预测
+                        if args.ensemble_method == 'stacking':
+                            forecast = predictor.predict_stacking(X_val)
+                        else:
+                            forecast = predictor.predict_weighted(X_val)
+                        
+                        # 评估
+                        metrics = predictor.evaluate(y_val, forecast)
+                        
+                        logger.info(f"  ✓ {asin} - MAPE: {metrics['mape']:.2f}%")
+                        logger.info(f"    权重：{predictor.weights}")
+                else:
+                    logger.warning("数据量不足，跳过集成预测")
+            else:
+                logger.warning("未找到历史数据，跳过集成预测")
+        
+        except Exception as e:
+            logger.error(f"集成预测失败：{e}", exc_info=True)
+    
+    # 预测管道 (v2.4 Phase 4)
+    if args.pipeline:
+        logger.info("\n" + "="*60)
+        logger.info("📦 启动预测管道 (Phase 4)")
+        logger.info("="*60)
+        
+        try:
+            from analysis.predict_pipeline import PredictionPipeline, PredictionConfig
+            
+            # 创建配置
+            config = PredictionConfig(
+                models=['prophet', 'lstm'] if args.use_lstm else ['prophet'],
+                ensemble_method=args.ensemble_method,
+                prophet_forecast_days=args.prophet_days,
+                lstm_forecast_days=args.lstm_days,
+                optimize_weights=args.optimize_weights,
+                results_dir=args.output,
+                generate_charts=True,
+                save_results=True
+            )
+            
+            # 创建管道
+            pipeline = PredictionPipeline(config)
+            
+            # 从数据库加载 ASIN 列表
+            from db import ProductRepository, get_async_session
+            import asyncio
+            
+            async def get_asins():
+                session = await get_async_session()
+                repo = ProductRepository(session)
+                products = await repo.get_all_products(limit=10)
+                await session.close()
+                return [p.asin for p in products if hasattr(p, 'asin')]
+            
+            asins = asyncio.run(get_asins())
+            
+            if asins:
+                logger.info(f"找到 {len(asins)} 个 ASIN")
+                
+                # 运行批量预测
+                results = pipeline.run_batch(asins[:3])  # 限制为前 3 个
+                
+                # 生成摘要报告
+                report = pipeline.get_summary_report(results)
+                
+                # 保存报告
+                report_path = Path(args.output) / "pipeline_summary.md"
+                report_path.parent.mkdir(parents=True, exist_ok=True)
+                
+                with open(report_path, 'w') as f:
+                    f.write(report)
+                
+                logger.info(f"\n✅ 预测管道完成")
+                logger.info(f"   报告已保存：{report_path}")
+                logger.info(f"   结果目录：{args.output}")
+            else:
+                logger.warning("未找到 ASIN，跳过预测管道")
+        
+        except Exception as e:
+            logger.error(f"预测管道失败：{e}", exc_info=True)
 
 
 if __name__ == "__main__":
