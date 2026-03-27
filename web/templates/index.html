@@ -20,6 +20,22 @@
         }
         header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
         header p { font-size: 1.1em; opacity: 0.9; }
+        .nav {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: 2px solid white;
+            border-radius: 8px;
+            transition: background 0.2s;
+            font-weight: bold;
+        }
+        .nav a:hover { background: rgba(255,255,255,0.2); }
+        .nav a.active { background: rgba(255,255,255,0.3); }
         .card {
             background: white;
             border-radius: 12px;
@@ -300,6 +316,12 @@
             <p>Amazon 数据采集 → 趋势分析 → Top20 潜力商品</p>
         </header>
 
+        <div class="nav">
+            <a href="/" class="active">🏠 首页</a>
+            <a href="/charts">📊 可视化</a>
+            <a href="/api/results">📄 API 文档</a>
+        </div>
+
         <div class="card">
             <h2>🎯 开始选品</h2>
             <div class="controls">
@@ -464,11 +486,26 @@
                 else if (score < 40) { badgeClass = 'badge-slow'; badgeText = '⚠️ 增长放缓'; }
 
                 // 评分标准说明 (支持扁平结构和嵌套结构)
+                const metrics = product.metrics || {};
                 const scoreExplain = {
-                    sales: (product.sales_growth !== undefined ? product.sales_growth : product.metrics?.sales_growth || 0).toFixed(1),
-                    review: (product.review_growth !== undefined ? product.review_growth : product.metrics?.review_growth || 0).toFixed(1),
-                    bsr: (product.bsr_improvement !== undefined ? product.bsr_improvement : product.metrics?.bsr_improvement || 0).toFixed(1)
+                    sales: (product.sales_growth !== undefined ? product.sales_growth : metrics.sales_growth || 0).toFixed(1),
+                    review: (product.review_growth !== undefined ? product.review_growth : metrics.review_growth || 0).toFixed(1),
+                    bsr: (product.bsr_improvement !== undefined ? product.bsr_improvement : metrics.bsr_improvement || 0).toFixed(1)
                 };
+                
+                // 增强指标 (v2.1)
+                const enhancedMetrics = {
+                    profit_margin: (metrics.profit_margin || 0).toFixed(1),
+                    market_saturation: (metrics.market_saturation || 0).toFixed(1),
+                    growth_sustainability: (metrics.growth_sustainability || 0).toFixed(1),
+                    risk_score: (metrics.risk_score || 0).toFixed(1)
+                };
+                
+                // 置信度
+                const confidence = (product.confidence || 0).toFixed(2);
+                
+                // 30 天预测
+                const forecast = product.forecast_30d || null;
 
                 // 商品链接
                 const productUrl = product.link || `https://www.amazon.com/dp/${product.asin}`;
@@ -521,42 +558,42 @@
                         <div class="enhanced-metrics">
                             <div class="metric-row">
                                 <span class="metric-label">💰 利润率估算</span>
-                                <span class="metric-value">${(product.metrics?.profit_margin || 0).toFixed(1)}/100</span>
+                                <span class="metric-value">${enhancedMetrics.profit_margin}/100</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">📊 市场饱和度</span>
-                                <span class="metric-value">${(product.metrics?.market_saturation || 0).toFixed(1)}/100</span>
+                                <span class="metric-value">${enhancedMetrics.market_saturation}/100 <span style="opacity:0.7">(越高越不饱和)</span></span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">📈 增长持续性</span>
-                                <span class="metric-value">${(product.metrics?.growth_sustainability || 0).toFixed(1)}/100</span>
+                                <span class="metric-value">${enhancedMetrics.growth_sustainability}/100</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">⚠️ 风险评分</span>
-                                <span class="metric-value">${(product.metrics?.risk_score || 0).toFixed(1)}/100</span>
+                                <span class="metric-value">${enhancedMetrics.risk_score}/100 <span style="opacity:0.7">(越低越好)</span></span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">✅ 置信度</span>
-                                <span class="metric-value">${(product.confidence || 0).toFixed(2)}</span>
+                                <span class="metric-value">${confidence}</span>
                             </div>
                             
-                            ${product.forecast_30d ? `
+                            ${forecast ? `
                             <div class="forecast-box">
                                 <div style="margin-bottom: 8px; font-weight: bold; opacity: 0.9;">🔮 30 天预测</div>
                                 <div class="forecast-row">
                                     <span>预测评分:</span>
-                                    <span>${product.forecast_30d.score || 'N/A'}</span>
+                                    <span>${forecast.score || 'N/A'}</span>
                                 </div>
                                 <div class="forecast-row">
                                     <span>趋势:</span>
-                                    <span>${product.forecast_30d.trend || 'N/A'}</span>
+                                    <span>${forecast.trend || 'N/A'}</span>
                                 </div>
                                 <div class="forecast-row">
                                     <span>置信区间:</span>
-                                    <span>[${(product.forecast_30d.confidence_interval?.low || 0).toFixed(1)}, ${(product.forecast_30d.confidence_interval?.high || 0).toFixed(1)}]</span>
+                                    <span>[${(forecast.confidence_interval?.low || 0).toFixed(1)}, ${(forecast.confidence_interval?.high || 0).toFixed(1)}]</span>
                                 </div>
                             </div>
-                            ` : ''}
+                            ` : '<div style="margin-top: 12px; opacity: 0.7; font-size: 0.85em;">📊 运行工作流以生成预测数据</div>'}
                         </div>
                     </div>
                 `;

@@ -1,0 +1,594 @@
+[
+  {
+    "asin": "B0DGV4T6BK",
+    "title": "Jemluse Wireless CarPlay Adapter for Apple iPhone - Multi-User Seamless Connection for Convert Wired to Wireless Car Play Adapter - No Latency from iOS 10+ to Screen w/USB C (Gray)",
+    "price": {
+      "symbol": "$",
+      "value": 28.49
+    },
+    "rating": 4.4,
+    "ratings_total": 9532,
+    "is_prime": false,
+    "is_amazon_choice": false,
+    "is_best_seller": false,
+    "collected_at": "2026-03-27T03:42:01.667983",
+    "metrics": {
+      "sales_growth": 50,
+      "review_growth": 63.54666666666667,
+      "bsr_improvement": 30,
+      "profit_margin": 64.99999999999999,
+      "market_saturation": 60,
+      "growth_sustainability": 82.0,
+      "risk_score": 0
+    },
+    "trend_score": 51.81,
+    "trend_label": "➡️ 稳定发展",
+    "confidence": 1.0,
+    "forecast_30d": {
+      "score": 54.32,
+      "change": 2.51,
+      "trend": "微升 ↗️",
+      "confidence_interval": {
+        "low": 49.32,
+        "high": 59.32
+      }
+    },
+    "risk_level": "🟢 极低风险",
+    "rank": 1
+  },
+  {
+    "asin": "B0DGJ7HYG1",
+    "title": "Apple AirPods 4 Wireless Earbuds, Bluetooth Headphones, with Active Noise Cancellation, Adaptive, Transparency Mode, Personalized Spatial Audio, USB-C Charging Case, Wireless Charging, H2 Chip",
+    "price": {
+      "symbol": "$",
+      "value": 148.99
+    },
+    "rating": 4.5,
+    "ratings_total": 45170,
+    "is_prime": false,
+    "is_amazon_choice": false,
+    "is_best_seller": false,
+    "collected_at": "2026-03-27T03:42:01.667990",
+    "metrics": {
+      "sales_growth": 30,
+      "review_growth": 100,
+      "bsr_improvement": 30,
+      "profit_margin": 64.99999999999999,
+      "market_saturation": 32.0,
+      "growth_sustainability": 76.0,
+      "risk_score": 0
+    },
+    "trend_score": 50.0,
+    "trend_label": "➡️ 稳定发展",
+    "confidence": 0.9,
+    "forecast_30d": {
+      "score": 52.52,
+      "change": 2.52,
+      "trend": "微升 ↗️",
+      "confidence_interval": {
+        "low": 47.52,
+        "high": 57.52
+      }
+    },
+    "risk_level": "🟢 极低风险",
+    "rank": 2
+  },
+  {
+    "asin": "B087Z5WDJ2",
+    "title": "Logitech M510 Wireless Mouse, 2.4 GHz with USB Unifying Receiver, 1000 DPI Laser-Grade Tracking, 7-Buttons, 24-Months Battery Life, PC/Mac/Laptop - Graphite",
+    "price": {
+      "symbol": "$",
+      "value": 27.99
+    },
+    "rating": 4.6,
+    "ratings_total": 34641,
+    "is_prime": false,
+    "is_amazon_choice": false,
+    "is_best_seller": false,
+    "collected_at": "2026-03-27T03:42:01.667992",
+    "metrics": {
+      "sales_growth": 30,
+      "review_growth": 100,
+      "bsr_improvement": 30,
+      "profit_margin": 64.99999999999999,
+      "market_saturation": 32.0,
+      "growth_sustainability": 76.0,
+      "risk_score": 0
+    },
+    "trend_score": 50.0,
+    "trend_label": "➡️ 稳定发展",
+    "confidence": 0.9,
+    "forecast_30d": {
+      "score": 52.52,
+      "change": 2.52,
+      "trend": "微升 ↗️",
+      "confidence_interval": {
+        "low": 47.52,
+        "high": 57.52
+      }
+    },
+    "risk_level": "🟢 极低风险",
+    "rank": 3
+  },
+  {
+    "asin": "B07CMS5Q6P",
+    "title": "Logitech G305 Lightspeed Wireless Gaming Mouse, Hero Sensor, 12,000 DPI, Lightweight, 6 Programmable Buttons, 250h Battery, On-Board Memory, Compatible with PC, Mac - Black",
+    "price": {
+      "symbol": "$",
+      "value": 26.99
+    },
+    "rating": 4.6,
+    "ratings_total": 37710,
+    "is_prime": false,
+    "is_amazon_choice": false,
+    "is_best_seller": false,
+    "collected_at": "2026-03-27T03:42:01.667996",
+    "metrics": {
+      "sales_growth": 30,
+      "review_growth": 100,
+      "bsr_improvement": 30,
+      "profit_margin": 64.99999999999999,
+      "market_saturation": 32.0,
+      "growth_sustainability": 76.0,
+      "risk_score": 0
+    },
+    "trend_score": 50.0,
+    "trend_label": "➡️ 稳定发展",
+    "confidence": 0.9,
+    "forecast_30d": {
+      "score": 52.52,
+      "change": 2.52,
+      "trend": "微升 ↗️",
+      "confidence_interval": {
+        "low": 47.52,
+        "high": 57.52
+      }
+    },
+    "risk_level": "🟢 极低风险",
+    "rank": 4
+  },
+  {
+    "asin": "B0BS1RT9S2",
+    "title": "Sony WH-CH520 Wireless Headphones Bluetooth On-Ear Headset with Microphone and up to 50 Hours Battery Life with Quick Charging, Blue",
+    "price": {
+      "symbol": "$",
+      "value": 48.0
+    },
+    "rating": 4.5,
+    "ratings_total": 30836,
+    "is_prime": false,
+    "is_amazon_choice": false,
+    "is_best_seller": false,
+    "collected_at": "2026-03-27T03:42:01.668007",
+    "metrics": {
+      "sales_growth": 30,
+      "review_growth": 100,
+      "bsr_improvement": 30,
+      "profit_margin": 64.99999999999999,
+      "market_saturation": 32.0,
+      "growth_sustainability": 76.0,
+      "risk_score": 0
+    },
+    "trend_score": 50.0,
+    "trend_label": "➡️ 稳定发展",
+    "confidence": 0.9,
+    "forecast_30d": {
+      "score": 52.52,
+      "change": 2.52,
+      "trend": "微升 ↗️",
+      "confidence_interval": {
+        "low": 47.52,
+        "high": 57.52
+      }
+    },
+    "risk_level": "🟢 极低风险",
+    "rank": 5
+  },
+  {
+    "asin": "B0BQPNMXQV",
+    "title": "JBL Vibe Beam - True Wireless JBL Deep Bass Sound Earbuds, Bluetooth 5.2, Water & Dust Resistant, Hands-Free Call with VoiceAware, Up to 32 Hours of Battery Life (Black)",
+    "price": {
+      "symbol": "$",
+      "value": 29.94
+    },
+    "rating": 4.3,
+    "ratings_total": 36211,
+    "is_prime": false,
+    "is_amazon_choice": false,
+    "is_best_seller": false,
+    "collected_at": "2026-03-27T03:42:01.667966",
+    "metrics": {
+      "sales_growth": 30,
+      "review_growth": 100,
+      "bsr_improvement": 30,
+      "profit_margin": 64.99999999999999,
+      "market_saturation": 40,
+      "growth_sustainability": 58.0,
+      "risk_score": 0
+    },
+    "trend_score": 49.9,
+    "trend_label": "➡️ 稳定发展",
+    "confidence": 0.9,
+    "forecast_30d": {
+      "score": 52.42,
+      "change": 2.52,
+      "trend": "微升 ↗️",
+      "confidence_interval": {
+        "low": 47.42,
+        "high": 57.42
+      }
+    },
+    "risk_level": "🟢 极低风险",
+    "rank": 6
+  },
+  {
+    "asin": "B004YAVF8I",
+    "title": "Logitech M185 Wireless Mouse, 2.4GHz with USB Mini Receiver, 12-Month Battery Life, 1000 DPI Optical Tracking, Ambidextrous PC/Mac/Laptop - Swift Grey",
+    "price": {
+      "symbol": "$",
+      "value": 12.99
+    },
+    "rating": 4.5,
+    "ratings_total": 41042,
+    "is_prime": false,
+    "is_amazon_choice": false,
+    "is_best_seller": false,
+    "collected_at": "2026-03-27T03:42:01.667980",
+    "metrics": {
+      "sales_growth": 30,
+      "review_growth": 100,
+      "bsr_improvement": 30,
+      "profit_margin": 60.0,
+      "market_saturation": 32.0,
+      "growth_sustainability": 76.0,
+      "risk_score": 0
+    },
+    "trend_score": 49.25,
+    "trend_label": "➡️ 稳定发展",
+    "confidence": 0.9,
+    "forecast_30d": {
+      "score": 51.77,
+      "change": 2.52,
+      "trend": "微升 ↗️",
+      "confidence_interval": {
+        "low": 46.77,
+        "high": 56.77
+      }
+    },
+    "risk_level": "🟢 极低风险",
+    "rank": 7
+  },
+  {
+    "asin": "B089KV4YYX",
+    "title": "Logitech MK295 Wireless Mouse & Keyboard Combo with SilentTouch Technology, Full Numpad, Advanced Optical Tracking, Lag-Free Wireless, 90% Less Noise - Graphite",
+    "price": {
+      "symbol": "$",
+      "value": 32.95
+    },
+    "rating": 4.4,
+    "ratings_total": 13639,
+    "is_prime": false,
+    "is_amazon_choice": false,
+    "is_best_seller": false,
+    "collected_at": "2026-03-27T03:42:01.667999",
+    "metrics": {
+      "sales_growth": 30,
+      "review_growth": 90.92666666666666,
+      "bsr_improvement": 30,
+      "profit_margin": 64.99999999999999,
+      "market_saturation": 40,
+      "growth_sustainability": 58.0,
+      "risk_score": 0
+    },
+    "trend_score": 48.09,
+    "trend_label": "➡️ 稳定发展",
+    "confidence": 0.9,
+    "forecast_30d": {
+      "score": 50.47,
+      "change": 2.38,
+      "trend": "微升 ↗️",
+      "confidence_interval": {
+        "low": 45.47,
+        "high": 55.47
+      }
+    },
+    "risk_level": "🟢 极低风险",
+    "rank": 8
+  },
+  {
+    "asin": "B0F5HPCLGB",
+    "title": "acer Wireless Mouse for Laptop, 2.4GHz Computer Mouse 3 Adjustable DPI Office Cordless USB Mice with USBA Receiver, 6 Buttons, 1600 DPI, Medium to Large Sized Hands Compatible with PC, Laptop, Desktop",
+    "price": {
+      "symbol": "$",
+      "value": 9.47
+    },
+    "rating": 4.5,
+    "ratings_total": 4211,
+    "is_prime": false,
+    "is_amazon_choice": false,
+    "is_best_seller": false,
+    "collected_at": "2026-03-27T03:42:01.668005",
+    "metrics": {
+      "sales_growth": 50,
+      "review_growth": 42.11,
+      "bsr_improvement": 30,
+      "profit_margin": 50.0,
+      "market_saturation": 75,
+      "growth_sustainability": 100,
+      "risk_score": 0
+    },
+    "trend_score": 47.67,
+    "trend_label": "➡️ 稳定发展",
+    "confidence": 1.0,
+    "forecast_30d": {
+      "score": 50.15,
+      "change": 2.48,
+      "trend": "微升 ↗️",
+      "confidence_interval": {
+        "low": 45.15,
+        "high": 55.15
+      }
+    },
+    "risk_level": "🟢 极低风险",
+    "rank": 9
+  },
+  {
+    "asin": "B079JLY5M5",
+    "title": "Logitech MK270 Wireless Keyboard and Mouse Combo for Windows, 2.4 GHz Wireless, Compact Mouse, 8 Multimedia and Shortcut Keys, 2-Year Battery Life, for PC, Laptop - Black",
+    "price": {
+      "symbol": "$",
+      "value": 24.99
+    },
+    "rating": 4.5,
+    "ratings_total": 107831,
+    "is_prime": false,
+    "is_amazon_choice": false,
+    "is_best_seller": false,
+    "collected_at": "2026-03-27T03:42:01.667977",
+    "metrics": {
+      "sales_growth": 30,
+      "review_growth": 100,
+      "bsr_improvement": 30,
+      "profit_margin": 60.0,
+      "market_saturation": 16.0,
+      "growth_sustainability": 76.0,
+      "risk_score": 0
+    },
+    "trend_score": 47.65,
+    "trend_label": "➡️ 稳定发展",
+    "confidence": 0.9,
+    "forecast_30d": {
+      "score": 50.17,
+      "change": 2.52,
+      "trend": "微升 ↗️",
+      "confidence_interval": {
+        "low": 45.17,
+        "high": 55.17
+      }
+    },
+    "risk_level": "🟢 极低风险",
+    "rank": 10
+  },
+  {
+    "asin": "B0FHWK3W1S",
+    "title": "Anker Prime 3-in-1 Wireless Charging Station, MagSafe Charger Stand Compatible, Qi2 25W Certified Palm-Sized Foldable Charger for iPhone 17/16, Apple Watch, AirPods (Non-Battery, Adapter Included)",
+    "price": {
+      "symbol": "$",
+      "value": 104.99
+    },
+    "rating": 4.6,
+    "ratings_total": 130,
+    "is_prime": false,
+    "is_amazon_choice": false,
+    "is_best_seller": false,
+    "collected_at": "2026-03-27T03:42:01.668009",
+    "metrics": {
+      "sales_growth": 70,
+      "review_growth": 1.3,
+      "bsr_improvement": 30,
+      "profit_margin": 64.99999999999999,
+      "market_saturation": 90,
+      "growth_sustainability": 76.0,
+      "risk_score": 20
+    },
+    "trend_score": 47.06,
+    "trend_label": "➡️ 稳定发展",
+    "confidence": 0.72,
+    "forecast_30d": {
+      "score": 48.53,
+      "change": 1.47,
+      "trend": "微升 ↗️",
+      "confidence_interval": {
+        "low": 43.53,
+        "high": 53.53
+      }
+    },
+    "risk_level": "🟢 低风险",
+    "rank": 11
+  },
+  {
+    "asin": "B015NBTAOW",
+    "title": "TECKNET Wireless Mouse, 2.4G Ergonomic Optical Mouse, Computer Mouse for Laptop, PC, Computer, Chromebook, Notebook, 6 Buttons, 24 Months Battery Life, 2600 DPI, 5 Adjustment Levels - Purple",
+    "price": {
+      "symbol": "$",
+      "value": 9.99
+    },
+    "rating": 4.5,
+    "ratings_total": 76817,
+    "is_prime": false,
+    "is_amazon_choice": false,
+    "is_best_seller": false,
+    "collected_at": "2026-03-27T03:42:01.667985",
+    "metrics": {
+      "sales_growth": 30,
+      "review_growth": 100,
+      "bsr_improvement": 30,
+      "profit_margin": 50.0,
+      "market_saturation": 16.0,
+      "growth_sustainability": 76.0,
+      "risk_score": 0
+    },
+    "trend_score": 46.15,
+    "trend_label": "➡️ 稳定发展",
+    "confidence": 0.9,
+    "forecast_30d": {
+      "score": 48.67,
+      "change": 2.52,
+      "trend": "微升 ↗️",
+      "confidence_interval": {
+        "low": 43.67,
+        "high": 53.67
+      }
+    },
+    "risk_level": "🟢 极低风险",
+    "rank": 12
+  },
+  {
+    "asin": "B0FBGG142J",
+    "title": "OEAK Womens Wireless Jelly Bra Plus Size Supportive Seamless Bras Full Coverage Push Up Comfortable No Underwire Tshirt Bras",
+    "price": {
+      "symbol": "$",
+      "value": 18.99
+    },
+    "rating": 4.1,
+    "ratings_total": 4326,
+    "is_prime": false,
+    "is_amazon_choice": false,
+    "is_best_seller": false,
+    "collected_at": "2026-03-27T03:42:01.668011",
+    "metrics": {
+      "sales_growth": 50,
+      "review_growth": 28.84,
+      "bsr_improvement": 30,
+      "profit_margin": 60.0,
+      "market_saturation": 75,
+      "growth_sustainability": 70.0,
+      "risk_score": 0
+    },
+    "trend_score": 45.02,
+    "trend_label": "➡️ 稳定发展",
+    "confidence": 1.0,
+    "forecast_30d": {
+      "score": 47.22,
+      "change": 2.2,
+      "trend": "微升 ↗️",
+      "confidence_interval": {
+        "low": 42.22,
+        "high": 52.22
+      }
+    },
+    "risk_level": "🟢 极低风险",
+    "rank": 13
+  },
+  {
+    "asin": "B08R8DT7X6",
+    "title": "Logitech G435 Lightspeed & Bluetooth Wireless Gaming Headset - Lightweight Over-Ear Headphones, Built-in mics, 18h Battery, Dolby Atmos, PC, PS4, PS5, Nintendo Switch/Switch 2, Mobile - Black",
+    "price": {
+      "symbol": "$",
+      "value": 39.99
+    },
+    "rating": 4.2,
+    "ratings_total": 10809,
+    "is_prime": false,
+    "is_amazon_choice": false,
+    "is_best_seller": false,
+    "collected_at": "2026-03-27T03:42:01.668002",
+    "metrics": {
+      "sales_growth": 30,
+      "review_growth": 72.06,
+      "bsr_improvement": 30,
+      "profit_margin": 64.99999999999999,
+      "market_saturation": 40,
+      "growth_sustainability": 58.0,
+      "risk_score": 0
+    },
+    "trend_score": 44.31,
+    "trend_label": "➡️ 稳定发展",
+    "confidence": 1.0,
+    "forecast_30d": {
+      "score": 46.62,
+      "change": 2.31,
+      "trend": "微升 ↗️",
+      "confidence_interval": {
+        "low": 41.62,
+        "high": 51.62
+      }
+    },
+    "risk_level": "🟢 极低风险",
+    "rank": 14
+  },
+  {
+    "asin": "B0G6CNF8RM",
+    "title": "Wireless Earbuds, Sports Bluetooth Headphones, 80Hrs Playtime Ear Buds with LED Power Display, Noise Canceling Headset, IPX7 Waterproof Earphones for Workout/Running（Rose Gold）",
+    "price": {
+      "symbol": "$",
+      "value": 22.79
+    },
+    "rating": 4.5,
+    "ratings_total": 1450,
+    "is_prime": false,
+    "is_amazon_choice": false,
+    "is_best_seller": false,
+    "collected_at": "2026-03-27T03:42:01.667988",
+    "metrics": {
+      "sales_growth": 50,
+      "review_growth": 14.5,
+      "bsr_improvement": 30,
+      "profit_margin": 60.0,
+      "market_saturation": 75,
+      "growth_sustainability": 88.0,
+      "risk_score": 0
+    },
+    "trend_score": 43.05,
+    "trend_label": "➡️ 稳定发展",
+    "confidence": 0.9,
+    "forecast_30d": {
+      "score": 44.76,
+      "change": 1.71,
+      "trend": "微升 ↗️",
+      "confidence_interval": {
+        "low": 39.76,
+        "high": 49.76
+      }
+    },
+    "risk_level": "🟢 极低风险",
+    "rank": 15
+  },
+  {
+    "asin": "B0CRKS96NS",
+    "title": "JOYO Wireless Guitar System 5.8GHz Wireless Guitar Transmitter Receiver with Charging Box 4 Signal Channel for Guitar Bass Electric Instruments (JW-06)",
+    "price": {
+      "symbol": "$",
+      "value": 55.99
+    },
+    "rating": 4.3,
+    "ratings_total": 1186,
+    "is_prime": false,
+    "is_amazon_choice": false,
+    "is_best_seller": false,
+    "collected_at": "2026-03-27T03:42:01.667994",
+    "metrics": {
+      "sales_growth": 50,
+      "review_growth": 7.906666666666666,
+      "bsr_improvement": 30,
+      "profit_margin": 70.0,
+      "market_saturation": 75,
+      "growth_sustainability": 58.0,
+      "risk_score": 0
+    },
+    "trend_score": 41.73,
+    "trend_label": "➡️ 稳定发展",
+    "confidence": 0.9,
+    "forecast_30d": {
+      "score": 43.31,
+      "change": 1.58,
+      "trend": "微升 ↗️",
+      "confidence_interval": {
+        "low": 38.31,
+        "high": 48.31
+      }
+    },
+    "risk_level": "🟢 极低风险",
+    "rank": 16
+  }
+]

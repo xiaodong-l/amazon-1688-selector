@@ -146,12 +146,31 @@
                 // 获取图表文件列表
                 const response = await fetch('/api/charts');
                 const data = await response.json();
+                console.log('图表数据:', data);
 
-                if (data.success && data.charts && data.charts.length > 0) {
-                    renderCharts(data.charts);
-                    document.getElementById('chartCount').textContent = data.charts.length;
+                if (data.success) {
+                    // 即使没有图表也显示提示
+                    if (data.charts && data.charts.length > 0) {
+                        renderCharts(data.charts);
+                        document.getElementById('chartCount').textContent = data.charts.length;
+                    } else {
+                        document.getElementById('chartCount').textContent = '0';
+                        document.getElementById('noData').innerHTML = `
+                            <h3>😕 暂无图表数据</h3>
+                            <p>请先运行选品工作流生成图表</p>
+                            <p style="margin-top: 15px; font-size: 0.9em; color: #aaa;">
+                                提示：运行完整工作流后，图表会自动保存在<br>
+                                <code style="background: #f0f0f0; padding: 5px 10px; border-radius: 4px;">data/charts/</code> 目录
+                            </p>
+                        `;
+                        document.getElementById('noData').style.display = 'block';
+                        document.getElementById('loading').style.display = 'none';
+                        return;
+                    }
+                    
                     document.getElementById('productCount').textContent = data.product_count || 20;
-                    document.getElementById('updateTime').textContent = new Date(data.last_update).toLocaleDateString();
+                    document.getElementById('updateTime').textContent = data.last_update ? 
+                        new Date(data.last_update).toLocaleDateString() : '-';
                     
                     document.getElementById('loading').style.display = 'none';
                     document.getElementById('chartGrid').style.display = 'grid';
@@ -161,7 +180,7 @@
                 }
             } catch (error) {
                 console.error('加载图表失败:', error);
-                document.getElementById('loading').innerHTML = '<p>❌ 加载失败，请刷新页面</p>';
+                document.getElementById('loading').innerHTML = `<p>❌ 加载失败：${error.message}</p>`;
             }
         }
 
