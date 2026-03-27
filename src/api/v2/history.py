@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from src.db.connection import get_db_session
+from src.db.connection import get_async_db_session
 from src.db.repositories import HistoryRepository, ProductRepository
 from src.db.models import History
 
@@ -31,6 +31,8 @@ class HistoryCreate(BaseModel):
     recorded_at: Optional[datetime] = Field(None, description="Recording timestamp")
 
 
+from datetime import datetime
+
 class HistoryResponse(BaseModel):
     """Schema for history response."""
     id: int
@@ -39,8 +41,8 @@ class HistoryResponse(BaseModel):
     rating: Optional[float]
     review_count: int
     bsr: Optional[int]
-    recorded_at: str
-    created_at: str
+    recorded_at: datetime
+    created_at: datetime
     
     class Config:
         from_attributes = True
@@ -74,81 +76,45 @@ class HistoryListResponse(BaseModel):
 # ==================== API Endpoints ====================
 
 @history_router.post("", response_model=HistoryResponse, status_code=201)
-def create_history_record(history: HistoryCreate):
+async def create_history_record(history: HistoryCreate):
     """
     Create a new history record.
     
     Records current state of a product for historical tracking.
     """
-    with get_db_session() as session:
+    async with get_async_db_session() as session:
         repo = HistoryRepository(session)
         
         # Verify product exists
         product_repo = ProductRepository(session)
-        product = product_repo.get_by_asin(history.asin)
+        product = await product_repo.get_by_asin(history.asin)
         if not product:
             raise HTTPException(
                 status_code=404,
                 detail=f"Product with ASIN {history.asin} not found",
             )
         
-        created = repo.create(history.model_dump())
+        created = await repo.create(history.model_dump())
         return HistoryResponse.model_validate(created)
 
 
-@history_router.get("/{asin}", response_model=HistoryListResponse)
-def get_history(
-    asin: str,
-    start_date: Optional[datetime] = Query(None, description="Start date filter"),
-    end_date: Optional[datetime] = Query(None, description="End date filter"),
-    limit: int = Query(default=100, ge=1, le=500, description="Max results"),
-):
-    """
-    Get history records for a product.
-    
-    Returns historical data points for the specified ASIN.
-    """
-    with get_db_session() as session:
-        repo = HistoryRepository(session)
-        
-        # Verify product exists
-        product_repo = ProductRepository(session)
-        product = product_repo.get_by_asin(asin)
-        if not product:
-            raise HTTPException(status_code=404, detail=f"Product with ASIN {asin} not found")
-        
-        records = repo.get_by_asin(
-            asin=asin,
-            start_date=start_date,
-            end_date=end_date,
-            limit=limit,
-        )
-        
-        return HistoryListResponse(
-            items=[HistoryResponse.model_validate(r) for r in records],
-            asin=asin,
-            total=len(records),
-            limit=limit,
-        )
-
-
 @history_router.get("/{asin}/latest", response_model=HistoryResponse)
-def get_latest_history(asin: str):
+async def get_latest_history(asin: str):
     """
     Get most recent history record for a product.
     
     Returns the latest recorded state.
     """
-    with get_db_session() as session:
+    async with get_async_db_session() as session:
         repo = HistoryRepository(session)
         
         # Verify product exists
         product_repo = ProductRepository(session)
-        product = product_repo.get_by_asin(asin)
+        product = await product_repo.get_by_asin(asin)
         if not product:
             raise HTTPException(status_code=404, detail=f"Product with ASIN {asin} not found")
         
-        latest = repo.get_latest(asin)
+        latest = await repo.get_latest(asin)
         
         if not latest:
             raise HTTPException(
@@ -160,7 +126,7 @@ def get_latest_history(asin: str):
 
 
 @history_router.get("/{asin}/price-history", response_model=List[PricePoint])
-def get_price_history(
+async def get_price_history(
     asin: str,
     days: int = Query(default=30, ge=1, le=365, description="Number of days"),
 ):
@@ -169,20 +135,20 @@ def get_price_history(
     
     Returns time-series price data for trend analysis.
     """
-    with get_db_session() as session:
+    async with get_async_db_session() as session:
         repo = HistoryRepository(session)
         
         # Verify product exists
         product_repo = ProductRepository(session)
-        product = product_repo.get_by_asin(asin)
+        product = await product_repo.get_by_asin(asin)
         if not product:
             raise HTTPException(status_code=404, detail=f"Product with ASIN {asin} not found")
         
-        return repo.get_price_history(asin=asin, days=days)
+        return await repo.get_price_history(asin=asin, days=days)
 
 
 @history_router.get("/{asin}/comparison", response_model=HistoryComparison)
-def get_comparison(
+async def get_comparison(
     asin: str,
     days: int = Query(default=7, ge=1, le=90, description="Days to compare"),
 ):
@@ -191,16 +157,16 @@ def get_comparison(
     
     Returns comparison between latest and historical data.
     """
-    with get_db_session() as session:
+    async with get_async_db_session() as session:
         repo = HistoryRepository(session)
         
         # Verify product exists
         product_repo = ProductRepository(session)
-        product = product_repo.get_by_asin(asin)
+        product = await product_repo.get_by_asin(asin)
         if not product:
             raise HTTPException(status_code=404, detail=f"Product with ASIN {asin} not found")
         
-        comparison = repo.get_comparison(asin=asin, days=days)
+        comparison = await repo.get_comparison(asin=asin, days=days)
         
         # Calculate changes
         current = comparison.get('current')
@@ -234,27 +200,27 @@ def get_comparison(
 
 
 @history_router.delete("/{asin}", status_code=204)
-def delete_history(asin: str):
+async def delete_history(asin: str):
     """
     Delete all history records for a product.
     
     Removes historical data but keeps the product.
     """
-    with get_db_session() as session:
+    async with get_async_db_session() as session:
         repo = HistoryRepository(session)
         
         # Verify product exists
         product_repo = ProductRepository(session)
-        product = product_repo.get_by_asin(asin)
+        product = await product_repo.get_by_asin(asin)
         if not product:
             raise HTTPException(status_code=404, detail=f"Product with ASIN {asin} not found")
         
-        repo.delete_by_asin(asin)
+        await repo.delete_by_asin(asin)
         return None
 
 
 @history_router.post("/cleanup", response_model=Dict[str, Any])
-def cleanup_old_records(
+async def cleanup_old_records(
     days: int = Query(default=90, ge=1, le=365, description="Keep records newer than this"),
 ):
     """
@@ -262,10 +228,10 @@ def cleanup_old_records(
     
     Removes records older than specified days.
     """
-    with get_db_session() as session:
+    async with get_async_db_session() as session:
         repo = HistoryRepository(session)
         
-        deleted_count = repo.delete_old_records(days=days)
+        deleted_count = await repo.delete_old_records(days=days)
         
         return {
             "deleted_count": deleted_count,
@@ -274,24 +240,60 @@ def cleanup_old_records(
 
 
 @history_router.get("/{asin}/count")
-def get_history_count(asin: str):
+async def get_history_count(asin: str):
     """
     Get count of history records for a product.
     
     Returns number of recorded data points.
     """
-    with get_db_session() as session:
+    async with get_async_db_session() as session:
         repo = HistoryRepository(session)
         
         # Verify product exists
         product_repo = ProductRepository(session)
-        product = product_repo.get_by_asin(asin)
+        product = await product_repo.get_by_asin(asin)
         if not product:
             raise HTTPException(status_code=404, detail=f"Product with ASIN {asin} not found")
         
-        count = repo.count_by_asin(asin)
+        count = await repo.count_by_asin(asin)
         
         return {
             "asin": asin,
             "record_count": count,
         }
+
+
+@history_router.get("/{asin}", response_model=HistoryListResponse)
+async def get_history(
+    asin: str,
+    start_date: Optional[datetime] = Query(None, description="Start date filter"),
+    end_date: Optional[datetime] = Query(None, description="End date filter"),
+    limit: int = Query(default=100, ge=1, le=500, description="Max results"),
+):
+    """
+    Get history records for a product.
+    
+    Returns historical data points for the specified ASIN.
+    """
+    async with get_async_db_session() as session:
+        repo = HistoryRepository(session)
+        
+        # Verify product exists
+        product_repo = ProductRepository(session)
+        product = await product_repo.get_by_asin(asin)
+        if not product:
+            raise HTTPException(status_code=404, detail=f"Product with ASIN {asin} not found")
+        
+        records = await repo.get_by_asin(
+            asin=asin,
+            start_date=start_date,
+            end_date=end_date,
+            limit=limit,
+        )
+        
+        return HistoryListResponse(
+            items=[HistoryResponse.model_validate(r) for r in records],
+            asin=asin,
+            total=len(records),
+            limit=limit,
+        )

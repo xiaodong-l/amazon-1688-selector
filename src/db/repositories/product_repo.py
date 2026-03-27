@@ -192,6 +192,8 @@ class ProductRepository:
         page_size: int = 50,
         load_relations: bool = False,
         include_deleted: bool = False,
+        limit: Optional[int] = None,
+        offset: Optional[int] = None,
     ) -> List[Product]:
         """
         Get all products with pagination.
@@ -201,19 +203,26 @@ class ProductRepository:
             page_size: Number of items per page (default: 50)
             load_relations: Whether to load images and features (default: False)
             include_deleted: Include soft-deleted products (default: False)
+            limit: Direct limit override (optional)
+            offset: Direct offset override (optional)
             
         Returns:
             List of Product instances
         """
-        offset = (page - 1) * page_size
+        if limit is not None and offset is not None:
+            pg_offset = offset
+            pg_limit = limit
+        else:
+            pg_offset = (page - 1) * page_size
+            pg_limit = page_size
         
         if load_relations:
             stmt = select(Product).options(
                 selectinload(Product.images),
                 selectinload(Product.features),
-            ).offset(offset).limit(page_size)
+            ).offset(pg_offset).limit(pg_limit)
         else:
-            stmt = select(Product).offset(offset).limit(page_size)
+            stmt = select(Product).offset(pg_offset).limit(pg_limit)
         
         if not include_deleted:
             stmt = _soft_delete_filter(stmt, Product)
@@ -236,6 +245,21 @@ class ProductRepository:
             stmt = stmt.where(Product.is_deleted == False, Product.deleted_at.is_(None))
         result = await self.session.execute(stmt)
         return result.scalar()
+    
+    async def get_categories(self) -> List[str]:
+        """
+        Get all unique product categories.
+        
+        Returns:
+            List of unique category names
+        """
+        stmt = select(Product.category).where(
+            Product.category.isnot(None),
+            Product.is_deleted == False,
+            Product.deleted_at.is_(None),
+        ).distinct()
+        result = await self.session.execute(stmt)
+        return [cat for cat in result.scalars().all() if cat]
     
     async def update(
         self,
@@ -343,6 +367,46 @@ class ProductRepository:
         await self.session.commit()
         return True
     
+    async def get_top_products(
+        self,
+        by: str = 'rating',
+        limit: int = 20,
+        category: Optional[str] = None,
+    ) -> List[Product]:
+        """
+        Get top products sorted by specified field.
+        
+        Args:
+            by: Sort field (rating, review_count, price, created_at)
+            limit: Number of results (default: 20)
+            category: Filter by category (optional)
+            
+        Returns:
+            List of top Product instances
+        """
+        # Map sort field to column
+        sort_columns = {
+            'rating': Product.rating,
+            'review_count': Product.review_count,
+            'price': Product.price,
+            'created_at': Product.created_at,
+        }
+        
+        sort_column = sort_columns.get(by, Product.rating)
+        
+        stmt = select(Product).where(
+            Product.is_deleted == False,
+            Product.deleted_at.is_(None),
+        )
+        
+        if category:
+            stmt = stmt.where(Product.category == category)
+        
+        stmt = stmt.order_by(sort_column.desc()).limit(limit)
+        
+        result = await self.session.execute(stmt)
+        return list(result.scalars().all())
+    
     async def search(
         self,
         query: Optional[str] = None,
@@ -351,12 +415,15 @@ class ProductRepository:
         min_price: Optional[float] = None,
         max_price: Optional[float] = None,
         min_rating: Optional[float] = None,
+        min_reviews: Optional[int] = None,
         min_bsr: Optional[int] = None,
         max_bsr: Optional[int] = None,
         prime_eligible: Optional[bool] = None,
         page: int = 1,
         page_size: int = 50,
         include_deleted: bool = False,
+        limit: Optional[int] = None,
+        offset: Optional[int] = None,
     ) -> List[Product]:
         """
         Search products with various filters.
@@ -368,12 +435,15 @@ class ProductRepository:
             min_price: Minimum price filter (optional)
             max_price: Maximum price filter (optional)
             min_rating: Minimum rating filter (optional)
+            min_reviews: Minimum review count filter (optional)
             min_bsr: Minimum BSR filter (optional)
             max_bsr: Maximum BSR filter (optional)
             prime_eligible: Filter by Prime eligibility (optional)
             page: Page number (1-indexed, default: 1)
             page_size: Number of items per page (default: 50)
             include_deleted: Include soft-deleted products (default: False)
+            limit: Direct limit override (optional)
+            offset: Direct offset override (optional)
             
         Returns:
             List of matching Product instances
@@ -402,6 +472,10 @@ class ProductRepository:
         if min_rating is not None:
             conditions.append(Product.rating >= min_rating)
         
+        # Review count filter
+        if min_reviews is not None:
+            conditions.append(Product.review_count >= min_reviews)
+        
         # BSR range
         if min_bsr is not None:
             conditions.append(Product.bsr >= min_bsr)
@@ -424,8 +498,11 @@ class ProductRepository:
             stmt = stmt.where(and_(*conditions))
         
         # Pagination
-        offset = (page - 1) * page_size
-        stmt = stmt.offset(offset).limit(page_size)
+        if limit is not None and offset is not None:
+            stmt = stmt.offset(offset).limit(limit)
+        else:
+            pg_offset = (page - 1) * page_size
+            stmt = stmt.offset(pg_offset).limit(page_size)
         
         result = await self.session.execute(stmt)
         return list(result.scalars().all())

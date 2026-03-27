@@ -165,15 +165,15 @@ async def get_async_db_session() -> AsyncGenerator[AsyncSession, None]:
         async with get_async_db_session() as session:
             products = await session.execute(select(Product))
     """
-    async_session = await get_async_session()
-    try:
-        yield async_session
-        await async_session.commit()
-    except Exception:
-        await async_session.rollback()
-        raise
-    finally:
-        await async_session.close()
+    async with get_async_session() as async_session:
+        try:
+            yield async_session
+            await async_session.commit()
+        except Exception:
+            await async_session.rollback()
+            raise
+        finally:
+            await async_session.close()
 
 
 # Async Engine Functions (SQLAlchemy 2.0)

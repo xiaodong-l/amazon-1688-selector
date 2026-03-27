@@ -111,61 +111,12 @@ async def async_history_repo(async_db_session) -> HistoryRepository:
     return HistoryRepository(async_db_session)
 
 
-# ==================== Sync Database Fixtures (Legacy Support) ====================
-
-@pytest.fixture(scope="session")
-def test_engine():
-    """
-    Create in-memory SQLite database engine for testing (synchronous).
-    
-    Returns:
-        SQLAlchemy engine instance
-    """
-    engine = create_engine(
-        TEST_SYNC_DATABASE_URL,
-        connect_args={"check_same_thread": False},
-        poolclass=StaticPool,
-        echo=False,
-    )
-    
-    # Create all tables
-    Base.metadata.create_all(bind=engine)
-    
-    yield engine
-    
-    # Cleanup
-    Base.metadata.drop_all(bind=engine)
-    engine.dispose()
+# Note: Sync database fixtures removed - all tests now use async fixtures
+# TEST_SYNC_DATABASE_URL kept for backward compatibility if needed
 
 
-@pytest.fixture
-def db_session(test_engine) -> Generator[Session, None, None]:
-    """
-    Create a new database session for each test (synchronous).
-    
-    Yields:
-        SQLAlchemy session instance
-    """
-    SessionFactory = sessionmaker(bind=test_engine, autocommit=False, autoflush=False)
-    session = SessionFactory()
-    
-    try:
-        yield session
-    finally:
-        session.rollback()
-        session.close()
-
-
-@pytest.fixture
-def product_repo(db_session) -> ProductRepository:
-    """Get ProductRepository with test session (synchronous)."""
-    return ProductRepository(db_session)
-
-
-@pytest.fixture
-def history_repo(db_session) -> HistoryRepository:
-    """Get HistoryRepository with test session (synchronous)."""
-    return HistoryRepository(db_session)
+# Note: Use async_product_repo and async_history_repo instead
+# Sync repositories are not supported as all repository methods are async
 
 
 # ==================== Test Data Fixtures ====================
@@ -235,16 +186,16 @@ async def async_sample_product(async_db_session, sample_product_data) -> Product
     )
 
 
-@pytest.fixture
-def sample_product(db_session, sample_product_data) -> Product:
+@pytest_asyncio.fixture
+async def sample_product(async_db_session, sample_product_data) -> Product:
     """
-    Create and return a sample product in the database (sync version).
+    Create and return a sample product in the database.
     
     Returns:
         Product instance
     """
-    repo = ProductRepository(db_session)
-    return repo.create(
+    repo = ProductRepository(async_db_session)
+    return await repo.create(
         asin=sample_product_data["asin"],
         title=sample_product_data["title"],
         price=sample_product_data["price"],
@@ -286,10 +237,10 @@ async def async_multiple_products(async_db_session) -> List[Product]:
     return products
 
 
-@pytest.fixture
-def multiple_products(db_session) -> List[Product]:
-    """Create multiple sample products in the database (sync version)."""
-    repo = ProductRepository(db_session)
+@pytest_asyncio.fixture
+async def multiple_products(async_db_session) -> List[Product]:
+    """Create multiple sample products in the database."""
+    repo = ProductRepository(async_db_session)
     products_data = [
         {"asin": "B08N5WRWNW", "title": "Echo Dot (4th Gen)", "price": 49.99, "rating": 4.7, "review_count": 254891, "bsr": 12, "category": "Electronics", "product_url": "https://amazon.com/dp/B08N5WRWNW"},
         {"asin": "B07XJ8C8F5", "title": "Echo Show 8 (2nd Gen)", "price": 129.99, "rating": 4.6, "review_count": 89234, "bsr": 45, "category": "Electronics", "product_url": "https://amazon.com/dp/B07XJ8C8F5"},
@@ -300,7 +251,7 @@ def multiple_products(db_session) -> List[Product]:
     
     products = []
     for data in products_data:
-        products.append(repo.create(
+        products.append(await repo.create(
             asin=data["asin"],
             title=data["title"],
             price=data["price"],
@@ -311,7 +262,7 @@ def multiple_products(db_session) -> List[Product]:
             category=data.get("category"),
         ))
     
-    db_session.commit()
+    await async_db_session.commit()
     return products
 
 
@@ -328,11 +279,11 @@ async def async_sample_product_history(async_db_session, async_sample_product) -
     )
 
 
-@pytest.fixture
-def sample_product_history(db_session, sample_product) -> ProductHistory:
-    """Create and return a sample history record (sync version)."""
-    repo = HistoryRepository(db_session)
-    return repo.record_history(
+@pytest_asyncio.fixture
+async def sample_product_history(async_db_session, sample_product) -> ProductHistory:
+    """Create and return a sample history record."""
+    repo = HistoryRepository(async_db_session)
+    return await repo.record_history(
         product_id=sample_product.id,
         asin=sample_product.asin,
         price=sample_product.price,
@@ -366,15 +317,15 @@ async def async_multiple_history_records(async_db_session, async_sample_product)
     return records
 
 
-@pytest.fixture
-def multiple_history_records(db_session, sample_product) -> List[ProductHistory]:
-    """Create multiple history records for testing (sync version)."""
-    repo = HistoryRepository(db_session)
+@pytest_asyncio.fixture
+async def multiple_history_records(async_db_session, sample_product) -> List[ProductHistory]:
+    """Create multiple history records for testing."""
+    repo = HistoryRepository(async_db_session)
     now = datetime.utcnow()
     
     records = []
     for i, price in enumerate([49.99, 44.99, 39.99, 49.99]):
-        record = repo.record_history(
+        record = await repo.record_history(
             product_id=sample_product.id,
             asin=sample_product.asin,
             price=price,
@@ -387,22 +338,22 @@ def multiple_history_records(db_session, sample_product) -> List[ProductHistory]
     return records
 
 
-@pytest.fixture
-def sample_price_history(db_session, sample_product) -> PriceHistory:
+@pytest_asyncio.fixture
+async def sample_price_history(async_db_session, sample_product) -> PriceHistory:
     """Create and return a sample price history record."""
-    repo = HistoryRepository(db_session)
-    return repo.record_price(
+    repo = HistoryRepository(async_db_session)
+    return await repo.record_price(
         product_id=sample_product.id,
         asin=sample_product.asin,
         price=sample_product.price,
     )
 
 
-@pytest.fixture
-def sample_bsr_history(db_session, sample_product) -> BSRHistory:
+@pytest_asyncio.fixture
+async def sample_bsr_history(async_db_session, sample_product) -> BSRHistory:
     """Create and return a sample BSR history record."""
-    repo = HistoryRepository(db_session)
-    return repo.record_bsr(
+    repo = HistoryRepository(async_db_session)
+    return await repo.record_bsr(
         product_id=sample_product.id,
         asin=sample_product.asin,
         bsr=sample_product.bsr,
@@ -433,26 +384,8 @@ async def async_clean_database(async_db_session):
     await async_db_session.commit()
 
 
-@pytest.fixture(autouse=True)
-def clean_database(db_session):
-    """
-    Automatically clean database after each sync test.
-    
-    This fixture runs automatically for every test to ensure isolation.
-    """
-    yield
-    
-    # Rollback any pending transactions
-    db_session.rollback()
-    
-    # Delete all records from all tables (in correct order due to FK)
-    db_session.query(BSRHistory).delete()
-    db_session.query(PriceHistory).delete()
-    db_session.query(ProductHistory).delete()
-    db_session.query(ProductFeature).delete()
-    db_session.query(ProductImage).delete()
-    db_session.query(Product).delete()
-    db_session.commit()
+# Note: Only async_clean_database is used now since all fixtures are async
+# The sync clean_database fixture has been removed as all tests use async fixtures
 
 
 # ==================== Utility Fixtures ====================

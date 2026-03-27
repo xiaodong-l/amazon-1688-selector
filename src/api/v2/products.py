@@ -30,6 +30,7 @@ class ProductCreate(BaseModel):
     bsr: Optional[int] = Field(None, ge=1, description="Best Sellers Rank")
     category: Optional[str] = Field(None, max_length=100, description="Product category")
     image_url: Optional[str] = Field(None, max_length=1000, description="Image URL")
+    product_url: str = Field(..., min_length=1, max_length=1000, description="Amazon product URL")
 
 
 class ProductUpdate(BaseModel):
@@ -43,6 +44,8 @@ class ProductUpdate(BaseModel):
     image_url: Optional[str] = Field(None, max_length=1000)
 
 
+from datetime import datetime
+
 class ProductResponse(BaseModel):
     """Schema for product response."""
     id: int
@@ -54,8 +57,8 @@ class ProductResponse(BaseModel):
     bsr: Optional[int]
     category: Optional[str]
     image_url: Optional[str]
-    created_at: str
-    updated_at: str
+    created_at: datetime
+    updated_at: datetime
     
     class Config:
         from_attributes = True
@@ -145,6 +148,38 @@ async def get_top_products(
         return [ProductResponse.model_validate(p) for p in products]
 
 
+@products_router.get("/categories", response_model=List[str])
+async def get_categories():
+    """
+    Get all unique product categories.
+    
+    Returns list of categories present in the database.
+    """
+    async with get_async_db_session() as session:
+        repo = ProductRepository(session)
+        return await repo.get_categories()
+
+
+@products_router.get("/stats/summary")
+async def get_summary_stats():
+    """
+    Get summary statistics for products.
+    
+    Returns count and basic metrics.
+    """
+    async with get_async_db_session() as session:
+        repo = ProductRepository(session)
+        
+        total = await repo.count()
+        categories = await repo.get_categories()
+        
+        return {
+            "total_products": total,
+            "total_categories": len(categories),
+            "categories": categories,
+        }
+
+
 @products_router.get("/{asin}", response_model=ProductResponse)
 async def get_product(asin: str):
     """
@@ -194,7 +229,7 @@ async def update_product(asin: str, product: ProductUpdate):
     async with get_async_db_session() as session:
         repo = ProductRepository(session)
         
-        updated = await repo.update(asin, product.model_dump(exclude_unset=True))
+        updated = await repo.update(asin, **product.model_dump(exclude_unset=True))
         
         if not updated:
             raise HTTPException(status_code=404, detail=f"Product with ASIN {asin} not found")
@@ -203,52 +238,16 @@ async def update_product(asin: str, product: ProductUpdate):
 
 
 @products_router.delete("/{asin}", status_code=204)
-def delete_product(asin: str):
+async def delete_product(asin: str):
     """
     Delete a product.
     
     Removes the product from the database.
     """
-    with get_db_session() as session:
+    async with get_async_db_session() as session:
         repo = ProductRepository(session)
         
-        if not repo.delete(asin):
+        if not await repo.delete(asin):
             raise HTTPException(status_code=404, detail=f"Product with ASIN {asin} not found")
         
         return None
-
-
-@products_router.get("/categories", response_model=List[str])
-def get_categories():
-    """
-    Get all unique product categories.
-    
-    Returns list of categories present in the database.
-    """
-    with get_db_session() as session:
-        repo = ProductRepository(session)
-        return repo.get_categories()
-
-
-@products_router.get("/stats/summary")
-def get_summary_stats():
-    """
-    Get summary statistics for products.
-    
-    Returns count and basic metrics.
-    """
-    with get_db_session() as session:
-        repo = ProductRepository(session)
-        
-        total = repo.count()
-        categories = repo.get_categories()
-        
-        # Get average rating and price
-        from sqlalchemy import func, avg
-        avg_rating = session.query(func.avg(ProductRepository(session).session.query().filter())).scalar()
-        
-        return {
-            "total_products": total,
-            "total_categories": len(categories),
-            "categories": categories,
-        }

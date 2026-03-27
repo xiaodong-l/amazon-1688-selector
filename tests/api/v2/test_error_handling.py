@@ -20,7 +20,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
 
 from src.api.v2.products import products_router
 from src.api.v2.history import history_router
-from src.db.connection import init_db, close_all
+from src.db.connection import init_db_async, close_all_async
+import pytest_asyncio
 
 
 # ==================== Test Client Setup ====================
@@ -33,18 +34,20 @@ def create_test_app() -> FastAPI:
     return app
 
 
-@pytest.fixture(scope="function")
-def client():
+@pytest_asyncio.fixture(scope="function")
+async def client():
     """Create test client with fresh database."""
-    close_all()
-    init_db(test_mode=True)
+    # Initialize test database (async for async endpoints)
+    await close_all_async()
+    await init_db_async(test_mode=True)
     
     app = create_test_app()
     
     with TestClient(app) as test_client:
         yield test_client
     
-    close_all()
+    # Cleanup
+    await close_all_async()
 
 
 @pytest.fixture
@@ -57,6 +60,7 @@ def sample_product_payload() -> Dict[str, Any]:
         "rating": 4.7,
         "review_count": 254891,
         "category": "Electronics",
+        "product_url": "https://amazon.com/dp/B08N5WRWNW",
     }
 
 

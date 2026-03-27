@@ -82,8 +82,8 @@ class HistoryRepository:
     
     async def record_history(
         self,
-        product_id: int,
-        asin: str,
+        product_id: Optional[int] = None,
+        asin: Optional[str] = None,
         price: Optional[float] = None,
         rating: Optional[float] = None,
         review_count: Optional[int] = None,
@@ -95,8 +95,8 @@ class HistoryRepository:
         Record a history snapshot for a product.
         
         Args:
-            product_id: Product ID
-            asin: Product ASIN
+            product_id: Product ID (optional, will be looked up from asin if not provided)
+            asin: Product ASIN (required if product_id not provided)
             price: Current price (optional)
             rating: Current rating (optional)
             review_count: Current review count (optional)
@@ -107,6 +107,18 @@ class HistoryRepository:
         Returns:
             Created ProductHistory instance
         """
+        # Look up product_id from asin if not provided
+        if product_id is None and asin:
+            from ..models.product import Product
+            stmt = select(Product).where(Product.asin == asin)
+            result = await self.session.execute(stmt)
+            product = result.scalar_one_or_none()
+            if product:
+                product_id = product.id
+        
+        if product_id is None:
+            raise ValueError("Either product_id or asin must be provided")
+        
         history = ProductHistory(
             product_id=product_id,
             asin=asin,
@@ -194,6 +206,41 @@ class HistoryRepository:
         
         return history
     
+    async def get_by_asin(
+        self,
+        asin: str,
+        start_date: Optional[datetime] = None,
+        end_date: Optional[datetime] = None,
+        limit: int = 100,
+    ) -> List[ProductHistory]:
+        """
+        Get product history entries by ASIN.
+        
+        Args:
+            asin: Product ASIN
+            start_date: Start date filter (optional)
+            end_date: End date filter (optional)
+            limit: Maximum number of records (default: 100)
+            
+        Returns:
+            List of ProductHistory instances
+        """
+        return await self.get_history(asin=asin, start_date=start_date, end_date=end_date, limit=limit)
+    
+    async def count_by_asin(self, asin: str) -> int:
+        """
+        Get count of history records for a product.
+        
+        Args:
+            asin: Product ASIN
+            
+        Returns:
+            Count of history records
+        """
+        stmt = select(func.count()).select_from(ProductHistory).where(ProductHistory.asin == asin)
+        result = await self.session.execute(stmt)
+        return result.scalar()
+    
     async def get_history(
         self,
         asin: Optional[str] = None,
@@ -243,6 +290,7 @@ class HistoryRepository:
         start_date: Optional[datetime] = None,
         end_date: Optional[datetime] = None,
         limit: int = 100,
+        days: Optional[int] = None,
     ) -> List[PriceHistory]:
         """
         Get price history entries.
@@ -253,6 +301,7 @@ class HistoryRepository:
             start_date: Start date filter (optional)
             end_date: End date filter (optional)
             limit: Maximum number of records (default: 100)
+            days: Number of days to look back (optional)
             
         Returns:
             List of PriceHistory instances
@@ -263,6 +312,8 @@ class HistoryRepository:
             conditions.append(PriceHistory.asin == asin)
         if product_id:
             conditions.append(PriceHistory.product_id == product_id)
+        if days is not None:
+            start_date = datetime.utcnow() - timedelta(days=days)
         if start_date:
             conditions.append(PriceHistory.recorded_at >= start_date)
         if end_date:
@@ -563,3 +614,113 @@ class HistoryRepository:
             'avg': row.avg_bsr,
             'current': current_record.bsr if current_record else None,
         }
+    
+    async def get_latest(self, asin: str) -> Optional[ProductHistory]:
+        """
+        Get the most recent history record for a product.
+        
+        Args:
+            asin: Product ASIN
+            
+        Returns:
+            Latest ProductHistory instance or None if no records
+        """
+        stmt = select(ProductHistory).where(
+            ProductHistory.asin == asin
+        ).order_by(desc(ProductHistory.recorded_at)).limit(1)
+        
+        result = await self.session.execute(stmt)
+        return result.scalar_one_or_none()
+    
+    async def get_comparison(
+        self,
+        asin: str,
+        days: int = 7,
+    ) -> Dict[str, Any]:
+        """
+        Compare current vs past product data.
+        
+        Args:
+            asin: Product ASIN
+            days: Days to compare (default: 7)
+            
+        Returns:
+            Dict with:
+                - current: Latest history record
+                - past: History record from `days` ago
+                - days_compared: Number of days compared
+        """
+        # Get current (latest) record
+        current_stmt = select(ProductHistory).where(
+            ProductHistory.asin == asin
+        ).order_by(desc(ProductHistory.recorded_at)).limit(1)
+        
+        current_result = await self.session.execute(current_stmt)
+        current = current_result.scalar_one_or_none()
+        
+        # Get past record (from `days` ago)
+        past_date = datetime.utcnow() - timedelta(days=days)
+        past_stmt = select(ProductHistory).where(
+            ProductHistory.asin == asin,
+            ProductHistory.recorded_at <= past_date,
+        ).order_by(desc(ProductHistory.recorded_at)).limit(1)
+        
+        past_result = await self.session.execute(past_stmt)
+        past = past_result.scalar_one_or_none()
+        
+        return {
+            'current': current,
+            'past': past,
+            'days_compared': days,
+        }
+    
+    async def delete_by_asin(self, asin: str) -> int:
+        """
+        Delete all history records for a product.
+        
+        Args:
+            asin: Product ASIN
+            
+        Returns:
+            Number of records deleted
+        """
+        stmt = select(ProductHistory).where(ProductHistory.asin == asin)
+        result = await self.session.execute(stmt)
+        records = list(result.scalars().all())
+        
+        deleted_count = len(records)
+        
+        for record in records:
+            await self.session.delete(record)
+        
+        await self.session.commit()
+        return deleted_count
+    
+    async def delete_old_records(
+        self,
+        days: int = 90,
+    ) -> int:
+        """
+        Delete history records older than specified days.
+        
+        Args:
+            days: Keep records newer than this (default: 90)
+            
+        Returns:
+            Number of records deleted
+        """
+        cutoff_date = datetime.utcnow() - timedelta(days=days)
+        
+        stmt = select(ProductHistory).where(
+            ProductHistory.recorded_at < cutoff_date
+        )
+        result = await self.session.execute(stmt)
+        records = list(result.scalars().all())
+        
+        deleted_count = len(records)
+        
+        for record in records:
+            await self.session.delete(record)
+        
+        await self.session.commit()
+        return deleted_count

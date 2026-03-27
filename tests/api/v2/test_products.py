@@ -15,7 +15,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
 
 from src.api.v2.products import products_router
-from src.db.connection import init_db, close_all, get_db_session
+from src.db.connection import init_db_async, close_all_async, get_db_session
 
 
 # ==================== Test Client Setup ====================
@@ -30,9 +30,9 @@ def create_test_app() -> FastAPI:
 @pytest_asyncio.fixture(scope="function")
 async def client():
     """Create test client with fresh database."""
-    # Initialize test database
-    close_all()
-    init_db(test_mode=True)
+    # Initialize test database (async for async endpoints)
+    await close_all_async()
+    await init_db_async(test_mode=True)
     
     app = create_test_app()
     
@@ -40,7 +40,7 @@ async def client():
         yield test_client
     
     # Cleanup
-    close_all()
+    await close_all_async()
 
 
 @pytest.fixture
@@ -55,6 +55,7 @@ def sample_product_payload() -> Dict[str, Any]:
         "bsr": 12,
         "category": "Electronics",
         "image_url": "https://example.com/image.jpg",
+        "product_url": "https://amazon.com/dp/B08N5WRWNW",
     }
 
 
@@ -199,6 +200,7 @@ class TestListProducts:
                 "asin": f"B00000000{i}",
                 "title": f"Product {i}",
                 "price": 10.0 + i,
+                "product_url": f"https://amazon.com/dp/B00000000{i}",
             }
             client.post("/api/v2/products", json=payload)
         
@@ -247,6 +249,7 @@ class TestListProducts:
                 "asin": f"B00000000{i}",
                 "title": f"Product {i}",
                 "price": 10.0 * (i + 1),
+                "product_url": f"https://amazon.com/dp/B00000000{i}",
             })
         
         # Filter by price range
